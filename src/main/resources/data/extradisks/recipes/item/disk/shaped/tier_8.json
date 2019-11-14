@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "GEG",
+    "EPE",
+    "IAI"
+  ],
+  "key": {
+    "G": {
+      "tag": "forge:glass"
+    },
+    "E": {
+      "item": "refinedstorage:quartz_enriched_iron"
+    },
+    "P": {
+      "item": "extradisks:16384k_storage_part"
+    },
+    "I": {
+      "item": "refinedstorage:improved_processor"
+    },
+    "A": {
+      "item": "refinedstorage:advanced_processor"
+    }
+  },
+  "result": {
+    "item": "extradisks:16384k_storage_disk"
+  }
+}
