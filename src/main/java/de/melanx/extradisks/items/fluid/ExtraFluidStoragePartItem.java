@@ -21,9 +21,10 @@ public class ExtraFluidStoragePartItem extends Item {
                 return ExtraItems.TIER_7_FLUID_PART;
             case TIER_8_FLUID:
                 return ExtraItems.TIER_8_FLUID_PART;
+            case TIER_9_FLUID:
+                return ExtraItems.TIER_9_FLUID_PART;
             default:
                 throw new IllegalArgumentException("Cannot get storage part of " + type);
         }
     }
-
 }
