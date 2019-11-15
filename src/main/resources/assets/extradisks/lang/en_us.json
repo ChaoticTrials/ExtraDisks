@@ -18,8 +18,16 @@
   "item.extradisks.262144k_fluid_storage_part": "262m Fluid Storage Part",
   "item.extradisks.1048576k_fluid_storage_part": "1048m Fluid Storage Part",
 
+  "item.extradisks.32768k_fluid_storage_part": "32768k Fluid Storage Part",
+  "item.extradisks.131072k_fluid_storage_part": "131m Fluid Storage Part",
+  "item.extradisks.524288k_fluid_storage_part": "524m Fluid Storage Part",
+
   "item.extradisks.16384k_fluid_storage_disk": "16384k Fluid Storage Disk",
   "item.extradisks.65536k_fluid_storage_disk": "65536k Fluid Storage Disk",
   "item.extradisks.262144k_fluid_storage_disk": "262m Fluid Storage Disk",
-  "item.extradisks.1048576k_fluid_storage_disk": "1048m Fluid Storage Disk"
+  "item.extradisks.1048576k_fluid_storage_disk": "1048m Fluid Storage Disk",
+
+  "item.extradisks.32768k_fluid_storage_disk": "32768k Fluid Storage Disk",
+  "item.extradisks.131072k_fluid_storage_disk": "131m Fluid Storage Disk",
+  "item.extradisks.524288k_fluid_storage_disk": "524m Fluid Storage Disk"
 }
