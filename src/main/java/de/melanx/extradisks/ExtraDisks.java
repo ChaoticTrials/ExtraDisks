@@ -1,13 +1,12 @@
 package de.melanx.extradisks;
 
+import de.melanx.extradisks.items.AdvancedStorageHousingItem;
 import de.melanx.extradisks.items.fluid.ExtraFluidStorageDiskItem;
 import de.melanx.extradisks.items.fluid.ExtraFluidStoragePartItem;
 import de.melanx.extradisks.items.fluid.ExtraFluidStorageType;
 import de.melanx.extradisks.items.item.ExtraItemStorageType;
 import de.melanx.extradisks.items.item.ExtraStorageDiskItem;
-import de.melanx.extradisks.items.AdvancedStorageHousingItem;
 import de.melanx.extradisks.items.item.ExtraStoragePartItem;
-import net.minecraft.block.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraftforge.common.MinecraftForge;
@@ -21,8 +20,6 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.fml.loading.FMLPaths;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
-import java.util.Collections;
 
 @Mod(ExtraDisks.MODID)
 public class ExtraDisks {
@@ -51,13 +48,15 @@ public class ExtraDisks {
             event.getRegistry().register(new AdvancedStorageHousingItem());
 
             for (ExtraItemStorageType type : ExtraItemStorageType.values()) {
-                if (type.getCapacity() > ExtraItemStorageType.TIER_8.getCapacity() && !ConfigHandler.moreDisks.get()) break;
+                if (type.getCapacity() > ExtraItemStorageType.TIER_8.getCapacity() && !ConfigHandler.moreDisks.get())
+                    break;
                 event.getRegistry().register(new ExtraStoragePartItem(type));
                 event.getRegistry().register(new ExtraStorageDiskItem(type));
             }
 
-            for (ExtraFluidStorageType type: ExtraFluidStorageType.values()) {
-                if (type.getCapacity() > ExtraFluidStorageType.TIER_8_FLUID.getCapacity() && !ConfigHandler.moreDisks.get()) break;
+            for (ExtraFluidStorageType type : ExtraFluidStorageType.values()) {
+                if (type.getCapacity() > ExtraFluidStorageType.TIER_8_FLUID.getCapacity() && !ConfigHandler.moreDisks.get())
+                    break;
                 event.getRegistry().register(new ExtraFluidStoragePartItem(type));
                 event.getRegistry().register(new ExtraFluidStorageDiskItem(type));
             }
