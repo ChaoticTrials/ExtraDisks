@@ -57,7 +57,7 @@ public class ExtraItems {
     @ObjectHolder(ExtraDisks.MODID + ":1048576k_fluid_storage_part")
     public static final ExtraFluidStoragePartItem TIER_8_FLUID_PART = null;
 
-    @ObjectHolder(ExtraDisks.MODID + ":infinite_storage_part")
+    @ObjectHolder(ExtraDisks.MODID + ":infinite_fluid_storage_part")
     public static final ExtraFluidStoragePartItem TIER_9_FLUID_PART = null;
 
     @ObjectHolder(ExtraDisks.MODID + ":32768k_fluid_storage_part")
@@ -76,7 +76,7 @@ public class ExtraItems {
     @ObjectHolder(ExtraDisks.MODID + ":1048576k_fluid_storage_disk")
     public static final ExtraFluidStorageDiskItem TIER_8_FLUID_DISK = null;
 
-    @ObjectHolder(ExtraDisks.MODID + ":infinite_storage_disk")
+    @ObjectHolder(ExtraDisks.MODID + ":infinite_fluid_storage_disk")
     public static final ExtraFluidStorageDiskItem TIER_9_FLUID_DISK = null;
 
     @ObjectHolder(ExtraDisks.MODID + ":32768k_fluid_storage_disk")
