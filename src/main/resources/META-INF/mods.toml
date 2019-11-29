@@ -31,6 +31,6 @@ This mod adds a few bigger storage disks for Refined Storage by raoulvdberge.
 [[dependencies.extradisks]]
     modId="refinedstorage"
     mandatory=true
-    versionRange="[1.7,]"
+    versionRange="[1.7.1,]"
     ordering="NONE"
     side="BOTH"
