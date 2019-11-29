@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "DED",
+    "PBP",
+    "DPD"
+  ],
+  "key": {
+    "D": {
+      "item": "refinedstorage:advanced_processor"
+    },
+    "E": {
+      "item": "refinedstorage:quartz_enriched_iron"
+    },
+    "P": {
+      "item": "extradisks:16384k_fluid_storage_part"
+    },
+    "B": {
+      "item": "minecraft:bucket"
+    }
+  },
+  "result": {
+    "item": "extradisks:32768k_fluid_storage_part"
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "parent": "item/handheld",
+  "textures": {
+    "layer0": "extradisks:item/disks/tier_6_fluid"
+  }
+}

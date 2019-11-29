@@ -13,14 +13,22 @@ public class ExtraStoragePartItem extends Item {
 
     public static ExtraStoragePartItem getByType(ExtraItemStorageType type) {
         switch (type) {
-            case TWO_FIFTY_SIX:
+            case TIER_5:
                 return ExtraItems.TIER_5;
-            case ONE_TWENTY_FOUR:
+            case TIER_6:
                 return ExtraItems.TIER_6;
-            case FOUR_NINTY_SIX:
+            case TIER_7:
                 return ExtraItems.TIER_7;
-            case SIXTEEN_THREE_EIGHTY_FOUR:
+            case TIER_8:
                 return ExtraItems.TIER_8;
+            case TIER_9:
+                return ExtraItems.TIER_9;
+            case TIER_10:
+                return ExtraItems.TIER_10;
+            case TIER_11:
+                return ExtraItems.TIER_11;
+            case TIER_12:
+                return ExtraItems.TIER_12;
             default:
                 throw new IllegalArgumentException("Cannot get storage part of " + type);
         }
