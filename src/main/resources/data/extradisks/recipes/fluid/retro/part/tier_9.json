@@ -25,7 +25,7 @@
   "conditions": [
     {
       "type": "forge:item_exists",
-      "item": "extradisks:infinite_fluid_storage_part"
+      "item": "extradisks:524288k_fluid_storage_part"
     }
   ]
 }
