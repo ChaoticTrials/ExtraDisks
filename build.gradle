@@ -22,7 +22,7 @@ repositories {
 
 apply plugin: 'net.minecraftforge.gradle'
 
-version = mod_version
+version = "${mc_version}-${mod_version}"
 group = 'de.melanx.extradisks'
 archivesBaseName = 'extradisks'
 

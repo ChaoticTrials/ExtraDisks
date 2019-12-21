@@ -21,5 +21,11 @@
   },
   "result": {
     "item": "extradisks:262144k_fluid_storage_part"
-  }
+  },
+  "conditions": [
+    {
+      "type": "forge:item_exists",
+      "item": "extradisks:262144k_fluid_storage_part"
+    }
+  ]
 }

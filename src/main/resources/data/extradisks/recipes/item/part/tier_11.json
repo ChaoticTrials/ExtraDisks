@@ -21,5 +21,11 @@
   },
   "result": {
     "item": "extradisks:1048576k_storage_part"
-  }
+  },
+  "conditions": [
+    {
+      "type": "forge:item_exists",
+      "item": "extradisks:1048576k_storage_part"
+    }
+  ]
 }
