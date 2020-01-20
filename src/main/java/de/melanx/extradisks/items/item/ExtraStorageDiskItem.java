@@ -72,7 +72,7 @@ public class ExtraStorageDiskItem extends Item implements IStorageDiskProvider {
 
     public ActionResult<ItemStack> onItemRightClick(World world, PlayerEntity player, Hand hand) {
         ItemStack diskStack = player.getHeldItem(hand);
-        if (!world.isRemote && player.isSneaking()) {
+        if (!world.isRemote && player.isCrouching()) {
             IStorageDisk disk = API.instance().getStorageDiskManager((ServerWorld) world).getByStack(diskStack);
             if (disk != null && disk.getStored() == 0) {
                 ItemStack storagePart = new ItemStack(ExtraStoragePartItem.getByType(this.type), diskStack.getCount());
