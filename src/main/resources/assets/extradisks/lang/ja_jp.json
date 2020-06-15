@@ -1,0 +1,48 @@
+{
+  "itemGroup.extradisks": "Extra Disks",
+
+  "item.extradisks.advanced_storage_housing": "高度なストレージハウジング",
+
+  "_comment": "Items",
+  "item.extradisks.256k_storage_part": "256kストレージパーツ",
+  "item.extradisks.1024k_storage_part": "1024kストレージパーツ",
+  "item.extradisks.4096k_storage_part": "4096kストレージパーツ",
+  "item.extradisks.16384k_storage_part": "16384kストレージパーツ",
+
+  "item.extradisks.65536k_storage_part": "65536kストレージパーツ",
+  "item.extradisks.262144k_storage_part": "262mストレージパーツ",
+  "item.extradisks.1048576k_storage_part": "1048mストレージパーツ",
+  "item.extradisks.infinite_storage_part": "無限ストレージパーツ",
+
+  "item.extradisks.256k_storage_disk": "256kストレージディスク",
+  "item.extradisks.1024k_storage_disk": "1024kストレージディスク",
+  "item.extradisks.4096k_storage_disk": "4096kストレージディスク",
+  "item.extradisks.16384k_storage_disk": "16384kストレージディスク",
+
+  "item.extradisks.65536k_storage_disk": "65536kストレージディスク",
+  "item.extradisks.262144k_storage_disk": "262mストレージディスク",
+  "item.extradisks.1048576k_storage_disk": "1048mストレージディスク",
+  "item.extradisks.infinite_storage_disk": "無限ストレージディスク",
+
+  "_comment": "Fluid",
+  "item.extradisks.16384k_fluid_storage_part": "16384k液体ストレージパーツ",
+  "item.extradisks.65536k_fluid_storage_part": "65536k液体ストレージパーツ",
+  "item.extradisks.262144k_fluid_storage_part": "262m液体ストレージパーツ",
+  "item.extradisks.1048576k_fluid_storage_part": "1048m液体ストレージパーツ",
+  "item.extradisks.infinite_fluid_storage_part": "無限液体ストレージパーツ",
+
+  "item.extradisks.16384k_fluid_storage_disk": "16384k液体ストレージディスク",
+  "item.extradisks.65536k_fluid_storage_disk": "65536k液体ストレージディスク",
+  "item.extradisks.262144k_fluid_storage_disk": "262m液体ストレージディスク",
+  "item.extradisks.1048576k_fluid_storage_disk": "1048m液体ストレージディスク",
+  "item.extradisks.infinite_fluid_storage_disk": "無限液体ストレージディスク",
+
+  "_comment": "Retro values",
+  "item.extradisks.32768k_fluid_storage_part": "32768k液体ストレージパーツ",
+  "item.extradisks.131072k_fluid_storage_part": "131m液体ストレージパーツ",
+  "item.extradisks.524288k_fluid_storage_part": "524m液体ストレージパーツ",
+
+  "item.extradisks.32768k_fluid_storage_disk": "32768k液体ストレージディスク",
+  "item.extradisks.131072k_fluid_storage_disk": "131m液体ストレージディスク",
+  "item.extradisks.524288k_fluid_storage_disk": "524m液体ストレージディスク"
+}
