@@ -12,7 +12,7 @@ buildscript {
 repositories {
     maven {
         name = "RS maven"
-        url = "https://repo.raoulvdberge.com"
+        url = "https://repo.refinedmods.com"
     }
     maven {
         name = "JEI maven"
@@ -80,9 +80,9 @@ minecraft {
 
 dependencies {
     minecraft "net.minecraftforge:forge:${mc_version}-${forge_version}"
-    compileOnly fg.deobf("com.raoulvdberge:refinedstorage:1.8+2")
-    runtimeOnly fg.deobf("com.raoulvdberge:refinedstorage:1.8+2")
-    runtimeOnly fg.deobf("mezz.jei:jei-1.15.1:6.0.0.1")
+    compileOnly fg.deobf("com.raoulvdberge:refinedstorage:1.8.5+36")
+    runtimeOnly fg.deobf("com.raoulvdberge:refinedstorage:1.8.5+36")
+    runtimeOnly fg.deobf("mezz.jei:jei-1.15.2:6.0.0.4")
 }
 
 jar {
