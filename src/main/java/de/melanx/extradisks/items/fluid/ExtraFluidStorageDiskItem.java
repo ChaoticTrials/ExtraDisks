@@ -1,11 +1,11 @@
 package de.melanx.extradisks.items.fluid;
 
-import com.raoulvdberge.refinedstorage.api.storage.StorageType;
-import com.raoulvdberge.refinedstorage.api.storage.disk.IStorageDisk;
-import com.raoulvdberge.refinedstorage.api.storage.disk.IStorageDiskProvider;
-import com.raoulvdberge.refinedstorage.api.storage.disk.StorageDiskSyncData;
-import com.raoulvdberge.refinedstorage.apiimpl.API;
-import com.raoulvdberge.refinedstorage.render.Styles;
+import com.refinedmods.refinedstorage.api.storage.StorageType;
+import com.refinedmods.refinedstorage.api.storage.disk.IStorageDisk;
+import com.refinedmods.refinedstorage.api.storage.disk.IStorageDiskProvider;
+import com.refinedmods.refinedstorage.api.storage.disk.StorageDiskSyncData;
+import com.refinedmods.refinedstorage.apiimpl.API;
+import com.refinedmods.refinedstorage.render.Styles;
 import de.melanx.extradisks.ExtraDisks;
 import de.melanx.extradisks.items.ExtraItems;
 import net.minecraft.client.util.ITooltipFlag;
