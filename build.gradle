@@ -18,13 +18,16 @@ repositories {
         name = "JEI maven"
         url = "https://dvs1.progwml6.com/files/maven/"
     }
+    flatDir {
+        dirs "libs"
+    }
 }
 
 apply plugin: 'net.minecraftforge.gradle'
 
-version = "${mc_version}-${mod_version}"
+version = mod_version
 group = 'de.melanx.extradisks'
-archivesBaseName = 'extradisks'
+archivesBaseName = "extradisks-${mc_version}"
 
 sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '1.8'
 
@@ -67,7 +70,7 @@ minecraft {
             property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
             property 'forge.logging.console.level', 'debug'
 
-            args '--mod', '--all', '--output', file('src/generated/resources/')
+            args "--mod", "extradisks", "--all", "--output", file("src/generated/resources/"), "--existing", file("src/main/resources")
 
             mods {
                 extradisks {
@@ -78,11 +81,14 @@ minecraft {
     }
 }
 
+sourceSets.main.resources {
+    srcDir 'src/generated/resources'
+}
+
 dependencies {
     minecraft "net.minecraftforge:forge:${mc_version}-${forge_version}"
-    compileOnly fg.deobf("com.refinedmods:refinedstorage:1.8.6+55")
-    runtimeOnly fg.deobf("com.refinedmods:refinedstorage:1.8.6+55")
-    runtimeOnly fg.deobf("mezz.jei:jei-1.15.2:6.0.0.4")
+    compile fg.deobf("com.refinedmods:refinedstorage:${rs_version}")
+    runtimeOnly fg.deobf("mezz.jei:jei-${mc_version}:${jei_version}")
 }
 
 jar {

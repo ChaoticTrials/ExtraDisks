@@ -11,9 +11,9 @@ public enum ExtraItemStorageType {
     TIER_12(Integer.MAX_VALUE / 1000);
 
     private String name;
-    private int capacity;
+    private final int capacity;
 
-    private ExtraItemStorageType(int capacity) {
+    ExtraItemStorageType(int capacity) {
         this.name = capacity + "k";
         if (capacity == Integer.MAX_VALUE / 1000)
             this.name = "infinite";

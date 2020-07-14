@@ -33,9 +33,8 @@ public class ExtraStorageDiskItem extends Item implements IStorageDiskProvider {
     private final ExtraItemStorageType type;
 
     public ExtraStorageDiskItem(ExtraItemStorageType type) {
-        super((new Properties()).group(ExtraDisks.ModGroup).maxStackSize(1));
+        super(new Properties().group(ExtraDisks.ModGroup).maxStackSize(1));
         this.type = type;
-        this.setRegistryName(ExtraDisks.MODID, type.getName() + "_storage_disk");
     }
 
     public void inventoryTick(ItemStack stack, World world, Entity entity, int slot, boolean selected) {
@@ -57,14 +56,14 @@ public class ExtraStorageDiskItem extends Item implements IStorageDiskProvider {
             StorageDiskSyncData data = API.instance().getStorageDiskSync().getData(id);
             if (data != null) {
                 if (data.getCapacity() == -1) {
-                    tooltip.add((new TranslationTextComponent("misc.refinedstorage.storage.stored", new Object[]{API.instance().getQuantityFormatter().format(data.getStored())})).setStyle(Styles.GRAY));
+                    tooltip.add((new TranslationTextComponent("misc.refinedstorage.storage.stored", API.instance().getQuantityFormatter().format(data.getStored()))).func_240703_c_(Styles.GRAY));
                 } else {
-                    tooltip.add((new TranslationTextComponent("misc.refinedstorage.storage.stored_capacity", new Object[]{API.instance().getQuantityFormatter().format(data.getStored()), API.instance().getQuantityFormatter().format(data.getCapacity())})).setStyle(Styles.GRAY));
+                    tooltip.add((new TranslationTextComponent("misc.refinedstorage.storage.stored_capacity", API.instance().getQuantityFormatter().format(data.getStored()), API.instance().getQuantityFormatter().format(data.getCapacity()))).func_240703_c_(Styles.GRAY));
                 }
             }
 
             if (flag.isAdvanced()) {
-                tooltip.add((new StringTextComponent(id.toString())).setStyle(Styles.GRAY));
+                tooltip.add((new StringTextComponent(id.toString())).func_240703_c_(Styles.GRAY));
             }
         }
 
@@ -77,12 +76,12 @@ public class ExtraStorageDiskItem extends Item implements IStorageDiskProvider {
             if (disk != null && disk.getStored() == 0) {
                 ItemStack storagePart = new ItemStack(ExtraStoragePartItem.getByType(this.type), diskStack.getCount());
                 if (!player.inventory.addItemStackToInventory(storagePart.copy())) {
-                    InventoryHelper.spawnItemStack(world, (double) player.getPosition().getX(), (double) player.getPosition().getY(), (double) player.getPosition().getZ(), storagePart);
+                    InventoryHelper.spawnItemStack(world, player.getPosX(), player.getPosY(), player.getPosZ(), storagePart);
                 }
 
                 API.instance().getStorageDiskManager((ServerWorld) world).remove(this.getId(diskStack));
                 API.instance().getStorageDiskManager((ServerWorld) world).markForSaving();
-                return new ActionResult(ActionResultType.SUCCESS, new ItemStack(ExtraItems.ADVANCED_STORAGE_HOUSING));
+                return new ActionResult(ActionResultType.SUCCESS, new ItemStack(ExtraItems.ADVANCED_STORAGE_HOUSING.get()));
             }
         }
 

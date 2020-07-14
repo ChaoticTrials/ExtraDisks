@@ -1,24 +1,20 @@
 {
-  "itemGroup.extradisks": "Extra Disks",
-
   "item.extradisks.advanced_storage_housing": "Carcasa avanzado",
 
   "_comment": "Items",
-  "item.extradisks.256storage_part": "Parte de memoria de 256k",
-  "item.extradisks.1024storage_part": "Parte de memoria de 1024k",
-  "item.extradisks.4096storage_part": "Parte de memoria de 4096k",
-  "item.extradisks.16384storage_part": "Parte de memoria de 16384k",
-
-  "item.extradisks.65536storage_part": "Parte de memoria de 65536k",
-  "item.extradisks.262144storage_part": "Parte de memoria de 262m",
-  "item.extradisks.1048576storage_part": "Parte de memoria de 1048m",
+  "item.extradisks.256k_storage_part": "Parte de memoria de 256k",
+  "item.extradisks.1024k_storage_part": "Parte de memoria de 1024k",
+  "item.extradisks.4096k_storage_part": "Parte de memoria de 4096k",
+  "item.extradisks.16384k_storage_part": "Parte de memoria de 16384k",
+  "item.extradisks.65536k_storage_part": "Parte de memoria de 65536k",
+  "item.extradisks.262144k_storage_part": "Parte de memoria de 262m",
+  "item.extradisks.1048576k_storage_part": "Parte de memoria de 1048m",
   "item.extradisks.infinite_storage_part": "Parte de memoria infinito",
 
   "item.extradisks.256k_storage_disk": "Disco duro de 256k",
   "item.extradisks.1024k_storage_disk": "Disco duro de 1024k",
   "item.extradisks.4096k_storage_disk": "Disco duro de 4096k",
   "item.extradisks.16384k_storage_disk": "Disco duro de 16384k",
-
   "item.extradisks.65536k_storage_disk": "Disco duro de 65536k",
   "item.extradisks.262144k_storage_disk": "Disco duro de 262m",
   "item.extradisks.1048576k_storage_disk": "Disco duro de 1048m",
@@ -35,14 +31,5 @@
   "item.extradisks.65536k_fluid_storage_disk": "Disco duro de fluidos de 65536k",
   "item.extradisks.262144k_fluid_storage_disk": "Disco duro de fluidos de 262m",
   "item.extradisks.1048576k_fluid_storage_disk": "Disco duro de fluidos de 1048m",
-  "item.extradisks.infinite_fluid_storage_disk": "Disco duro de fluidos infinito",
-
-  "_comment": "Retro values",
-  "item.extradisks.32768k_fluid_storage_part": "Parte de memoria de fluidos de 32768k",
-  "item.extradisks.131072k_fluid_storage_part": "Parte de memoria de fluidos de 131m",
-  "item.extradisks.524288k_fluid_storage_part": "Parte de memoria de fluidos de 524m",
-
-  "item.extradisks.32768k_fluid_storage_disk": "Disco duro de fluidos de 32768k",
-  "item.extradisks.131072k_fluid_storage_disk": "Disco duro de fluidos de 131m",
-  "item.extradisks.524288k_fluid_storage_disk": "Disco duro de fluidos de 524m"
+  "item.extradisks.infinite_fluid_storage_disk": "Disco duro de fluidos infinito"
 }
