@@ -1,0 +1,6 @@
+{
+  "parent": "item/handheld",
+  "textures": {
+    "layer0": "extradisks:item/infinite_fluid_storage_part"
+  }
+}

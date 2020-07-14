@@ -1,0 +1,6 @@
+{
+  "parent": "item/handheld",
+  "textures": {
+    "layer0": "extradisks:item/16384k_storage_disk"
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "DED",
+    "PRP",
+    "DPD"
+  ],
+  "key": {
+    "D": {
+      "item": "refinedstorage:advanced_processor"
+    },
+    "E": {
+      "item": "refinedstorage:quartz_enriched_iron"
+    },
+    "P": {
+      "item": "extradisks:16384k_storage_part"
+    },
+    "R": {
+      "tag": "forge:dusts/redstone"
+    }
+  },
+  "result": {
+    "item": "extradisks:65536k_storage_part"
+  }
+}

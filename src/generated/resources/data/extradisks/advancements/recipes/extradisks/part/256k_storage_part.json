@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "extradisks:part/256k_storage_part"
+    ]
+  },
+  "criteria": {
+    "has_prev_part": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "refinedstorage:64k_storage_part"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "extradisks:part/256k_storage_part"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_prev_part",
+      "has_the_recipe"
+    ]
+  ]
+}
