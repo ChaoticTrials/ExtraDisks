@@ -42,7 +42,7 @@ public class Recipes extends RecipeProvider {
         registerPartRecipe(ExtraItems.TIER_11_PART.get(), ExtraItems.TIER_10_PART.get(), consumer);
         registerPartRecipe(ExtraItems.TIER_12_PART.get(), ExtraItems.TIER_11_PART.get(), consumer);
 
-        registerPartRecipe(ExtraItems.TIER_5_FLUID_DISK.get(), RSItems.FOUR_THOUSAND_NINETY_SIX_K_FLUID_STORAGE_PART, consumer);
+        registerPartRecipe(ExtraItems.TIER_5_FLUID_PART.get(), RSItems.FOUR_THOUSAND_NINETY_SIX_K_FLUID_STORAGE_PART, consumer);
         registerPartRecipe(ExtraItems.TIER_6_FLUID_PART.get(), ExtraItems.TIER_5_FLUID_PART.get(), consumer);
         registerPartRecipe(ExtraItems.TIER_7_FLUID_PART.get(), ExtraItems.TIER_6_FLUID_PART.get(), consumer);
         registerPartRecipe(ExtraItems.TIER_8_FLUID_PART.get(), ExtraItems.TIER_7_FLUID_PART.get(), consumer);

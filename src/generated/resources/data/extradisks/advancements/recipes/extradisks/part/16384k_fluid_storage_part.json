@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "extradisks:part/16384k_fluid_storage_disk"
+      "extradisks:part/16384k_fluid_storage_part"
     ]
   },
   "criteria": {
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "extradisks:part/16384k_fluid_storage_disk"
+        "recipe": "extradisks:part/16384k_fluid_storage_part"
       }
     }
   },
