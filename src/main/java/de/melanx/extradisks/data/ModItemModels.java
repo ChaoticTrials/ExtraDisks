@@ -4,8 +4,8 @@ import de.melanx.extradisks.ExtraDisks;
 import de.melanx.extradisks.items.ExtraItems;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.item.Item;
-import net.minecraftforge.client.model.generators.ExistingFileHelper;
 import net.minecraftforge.client.model.generators.ItemModelProvider;
+import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.fml.RegistryObject;
 
 public class ModItemModels extends ItemModelProvider {
