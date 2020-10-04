@@ -33,7 +33,7 @@ public class Recipes extends RecipeProvider {
         registerDiskRecipes(ExtraItems.TIER_8_FLUID_DISK.get(), ExtraItems.TIER_8_FLUID_PART.get(), consumer);
         registerDiskRecipes(ExtraItems.TIER_9_FLUID_DISK.get(), ExtraItems.TIER_9_FLUID_PART.get(), consumer);
 
-        registerPartRecipe(ExtraItems.TIER_5_PART.get(), RSItems.SIXTY_FOUR_K_STORAGE_PART, consumer);
+        registerPartRecipe(ExtraItems.TIER_5_PART.get(), RSItems.FLUID_STORAGE_PARTS.get(64_000).get(), consumer);
         registerPartRecipe(ExtraItems.TIER_6_PART.get(), ExtraItems.TIER_5_PART.get(), consumer);
         registerPartRecipe(ExtraItems.TIER_7_PART.get(), ExtraItems.TIER_6_PART.get(), consumer);
         registerPartRecipe(ExtraItems.TIER_8_PART.get(), ExtraItems.TIER_7_PART.get(), consumer);
@@ -42,7 +42,7 @@ public class Recipes extends RecipeProvider {
         registerPartRecipe(ExtraItems.TIER_11_PART.get(), ExtraItems.TIER_10_PART.get(), consumer);
         registerPartRecipe(ExtraItems.TIER_12_PART.get(), ExtraItems.TIER_11_PART.get(), consumer);
 
-        registerPartRecipe(ExtraItems.TIER_5_FLUID_PART.get(), RSItems.FOUR_THOUSAND_NINETY_SIX_K_FLUID_STORAGE_PART, consumer);
+        registerPartRecipe(ExtraItems.TIER_5_FLUID_PART.get(), RSItems.FLUID_STORAGE_PARTS.get(4096_000).get(), consumer);
         registerPartRecipe(ExtraItems.TIER_6_FLUID_PART.get(), ExtraItems.TIER_5_FLUID_PART.get(), consumer);
         registerPartRecipe(ExtraItems.TIER_7_FLUID_PART.get(), ExtraItems.TIER_6_FLUID_PART.get(), consumer);
         registerPartRecipe(ExtraItems.TIER_8_FLUID_PART.get(), ExtraItems.TIER_7_FLUID_PART.get(), consumer);
@@ -53,10 +53,10 @@ public class Recipes extends RecipeProvider {
                 .patternLine("E E")
                 .patternLine("IAI")
                 .key('G', Tags.Items.GLASS)
-                .key('E', RSItems.QUARTZ_ENRICHED_IRON)
-                .key('I', RSItems.IMPROVED_PROCESSOR)
-                .key('A', RSItems.ADVANCED_PROCESSOR)
-                .addCriterion("has_processor", hasItem(RSItems.ADVANCED_PROCESSOR))
+                .key('E', RSItems.QUARTZ_ENRICHED_IRON.get())
+                .key('I', RSItems.PROCESSORS.get("advanced").get())
+                .key('A', RSItems.PROCESSORS.get("advanced").get())
+                .addCriterion("has_processor", hasItem(RSItems.PROCESSORS.get("advanced").get()))
                 .build(consumer);
     }
 
@@ -65,8 +65,8 @@ public class Recipes extends RecipeProvider {
                 .patternLine("DED")
                 .patternLine("PRP")
                 .patternLine("DPD")
-                .key('D', RSItems.ADVANCED_PROCESSOR)
-                .key('E', RSItems.QUARTZ_ENRICHED_IRON)
+                .key('D', RSItems.PROCESSORS.get("advanced").get())
+                .key('E', RSItems.QUARTZ_ENRICHED_IRON.get())
                 .key('P', prevPart)
                 .key('R', Tags.Items.DUSTS_REDSTONE)
                 .addCriterion("has_prev_part", hasItem(prevPart))
@@ -79,10 +79,10 @@ public class Recipes extends RecipeProvider {
                 .patternLine("EPE")
                 .patternLine("IAI")
                 .key('G', Tags.Items.GLASS)
-                .key('E', RSItems.QUARTZ_ENRICHED_IRON)
+                .key('E', RSItems.QUARTZ_ENRICHED_IRON.get())
                 .key('P', part)
-                .key('I', RSItems.IMPROVED_PROCESSOR)
-                .key('A', RSItems.ADVANCED_PROCESSOR)
+                .key('I', RSItems.PROCESSORS.get("improved").get())
+                .key('A', RSItems.PROCESSORS.get("advanced").get())
                 .addCriterion("has_part", hasItem(part))
                 .build(consumer, new ResourceLocation(ExtraDisks.MODID, "disk/shaped/" + result.getRegistryName().getPath()));
         ShapelessRecipeBuilder.shapelessRecipe(result)
