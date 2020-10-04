@@ -72,7 +72,6 @@ public class ExtraFluidStorageDiskItem extends Item implements IStorageDiskProvi
             }
 
             if (flag.isAdvanced()) {
-                //tooltip.add(new StringTextComponent(id.toString()).mergeStyle(Styles.GRAY));
                 tooltip.add(new StringTextComponent(id.toString()).func_230530_a_(Styles.GRAY));
             }
         }
