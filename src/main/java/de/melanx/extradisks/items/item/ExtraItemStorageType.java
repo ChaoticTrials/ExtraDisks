@@ -8,16 +8,19 @@ public enum ExtraItemStorageType {
     TIER_9(65536),
     TIER_10(262144),
     TIER_11(1048576),
-    TIER_12(Integer.MAX_VALUE / 1000);
+    TIER_12(-1);
 
-    private String name;
+    private final String name;
     private final int capacity;
 
     ExtraItemStorageType(int capacity) {
-        this.name = capacity + "k";
-        if (capacity == Integer.MAX_VALUE / 1000)
+        if (capacity == -1) {
             this.name = "infinite";
-        this.capacity = capacity * 1000;
+            this.capacity = -1;
+        } else {
+            this.name = capacity + "k";
+            this.capacity = capacity * 1000;
+        }
     }
 
     public String getName() {
