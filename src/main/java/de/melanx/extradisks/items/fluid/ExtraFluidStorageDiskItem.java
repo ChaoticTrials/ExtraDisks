@@ -24,14 +24,13 @@ import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.List;
 import java.util.UUID;
 
 public class ExtraFluidStorageDiskItem extends Item implements IStorageDiskProvider {
-
     private static final String NBT_ID = "Id";
-
     private final ExtraFluidStorageType type;
 
     public ExtraFluidStorageDiskItem(ExtraFluidStorageType type) {
@@ -40,15 +39,12 @@ public class ExtraFluidStorageDiskItem extends Item implements IStorageDiskProvi
     }
 
     @Override
-    public void inventoryTick(ItemStack stack, World world, Entity entity, int slot, boolean selected) {
+    public void inventoryTick(@Nonnull ItemStack stack, @Nonnull World world, @Nonnull Entity entity, int slot, boolean selected) {
         super.inventoryTick(stack, world, entity, slot, selected);
-
         if (!world.isRemote && !stack.hasTag()) {
             UUID id = UUID.randomUUID();
-
             API.instance().getStorageDiskManager((ServerWorld) world).set(id, API.instance().createDefaultFluidDisk((ServerWorld) world, getCapacity(stack), (PlayerEntity) entity));
             API.instance().getStorageDiskManager((ServerWorld) world).markForSaving();
-
             setId(stack, id);
         }
     }
@@ -77,27 +73,24 @@ public class ExtraFluidStorageDiskItem extends Item implements IStorageDiskProvi
         }
     }
 
+    @Nonnull
     @Override
-    public ActionResult<ItemStack> onItemRightClick(World world, PlayerEntity player, Hand hand) {
+    public ActionResult<ItemStack> onItemRightClick(World world, PlayerEntity player, @Nonnull Hand hand) {
         ItemStack diskStack = player.getHeldItem(hand);
 
         if (!world.isRemote && player.isCrouching()) {
             IStorageDisk disk = API.instance().getStorageDiskManager((ServerWorld) world).getByStack(diskStack);
-
             if (disk != null && disk.getStored() == 0) {
                 ItemStack storagePart = new ItemStack(ExtraFluidStoragePartItem.getByType(type), diskStack.getCount());
-
                 if (!player.inventory.addItemStackToInventory(storagePart.copy())) {
                     InventoryHelper.spawnItemStack(world, player.getPosX(), player.getPosY(), player.getPosZ(), storagePart);
                 }
 
                 API.instance().getStorageDiskManager((ServerWorld) world).remove(getId(diskStack));
                 API.instance().getStorageDiskManager((ServerWorld) world).markForSaving();
-
                 return new ActionResult<>(ActionResultType.SUCCESS, new ItemStack(ExtraItems.ADVANCED_STORAGE_HOUSING.get()));
             }
         }
-
         return new ActionResult<>(ActionResultType.PASS, diskStack);
     }
 

@@ -24,6 +24,7 @@ import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.List;
 import java.util.UUID;
@@ -37,7 +38,8 @@ public class ExtraStorageDiskItem extends Item implements IStorageDiskProvider {
         this.type = type;
     }
 
-    public void inventoryTick(ItemStack stack, World world, Entity entity, int slot, boolean selected) {
+    @Override
+    public void inventoryTick(@Nonnull ItemStack stack, @Nonnull World world, @Nonnull Entity entity, int slot, boolean selected) {
         super.inventoryTick(stack, world, entity, slot, selected);
         if (!world.isRemote && !stack.hasTag()) {
             UUID id = UUID.randomUUID();
@@ -45,10 +47,10 @@ public class ExtraStorageDiskItem extends Item implements IStorageDiskProvider {
             API.instance().getStorageDiskManager((ServerWorld) world).markForSaving();
             this.setId(stack, id);
         }
-
     }
 
-    public void addInformation(ItemStack stack, @Nullable World world, List<ITextComponent> tooltip, ITooltipFlag flag) {
+    @Override
+    public void addInformation(@Nonnull ItemStack stack, @Nullable World world, @Nonnull List<ITextComponent> tooltip, @Nonnull ITooltipFlag flag) {
         super.addInformation(stack, world, tooltip, flag);
         if (this.isValid(stack)) {
             UUID id = this.getId(stack);
@@ -69,8 +71,11 @@ public class ExtraStorageDiskItem extends Item implements IStorageDiskProvider {
 
     }
 
-    public ActionResult<ItemStack> onItemRightClick(World world, PlayerEntity player, Hand hand) {
+    @Nonnull
+    @Override
+    public ActionResult<ItemStack> onItemRightClick(World world, PlayerEntity player, @Nonnull Hand hand) {
         ItemStack diskStack = player.getHeldItem(hand);
+
         if (!world.isRemote && player.isCrouching()) {
             IStorageDisk disk = API.instance().getStorageDiskManager((ServerWorld) world).getByStack(diskStack);
             if (disk != null && disk.getStored() == 0) {
@@ -81,34 +86,39 @@ public class ExtraStorageDiskItem extends Item implements IStorageDiskProvider {
 
                 API.instance().getStorageDiskManager((ServerWorld) world).remove(this.getId(diskStack));
                 API.instance().getStorageDiskManager((ServerWorld) world).markForSaving();
-                return new ActionResult(ActionResultType.SUCCESS, new ItemStack(ExtraItems.ADVANCED_STORAGE_HOUSING.get()));
+                return new ActionResult<>(ActionResultType.SUCCESS, new ItemStack(ExtraItems.ADVANCED_STORAGE_HOUSING.get()));
             }
         }
-
-        return new ActionResult(ActionResultType.PASS, diskStack);
+        return new ActionResult<>(ActionResultType.PASS, diskStack);
     }
 
+    @Override
     public int getEntityLifespan(ItemStack stack, World world) {
         return Integer.MAX_VALUE;
     }
 
+    @Override
     public UUID getId(ItemStack disk) {
         return disk.getTag().getUniqueId(NBT_ID);
     }
 
+    @Override
     public void setId(ItemStack disk, UUID id) {
         disk.setTag(new CompoundNBT());
         disk.getTag().putUniqueId(NBT_ID, id);
     }
 
+    @Override
     public boolean isValid(ItemStack disk) {
         return disk.hasTag() && disk.getTag().hasUniqueId(NBT_ID);
     }
 
+    @Override
     public int getCapacity(ItemStack disk) {
         return this.type.getCapacity();
     }
 
+    @Override
     public StorageType getType() {
         return StorageType.ITEM;
     }
