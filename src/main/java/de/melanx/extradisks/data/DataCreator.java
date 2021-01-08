@@ -17,9 +17,11 @@ public class DataCreator {
 
         if (event.includeServer()) {
             generator.addProvider(new Recipes(generator));
+            generator.addProvider(new LootTables(generator));
         }
         if (event.includeClient()) {
             generator.addProvider(new ModItemModels(generator, helper));
+            generator.addProvider(new BlockStates(generator, helper));
         }
     }
 

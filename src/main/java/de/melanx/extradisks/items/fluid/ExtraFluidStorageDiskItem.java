@@ -7,7 +7,7 @@ import com.refinedmods.refinedstorage.api.storage.disk.StorageDiskSyncData;
 import com.refinedmods.refinedstorage.apiimpl.API;
 import com.refinedmods.refinedstorage.render.Styles;
 import de.melanx.extradisks.ExtraDisks;
-import de.melanx.extradisks.items.ExtraItems;
+import de.melanx.extradisks.items.Registration;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -43,9 +43,9 @@ public class ExtraFluidStorageDiskItem extends Item implements IStorageDiskProvi
         super.inventoryTick(stack, world, entity, slot, selected);
         if (!world.isRemote && !stack.hasTag()) {
             UUID id = UUID.randomUUID();
-            API.instance().getStorageDiskManager((ServerWorld) world).set(id, API.instance().createDefaultFluidDisk((ServerWorld) world, getCapacity(stack), (PlayerEntity) entity));
+            API.instance().getStorageDiskManager((ServerWorld) world).set(id, API.instance().createDefaultFluidDisk((ServerWorld) world, this.getCapacity(stack), (PlayerEntity) entity));
             API.instance().getStorageDiskManager((ServerWorld) world).markForSaving();
-            setId(stack, id);
+            this.setId(stack, id);
         }
     }
 
@@ -53,8 +53,8 @@ public class ExtraFluidStorageDiskItem extends Item implements IStorageDiskProvi
     public void addInformation(ItemStack stack, @Nullable World world, List<ITextComponent> tooltip, ITooltipFlag flag) {
         super.addInformation(stack, world, tooltip, flag);
 
-        if (isValid(stack)) {
-            UUID id = getId(stack);
+        if (this.isValid(stack)) {
+            UUID id = this.getId(stack);
 
             API.instance().getStorageDiskSync().sendRequest(id);
 
@@ -81,14 +81,14 @@ public class ExtraFluidStorageDiskItem extends Item implements IStorageDiskProvi
         if (!world.isRemote && player.isCrouching()) {
             IStorageDisk disk = API.instance().getStorageDiskManager((ServerWorld) world).getByStack(diskStack);
             if (disk != null && disk.getStored() == 0) {
-                ItemStack storagePart = new ItemStack(ExtraFluidStoragePartItem.getByType(type), diskStack.getCount());
+                ItemStack storagePart = new ItemStack(ExtraFluidStoragePartItem.getByType(this.type), diskStack.getCount());
                 if (!player.inventory.addItemStackToInventory(storagePart.copy())) {
                     InventoryHelper.spawnItemStack(world, player.getPosX(), player.getPosY(), player.getPosZ(), storagePart);
                 }
 
-                API.instance().getStorageDiskManager((ServerWorld) world).remove(getId(diskStack));
+                API.instance().getStorageDiskManager((ServerWorld) world).remove(this.getId(diskStack));
                 API.instance().getStorageDiskManager((ServerWorld) world).markForSaving();
-                return new ActionResult<>(ActionResultType.SUCCESS, new ItemStack(ExtraItems.ADVANCED_STORAGE_HOUSING.get()));
+                return new ActionResult<>(ActionResultType.SUCCESS, new ItemStack(Registration.ADVANCED_STORAGE_HOUSING.get()));
             }
         }
         return new ActionResult<>(ActionResultType.PASS, diskStack);
@@ -117,7 +117,7 @@ public class ExtraFluidStorageDiskItem extends Item implements IStorageDiskProvi
 
     @Override
     public int getCapacity(ItemStack disk) {
-        return type.getCapacity();
+        return this.type.getCapacity();
     }
 
     @Override

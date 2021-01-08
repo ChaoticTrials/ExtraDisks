@@ -7,7 +7,7 @@ import com.refinedmods.refinedstorage.api.storage.disk.StorageDiskSyncData;
 import com.refinedmods.refinedstorage.apiimpl.API;
 import com.refinedmods.refinedstorage.render.Styles;
 import de.melanx.extradisks.ExtraDisks;
-import de.melanx.extradisks.items.ExtraItems;
+import de.melanx.extradisks.items.Registration;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -86,7 +86,7 @@ public class ExtraStorageDiskItem extends Item implements IStorageDiskProvider {
 
                 API.instance().getStorageDiskManager((ServerWorld) world).remove(this.getId(diskStack));
                 API.instance().getStorageDiskManager((ServerWorld) world).markForSaving();
-                return new ActionResult<>(ActionResultType.SUCCESS, new ItemStack(ExtraItems.ADVANCED_STORAGE_HOUSING.get()));
+                return new ActionResult<>(ActionResultType.SUCCESS, new ItemStack(Registration.ADVANCED_STORAGE_HOUSING.get()));
             }
         }
         return new ActionResult<>(ActionResultType.PASS, diskStack);

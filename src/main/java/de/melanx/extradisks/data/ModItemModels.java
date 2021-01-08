@@ -1,10 +1,12 @@
 package de.melanx.extradisks.data;
 
 import de.melanx.extradisks.ExtraDisks;
-import de.melanx.extradisks.items.ExtraItems;
+import de.melanx.extradisks.items.Registration;
 import net.minecraft.data.DataGenerator;
+import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraftforge.client.model.generators.ItemModelProvider;
+import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.fml.RegistryObject;
 
@@ -15,13 +17,23 @@ public class ModItemModels extends ItemModelProvider {
 
     @Override
     protected void registerModels() {
-        for (RegistryObject<Item> item : ExtraItems.ITEMS.getEntries())
-            generateItem(item.get());
+        Registration.ITEMS.getEntries().stream().map(RegistryObject::get).forEach(item -> {
+            if (item instanceof BlockItem) {
+                this.generateBlockItemModel(item);
+            } else {
+                this.generateItem(item);
+            }
+        });
     }
 
     private void generateItem(Item item) {
         String path = item.getRegistryName().getPath();
-        getBuilder(path).parent(getExistingFile(mcLoc("item/handheld")))
+        this.getBuilder(path).parent(this.getExistingFile(this.mcLoc("item/handheld")))
                 .texture("layer0", "item/" + path);
+    }
+
+    private void generateBlockItemModel(Item item) {
+        String path = item.getRegistryName().getPath();
+        this.getBuilder(path).parent(new ModelFile.UncheckedModelFile(this.modLoc("block/" + path)));
     }
 }

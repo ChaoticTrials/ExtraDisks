@@ -1,5 +1,6 @@
 {
   "item.extradisks.advanced_storage_housing": "Erweitertes Speichergehäuse",
+  "block.extradisks.advanced_machine_casing": "Erweitertes Gehäuse",
 
   "_comment": "Items",
   "item.extradisks.256k_storage_part": "256k Speicherkern",
@@ -20,6 +21,15 @@
   "item.extradisks.1048576k_storage_disk": "1048m Speicherzelle",
   "item.extradisks.infinite_storage_disk": "Unendliche Speicherzelle",
 
+  "block.extradisks.256k_storage_block": "256k Speicherblock",
+  "block.extradisks.1024k_storage_block": "1024k Speicherblock",
+  "block.extradisks.4096k_storage_block": "4096k Speicherblock",
+  "block.extradisks.16384k_storage_block": "16384k Speicherblock",
+  "block.extradisks.65536k_storage_block": "65536k Speicherblock",
+  "block.extradisks.262144k_storage_block": "262m Speicherblock",
+  "block.extradisks.1048576k_storage_block": "1048m Speicherblock",
+  "block.extradisks.infinite_storage_block": "Unendliche Speicherblock",
+
   "_comment": "Fluid",
   "item.extradisks.16384k_fluid_storage_part": "16384k Flüssigspeicherkern",
   "item.extradisks.65536k_fluid_storage_part": "65536k Flüssigspeicherkern",
@@ -31,5 +41,11 @@
   "item.extradisks.65536k_fluid_storage_disk": "65536k Flüssigspeicherzelle",
   "item.extradisks.262144k_fluid_storage_disk": "262m Flüssigspeicherzelle",
   "item.extradisks.1048576k_fluid_storage_disk": "1048m Flüssigspeicherzelle",
-  "item.extradisks.infinite_fluid_storage_disk": "Unendliche Flüssigspeicherzelle"
+  "item.extradisks.infinite_fluid_storage_disk": "Unendliche Flüssigspeicherzelle",
+
+  "block.extradisks.16384k_fluid_storage_block": "16384k Flüssigspeicherblock",
+  "block.extradisks.65536k_fluid_storage_block": "65536k Flüssigspeicherblock",
+  "block.extradisks.262144k_fluid_storage_block": "262m Flüssigspeicherblock",
+  "block.extradisks.1048576k_fluid_storage_block": "1048m Flüssigspeicherblock",
+  "block.extradisks.infinite_fluid_storage_block": "Unendlicher Flüssigspeicherblock",
 }
