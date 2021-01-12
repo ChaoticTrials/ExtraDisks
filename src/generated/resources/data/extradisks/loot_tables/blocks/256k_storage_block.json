@@ -6,12 +6,12 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "4096k_storage_block",
           "functions": [
             {
-              "function": "refinedstorage:storage_block"
+              "function": "extradisks:storage_block"
             }
-          ]
+          ],
+          "name": "extradisks:256k_storage_block"
         }
       ]
     }

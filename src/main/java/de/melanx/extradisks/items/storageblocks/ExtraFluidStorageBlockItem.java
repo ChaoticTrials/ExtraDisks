@@ -1,6 +1,5 @@
 package de.melanx.extradisks.items.storageblocks;
 
-import com.refinedmods.refinedstorage.RSBlocks;
 import com.refinedmods.refinedstorage.api.storage.disk.IStorageDisk;
 import com.refinedmods.refinedstorage.api.storage.disk.StorageDiskSyncData;
 import com.refinedmods.refinedstorage.apiimpl.API;

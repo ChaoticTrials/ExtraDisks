@@ -6,12 +6,12 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "infinite_storage_block",
           "functions": [
             {
-              "function": "refinedstorage:storage_block"
+              "function": "extradisks:storage_block"
             }
-          ]
+          ],
+          "name": "extradisks:infinite_fluid_storage_block"
         }
       ]
     }
