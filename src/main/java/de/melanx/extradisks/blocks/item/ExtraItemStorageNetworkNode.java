@@ -6,6 +6,7 @@ import com.refinedmods.refinedstorage.apiimpl.API;
 import com.refinedmods.refinedstorage.apiimpl.network.node.storage.ItemStorageWrapperStorageDisk;
 import com.refinedmods.refinedstorage.apiimpl.network.node.storage.StorageNetworkNode;
 import de.melanx.extradisks.ExtraDisks;
+import de.melanx.extradisks.ServerConfig;
 import de.melanx.extradisks.items.item.ExtraItemStorageType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -67,9 +68,26 @@ public class ExtraItemStorageNetworkNode extends StorageNetworkNode {
 
     @Override
     public int getEnergyUsage() {
-        // TODO add server config for energy usage
-        // https://github.com/refinedmods/refinedstorage/blob/mc1.16/src/main/java/com/refinedmods/refinedstorage/config/ServerConfig.java
-        return 0;
+        switch (this.type) {
+            case TIER_5:
+                return ServerConfig.tier5usage.get();
+            case TIER_6:
+                return ServerConfig.tier6usage.get();
+            case TIER_7:
+                return ServerConfig.tier7usage.get();
+            case TIER_8:
+                return ServerConfig.tier8usage.get();
+            case TIER_9:
+                return ServerConfig.tier9usage.get();
+            case TIER_10:
+                return ServerConfig.tier10usage.get();
+            case TIER_11:
+                return ServerConfig.tier11usage.get();
+            case TIER_12:
+                return ServerConfig.tier12usage.get();
+            default:
+                return 0;
+        }
     }
 
     @Override

@@ -6,6 +6,7 @@ import com.refinedmods.refinedstorage.apiimpl.API;
 import com.refinedmods.refinedstorage.apiimpl.network.node.storage.FluidStorageNetworkNode;
 import com.refinedmods.refinedstorage.apiimpl.network.node.storage.FluidStorageWrapperStorageDisk;
 import de.melanx.extradisks.ExtraDisks;
+import de.melanx.extradisks.ServerConfig;
 import de.melanx.extradisks.items.fluid.ExtraFluidStorageType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.ResourceLocation;
@@ -58,9 +59,20 @@ public class ExtraFluidStorageNetworkNode extends FluidStorageNetworkNode {
 
     @Override
     public int getEnergyUsage() {
-        // TODO add server config for energy usage
-        // https://github.com/refinedmods/refinedstorage/blob/mc1.16/src/main/java/com/refinedmods/refinedstorage/config/ServerConfig.java
-        return 0;
+        switch (this.type) {
+            case TIER_5_FLUID:
+                return ServerConfig.fluid_tier5usage.get();
+            case TIER_6_FLUID:
+                return ServerConfig.fluid_tier6usage.get();
+            case TIER_7_FLUID:
+                return ServerConfig.fluid_tier7usage.get();
+            case TIER_8_FLUID:
+                return ServerConfig.fluid_tier8usage.get();
+            case TIER_9_FLUID:
+                return ServerConfig.fluid_tier9usage.get();
+            default:
+                return 0;
+        }
     }
 
     @Override
