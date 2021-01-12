@@ -32,7 +32,7 @@ public class ExtraFluidStorageBlockTile extends NetworkNodeTile<ExtraFluidStorag
     }
 
     @Override
-    public ExtraFluidStorageNetworkNode createNode(World world, BlockPos blockPos) {
-        return null;
+    public ExtraFluidStorageNetworkNode createNode(World world, BlockPos pos) {
+        return new ExtraFluidStorageNetworkNode(world, pos, this.type);
     }
 }
