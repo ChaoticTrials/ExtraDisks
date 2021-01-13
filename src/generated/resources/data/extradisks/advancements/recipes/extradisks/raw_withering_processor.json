@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "extradisks:raw_withering_processor"
+    ]
+  },
+  "criteria": {
+    "has_binding": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "refinedstorage:processor_binding"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "extradisks:raw_withering_processor"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_binding",
+      "has_the_recipe"
+    ]
+  ]
+}

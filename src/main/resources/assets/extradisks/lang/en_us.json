@@ -2,6 +2,8 @@
   "itemGroup.extradisks": "Extra Disks",
 
   "item.extradisks.advanced_storage_housing": "Advanced Storage Housing",
+  "item.extradisks.raw_withering_processor": "Raw Withering Processor",
+  "item.extradisks.withering_processor": "Withering Processor",
   "block.extradisks.advanced_machine_casing": "Advanced Machine Casing",
 
   "_comment": "Items",

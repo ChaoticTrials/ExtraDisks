@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "refinedstorage:processor_binding"
+    },
+    {
+      "tag": "forge:nether_stars"
+    },
+    {
+      "item": "refinedstorage:silicon"
+    },
+    {
+      "tag": "forge:dusts/redstone"
+    }
+  ],
+  "result": {
+    "item": "extradisks:raw_withering_processor"
+  }
+}

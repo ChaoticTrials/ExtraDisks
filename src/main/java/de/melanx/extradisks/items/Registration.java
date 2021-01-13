@@ -61,6 +61,8 @@ public class Registration {
     public static final RegistryObject<Block> ADVANCED_MACHINE_CASING_BLOCK = BLOCKS.register("advanced_machine_casing", () -> new Block(BlockUtils.DEFAULT_ROCK_PROPERTIES));
     public static final RegistryObject<Item> ADVANCED_MACHINE_CASING = ITEMS.register("advanced_machine_casing", () -> new BlockItem(ADVANCED_MACHINE_CASING_BLOCK.get(), ITEM_PROPS));
     public static final RegistryObject<Item> ADVANCED_STORAGE_HOUSING = ITEMS.register("advanced_storage_housing", () -> new Item(ITEM_PROPS));
+    public static final RegistryObject<Item> RAW_WITHERING_PROCESSOR = ITEMS.register("raw_withering_processor", () -> new Item(ITEM_PROPS));
+    public static final RegistryObject<Item> WITHERING_PROCESSOR = ITEMS.register("withering_processor", () -> new Item(ITEM_PROPS));
 
     public static void init() {
         for (ExtraItemStorageType type : ExtraItemStorageType.values()) {
@@ -101,24 +103,11 @@ public class Registration {
             FLUID_STORAGE_DISK.put(type, ITEMS.register(type.getName() + "_fluid_storage_disk", () -> new ExtraFluidStorageDiskItem(type)));
         }
 
-        StringBuilder builder = new StringBuilder();
-        ITEM_STORAGE_BLOCK.forEach((key, value) -> {
-            builder.append(value.getId().getPath());
-            builder.append(", ");
-        });
-
-        FLUID_STORAGE_BLOCK.forEach((key, value) -> {
-            builder.append(value.getId().getPath());
-            builder.append(", ");
-        });
-
-        System.out.println(builder.toString());
-
         IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
         BLOCKS.register(bus);
         ExtraDisks.LOGGER.info(BLOCKS.getEntries().size() + " blocks registered.");
         ITEMS.register(bus);
-        ExtraDisks.LOGGER.info(ITEMS.getEntries().size() + " items registered.");
+        ExtraDisks.LOGGER.info(ITEMS.getEntries().size() - BLOCKS.getEntries().size() + " items registered.");
         TILES.register(bus);
         ExtraDisks.LOGGER.info(TILES.getEntries().size() + " tiles registered.");
         CONTAINERS.register(bus);
