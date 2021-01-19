@@ -11,7 +11,7 @@
       "conditions": {
         "items": [
           {
-            "item": "extradisks:infinite_storage_part"
+            "tag": "refinedstorage:parts/items/infinite"
           }
         ]
       }

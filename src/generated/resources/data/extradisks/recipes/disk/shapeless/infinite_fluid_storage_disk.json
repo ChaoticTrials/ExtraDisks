@@ -5,7 +5,7 @@
       "item": "extradisks:advanced_storage_housing"
     },
     {
-      "item": "extradisks:infinite_fluid_storage_part"
+      "tag": "refinedstorage:parts/fluids/infinite"
     }
   ],
   "result": {

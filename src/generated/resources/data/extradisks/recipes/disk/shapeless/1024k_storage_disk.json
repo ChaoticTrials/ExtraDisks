@@ -5,7 +5,7 @@
       "item": "extradisks:advanced_storage_housing"
     },
     {
-      "item": "extradisks:1024k_storage_part"
+      "tag": "refinedstorage:parts/items/1024k"
     }
   ],
   "result": {

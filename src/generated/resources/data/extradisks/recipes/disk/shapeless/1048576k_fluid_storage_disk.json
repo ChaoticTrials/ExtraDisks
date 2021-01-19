@@ -5,7 +5,7 @@
       "item": "extradisks:advanced_storage_housing"
     },
     {
-      "item": "extradisks:1048576k_fluid_storage_part"
+      "tag": "refinedstorage:parts/fluids/1048576k"
     }
   ],
   "result": {

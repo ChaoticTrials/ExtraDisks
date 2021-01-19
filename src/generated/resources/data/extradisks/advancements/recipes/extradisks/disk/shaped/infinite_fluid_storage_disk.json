@@ -11,7 +11,7 @@
       "conditions": {
         "items": [
           {
-            "item": "extradisks:infinite_fluid_storage_part"
+            "tag": "refinedstorage:parts/fluids/infinite"
           }
         ]
       }

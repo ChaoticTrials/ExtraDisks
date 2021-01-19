@@ -10,7 +10,7 @@
       "item": "refinedstorage:quartz_enriched_iron"
     },
     "P": {
-      "item": "extradisks:1048576k_fluid_storage_part"
+      "tag": "refinedstorage:parts/fluids/1048576k"
     },
     "C": {
       "item": "extradisks:advanced_machine_casing"

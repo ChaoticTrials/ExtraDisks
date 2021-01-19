@@ -13,7 +13,7 @@
       "item": "refinedstorage:quartz_enriched_iron"
     },
     "P": {
-      "item": "extradisks:4096k_storage_part"
+      "tag": "refinedstorage:parts/items/4096k"
     },
     "I": {
       "item": "refinedstorage:improved_processor"

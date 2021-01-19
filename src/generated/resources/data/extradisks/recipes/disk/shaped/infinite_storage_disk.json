@@ -13,7 +13,7 @@
       "item": "refinedstorage:quartz_enriched_iron"
     },
     "P": {
-      "item": "extradisks:infinite_storage_part"
+      "tag": "refinedstorage:parts/items/infinite"
     },
     "I": {
       "item": "refinedstorage:improved_processor"

@@ -13,7 +13,7 @@
       "item": "refinedstorage:quartz_enriched_iron"
     },
     "P": {
-      "item": "extradisks:16384k_fluid_storage_part"
+      "tag": "refinedstorage:parts/fluids/16384k"
     },
     "R": {
       "tag": "forge:dusts/redstone"

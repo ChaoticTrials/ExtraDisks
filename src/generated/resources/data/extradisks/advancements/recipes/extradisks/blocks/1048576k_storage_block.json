@@ -11,7 +11,7 @@
       "conditions": {
         "items": [
           {
-            "item": "extradisks:1048576k_storage_part"
+            "tag": "refinedstorage:parts/items/1048576k"
           }
         ]
       }
