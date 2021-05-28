@@ -25,6 +25,12 @@ public class ExtraFluidStorageBlockTile extends NetworkNodeTile<ExtraFluidStorag
     public ExtraFluidStorageBlockTile(ExtraFluidStorageType type) {
         super(Registration.FLUID_STORAGE_TILE.get(type).get());
         this.type = type;
+
+        this.dataManager.addWatchedParameter(PRIORITY);
+        this.dataManager.addWatchedParameter(COMPARE);
+        this.dataManager.addWatchedParameter(WHITELIST_BLACKLIST);
+        this.dataManager.addWatchedParameter(ACCESS_TYPE);
+        this.dataManager.addWatchedParameter(STORED);
     }
 
     public ExtraFluidStorageType getFluidStorageType() {
