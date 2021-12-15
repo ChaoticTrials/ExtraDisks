@@ -1,0 +1,55 @@
+{
+    "itemGroup.extradisks": "Extra Disks",
+
+    "item.extradisks.advanced_storage_housing": "Zaawansowana obudowa dysku",
+    "item.extradisks.raw_withering_processor": "Surowy witherowy procesor",
+    "item.extradisks.withering_processor": "Witherowy procesor",
+    "block.extradisks.advanced_machine_casing": "Zaawansowana obudowa maszyn",
+
+    "_comment": "Przedmioty",
+    "item.extradisks.256k_storage_part": "Pamięć przechowywania 256k",
+    "item.extradisks.1024k_storage_part": "Pamięć przechowywania 1024k",
+    "item.extradisks.4096k_storage_part": "Pamięć przechowywania 4096k",
+    "item.extradisks.16384k_storage_part": "Pamięć przechowywania 16384k",
+    "item.extradisks.65536k_storage_part": "Pamięć przechowywania 65536k",
+    "item.extradisks.262144k_storage_part": "Pamięć przechowywania 262M",
+    "item.extradisks.1048576k_storage_part": "Pamięć przechowywania 1048M",
+    "item.extradisks.infinite_storage_part": "Nieskończona pamięć przechowywania",
+
+    "item.extradisks.256k_storage_disk": "Dysk przechowywania 256k",
+    "item.extradisks.1024k_storage_disk": "Dysk przechowywania 1024k",
+    "item.extradisks.4096k_storage_disk": "Dysk przechowywania 4096k",
+    "item.extradisks.16384k_storage_disk": "Dysk przechowywania 16384k",
+    "item.extradisks.65536k_storage_disk": "Dysk przechowywania 65536k",
+    "item.extradisks.262144k_storage_disk": "Dysk przechowywania 262M",
+    "item.extradisks.1048576k_storage_disk": "Dysk przechowywania 1048M",
+    "item.extradisks.infinite_storage_disk": "Nieskończony dysk przechowywania",
+
+    "block.extradisks.256k_storage_block": "Blok przechowywania 256k",
+    "block.extradisks.1024k_storage_block": "Blok przechowywania 1024k",
+    "block.extradisks.4096k_storage_block": "Blok przechowywania 4096k",
+    "block.extradisks.16384k_storage_block": "Blok przechowywania 16384k",
+    "block.extradisks.65536k_storage_block": "Blok przechowywania 65536k",
+    "block.extradisks.262144k_storage_block": "Blok przechowywania 262M",
+    "block.extradisks.1048576k_storage_block": "Blok przechowywania 1048M",
+    "block.extradisks.infinite_storage_block": "Nieskończony blok przechowywania",
+
+    "_comment": "Fluid",
+    "item.extradisks.16384k_fluid_storage_part": "Pamięć przechowywania cieczy 16384k",
+    "item.extradisks.65536k_fluid_storage_part": "Pamięć przechowywania cieczy 65536k",
+    "item.extradisks.262144k_fluid_storage_part": "Pamięć przechowywania cieczy 262M",
+    "item.extradisks.1048576k_fluid_storage_part": "Pamięć przechowywania cieczy 1048M",
+    "item.extradisks.infinite_fluid_storage_part": "Nieskończona pamięć przechowywania cieczy",
+
+    "item.extradisks.16384k_fluid_storage_disk": "Dysk przechowywania cieczy 16384k",
+    "item.extradisks.65536k_fluid_storage_disk": "Dysk przechowywania cieczy 65536k",
+    "item.extradisks.262144k_fluid_storage_disk": "Dysk przechowywania cieczy 262M",
+    "item.extradisks.1048576k_fluid_storage_disk": "Dysk przechowywania cieczy 1048M",
+    "item.extradisks.infinite_fluid_storage_disk": "Nieskończony dysk przechowywania cieczy",
+
+    "block.extradisks.16384k_fluid_storage_block": "Blok przechowywania cieczy 16384k",
+    "block.extradisks.65536k_fluid_storage_block": "Blok przechowywania cieczy 65536k",
+    "block.extradisks.262144k_fluid_storage_block": "Blok przechowywania cieczy 262M",
+    "block.extradisks.1048576k_fluid_storage_block": "Blok przechowywania cieczy 1048M",
+    "block.extradisks.infinite_fluid_storage_block": "Nieskończony blok przechowywania cieczy"
+}
