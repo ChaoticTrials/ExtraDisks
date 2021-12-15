@@ -1,106 +1,33 @@
 buildscript {
-    repositories {
-        maven { url = 'https://files.minecraftforge.net/maven' }
-        jcenter()
-        mavenCentral()
-    }
-    dependencies {
-        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '3.+', changing: true
-    }
+    apply from: 'https://noeppi-noeppi.github.io/ModUtils/v3/buildscript.gradle', to: buildscript
 }
+
+apply from: 'https://noeppi-noeppi.github.io/ModUtils/v3/mod.gradle'
 
 repositories {
     maven {
-        name = "RS maven"
-        url = "https://repo.refinedmods.com"
+        url = uri("https://maven.pkg.github.com/refinedmods/refinedstorage")
+        /* As of december 2021, GitHub packages requires authentication.
+           The password below is a personal access token that has read access to the Refined Mods repos.
+           It can be reused in other projects.
+           See: https://github.community/t/download-from-github-package-registry-without-authentication/14407/38 and
+                https://github.community/t/download-from-github-package-registry-without-authentication/14407/44
+         */
+        credentials {
+            username = "anything"
+            password = "\u0067hp_pnP5hVDYXXhhXwe21IEkrUzGjquUJL0xjLzb"
+        }
     }
     maven {
         name = "JEI maven"
         url = "https://dvs1.progwml6.com/files/maven/"
     }
-    flatDir {
-        dirs "libs"
-    }
-}
-
-apply plugin: 'net.minecraftforge.gradle'
-
-version = mod_version
-group = 'de.melanx.extradisks'
-archivesBaseName = "extradisks-${mc_version}"
-
-sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '1.8'
-
-minecraft {
-    mappings channel: 'snapshot', version: mappings_version
-
-    runs {
-        client {
-            workingDirectory project.file('run')
-
-            // Recommended logging data for a userdev environment
-            property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
-
-            // Recommended logging level for the console
-            property 'forge.logging.console.level', 'debug'
-
-            mods {
-                extradisks {
-                    source sourceSets.main
-                }
-            }
-        }
-
-        server {
-            workingDirectory project.file('run_server')
-
-            property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
-            property 'forge.logging.console.level', 'debug'
-
-            mods {
-                extradisks {
-                    source sourceSets.main
-                }
-            }
-        }
-
-        data {
-            workingDirectory project.file('run_data')
-
-            property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
-            property 'forge.logging.console.level', 'debug'
-
-            args "--mod", "extradisks", "--all", "--output", file("src/generated/resources/"), "--existing", file("src/main/resources")
-
-            mods {
-                extradisks {
-                    source sourceSets.main
-                }
-            }
-        }
-    }
-}
-
-sourceSets.main.resources {
-    srcDir 'src/generated/resources'
 }
 
 dependencies {
-    minecraft "net.minecraftforge:forge:${mc_version}-${forge_version}"
-    compile fg.deobf("com.refinedmods:refinedstorage:${rs_version}")
-    runtimeOnly fg.deobf("mezz.jei:jei-${mc_version}:${jei_version}")
-}
-
-jar {
-    manifest {
-        attributes([
-                "Specification-Title"     : "Extra Disks",
-                "Specification-Vendor"    : "MelanX",
-                "Specification-Version"   : "1", // We are version 1 of ourselves
-                "Implementation-Title"    : project.name,
-                "Implementation-Version"  : "${version}",
-                "Implementation-Vendor"   : "MelanX",
-                "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
-        ])
+    compileOnly "com.refinedmods:refinedstorage:1.10.0-test.5"
+    runtimeOnly fg.deobf("com.refinedmods:refinedstorage:1.10.0-test.5") {
+        transitive false
     }
+    runtimeOnly fg.deobf("mezz.jei:jei-1.18:9.0.0.40")
 }

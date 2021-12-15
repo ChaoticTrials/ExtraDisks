@@ -6,15 +6,15 @@ import com.refinedmods.refinedstorage.apiimpl.API;
 import com.refinedmods.refinedstorage.apiimpl.network.node.storage.FluidStorageNetworkNode;
 import com.refinedmods.refinedstorage.apiimpl.network.node.storage.FluidStorageWrapperStorageDisk;
 import de.melanx.extradisks.ExtraDisks;
-import de.melanx.extradisks.ServerConfig;
+import de.melanx.extradisks.ModConfig;
 import de.melanx.extradisks.items.fluid.ExtraFluidStorageType;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TranslationTextComponent;
-import net.minecraft.world.World;
-import net.minecraft.world.server.ServerWorld;
+import net.minecraft.core.BlockPos;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.Level;
 import net.minecraftforge.fluids.FluidStack;
 
 import javax.annotation.Nullable;
@@ -30,8 +30,8 @@ public class ExtraFluidStorageNetworkNode extends FluidStorageNetworkNode {
     private final ExtraFluidStorageType type;
     private IStorageDisk<FluidStack> storage;
 
-    public ExtraFluidStorageNetworkNode(World world, BlockPos pos, ExtraFluidStorageType type) {
-        super(world, pos, null);
+    public ExtraFluidStorageNetworkNode(Level level, BlockPos pos, ExtraFluidStorageType type) {
+        super(level, pos, null);
         this.type = type;
     }
 
@@ -59,20 +59,13 @@ public class ExtraFluidStorageNetworkNode extends FluidStorageNetworkNode {
 
     @Override
     public int getEnergyUsage() {
-        switch (this.type) {
-            case TIER_5_FLUID:
-                return ServerConfig.fluid_tier5usage.get();
-            case TIER_6_FLUID:
-                return ServerConfig.fluid_tier6usage.get();
-            case TIER_7_FLUID:
-                return ServerConfig.fluid_tier7usage.get();
-            case TIER_8_FLUID:
-                return ServerConfig.fluid_tier8usage.get();
-            case TIER_9_FLUID:
-                return ServerConfig.fluid_tier9usage.get();
-            default:
-                return 0;
-        }
+        return switch (this.type) {
+            case TIER_5_FLUID -> ModConfig.fluid_tier5usage.get();
+            case TIER_6_FLUID -> ModConfig.fluid_tier6usage.get();
+            case TIER_7_FLUID -> ModConfig.fluid_tier7usage.get();
+            case TIER_8_FLUID -> ModConfig.fluid_tier8usage.get();
+            case TIER_9_FLUID -> ModConfig.fluid_tier9usage.get();
+        };
     }
 
     @Override
@@ -85,16 +78,17 @@ public class ExtraFluidStorageNetworkNode extends FluidStorageNetworkNode {
     }
 
     @Override
-    public void loadStorage(@Nullable PlayerEntity owner) {
+    public void loadStorage(@Nullable Player owner) {
         //noinspection rawtypes
-        IStorageDisk disk = API.instance().getStorageDiskManager((ServerWorld) this.world).get(this.getStorageId());
+        IStorageDisk disk = API.instance().getStorageDiskManager((ServerLevel) this.world).get(this.getStorageId());
 
         if (disk == null) {
-            disk = API.instance().createDefaultFluidDisk((ServerWorld) this.world, this.type.getCapacity(), owner);
-            API.instance().getStorageDiskManager((ServerWorld) this.world).set(this.getStorageId(), disk);
-            API.instance().getStorageDiskManager((ServerWorld) this.world).markForSaving();
+            disk = API.instance().createDefaultFluidDisk((ServerLevel) this.world, this.type.getCapacity(), owner);
+            API.instance().getStorageDiskManager((ServerLevel) this.world).set(this.getStorageId(), disk);
+            API.instance().getStorageDiskManager((ServerLevel) this.world).markForSaving();
         }
 
+        //noinspection unchecked
         this.storage = new FluidStorageWrapperStorageDisk(this, disk);
     }
 
@@ -104,13 +98,13 @@ public class ExtraFluidStorageNetworkNode extends FluidStorageNetworkNode {
     }
 
     @Override
-    public ITextComponent getTitle() {
-        return new TranslationTextComponent("block." + ExtraDisks.MODID + "." + this.type.getName() + "_fluid_storage_block");
+    public Component getTitle() {
+        return new TranslatableComponent("block." + ExtraDisks.MODID + "." + this.type.getName() + "_fluid_storage_block");
     }
 
     @Override
     public long getStored() {
-        return ExtraFluidStorageBlockTile.STORED.getValue();
+        return ExtraFluidStorageBlockEntity.STORED.getValue();
     }
 
     @Override

@@ -1,5 +1,5 @@
 modLoader="javafml"
-loaderVersion="[34,)"
+loaderVersion="[39,)"
 license="MIT License"
 issueTrackerURL="https://github.com/MelanX/ExtraDisks/issues"
 
@@ -7,7 +7,7 @@ issueTrackerURL="https://github.com/MelanX/ExtraDisks/issues"
 modId="extradisks"
 version="${file.jarVersion}"
 displayName="Extra Disks"
-updateJSONURL="https://raw.githubusercontent.com/MelanX/mod-updatechecker-files/master/extradisks.json"
+updateJSONURL="https://assets.melanx.de/updates/extra-disks.json"
 displayURL="https://www.curseforge.com/minecraft/mc-mods/extra-disks/"
 credits="Thanks for raoulvdberge and Refined Storage for being a fancy mod! Thanks to Reborn Storage for most of the textures as well!"
 authors="MelanX"
@@ -18,20 +18,20 @@ This mod adds a few bigger storage disks for Refined Storage by raoulvdberge.
 [[dependencies.extradisks]]
     modId="forge"
     mandatory=true
-    versionRange="[34,)"
+    versionRange="[39,)"
     ordering="NONE"
     side="BOTH"
 
 [[dependencies.extradisks]]
     modId="minecraft"
     mandatory=true
-    versionRange="[1.16.3,)"
+    versionRange="[1.18.1, 1.19)"
     ordering="NONE"
     side="BOTH"
 
 [[dependencies.extradisks]]
     modId="refinedstorage"
     mandatory=true
-    versionRange="[1.9.7,)"
+    versionRange="[1.10,)"
     ordering="NONE"
     side="BOTH"

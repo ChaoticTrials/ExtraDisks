@@ -6,16 +6,16 @@ import com.refinedmods.refinedstorage.apiimpl.API;
 import com.refinedmods.refinedstorage.apiimpl.network.node.storage.ItemStorageWrapperStorageDisk;
 import com.refinedmods.refinedstorage.apiimpl.network.node.storage.StorageNetworkNode;
 import de.melanx.extradisks.ExtraDisks;
-import de.melanx.extradisks.ServerConfig;
+import de.melanx.extradisks.ModConfig;
 import de.melanx.extradisks.items.item.ExtraItemStorageType;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TranslationTextComponent;
-import net.minecraft.world.World;
-import net.minecraft.world.server.ServerWorld;
+import net.minecraft.core.BlockPos;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -33,32 +33,22 @@ public class ExtraItemStorageNetworkNode extends StorageNetworkNode {
     private final ExtraItemStorageType type;
     private IStorageDisk<ItemStack> storage;
 
-    public ExtraItemStorageNetworkNode(World world, BlockPos pos, ExtraItemStorageType type) {
-        super(world, pos, null);
+    public ExtraItemStorageNetworkNode(Level level, BlockPos pos, ExtraItemStorageType type) {
+        super(level, pos, null);
         this.type = type;
     }
 
     public static ResourceLocation getId(ExtraItemStorageType type) {
-        switch (type) {
-            case TIER_5:
-                return BLOCK_256K_ID;
-            case TIER_6:
-                return BLOCK_1024K_ID;
-            case TIER_7:
-                return BLOCK_4096K_ID;
-            case TIER_8:
-                return BLOCK_16384K_ID;
-            case TIER_9:
-                return BLOCK_65536K_ID;
-            case TIER_10:
-                return BLOCK_262144K_ID;
-            case TIER_11:
-                return BLOCK_1048576K_ID;
-            case TIER_12:
-                return BLOCK_INFINITE_ID;
-            default:
-                throw new IllegalArgumentException("Unknown storage type " + type);
-        }
+        return switch (type) {
+            case TIER_5 -> BLOCK_256K_ID;
+            case TIER_6 -> BLOCK_1024K_ID;
+            case TIER_7 -> BLOCK_4096K_ID;
+            case TIER_8 -> BLOCK_16384K_ID;
+            case TIER_9 -> BLOCK_65536K_ID;
+            case TIER_10 -> BLOCK_262144K_ID;
+            case TIER_11 -> BLOCK_1048576K_ID;
+            case TIER_12 -> BLOCK_INFINITE_ID;
+        };
     }
 
     @Override
@@ -68,26 +58,16 @@ public class ExtraItemStorageNetworkNode extends StorageNetworkNode {
 
     @Override
     public int getEnergyUsage() {
-        switch (this.type) {
-            case TIER_5:
-                return ServerConfig.tier5usage.get();
-            case TIER_6:
-                return ServerConfig.tier6usage.get();
-            case TIER_7:
-                return ServerConfig.tier7usage.get();
-            case TIER_8:
-                return ServerConfig.tier8usage.get();
-            case TIER_9:
-                return ServerConfig.tier9usage.get();
-            case TIER_10:
-                return ServerConfig.tier10usage.get();
-            case TIER_11:
-                return ServerConfig.tier11usage.get();
-            case TIER_12:
-                return ServerConfig.tier12usage.get();
-            default:
-                return 0;
-        }
+        return switch (this.type) {
+            case TIER_5 -> ModConfig.tier5usage.get();
+            case TIER_6 -> ModConfig.tier6usage.get();
+            case TIER_7 -> ModConfig.tier7usage.get();
+            case TIER_8 -> ModConfig.tier8usage.get();
+            case TIER_9 -> ModConfig.tier9usage.get();
+            case TIER_10 -> ModConfig.tier10usage.get();
+            case TIER_11 -> ModConfig.tier11usage.get();
+            case TIER_12 -> ModConfig.tier12usage.get();
+        };
     }
 
     @Override
@@ -100,15 +80,16 @@ public class ExtraItemStorageNetworkNode extends StorageNetworkNode {
     }
 
     @Override
-    public void loadStorage(@Nullable PlayerEntity owner) {
+    public void loadStorage(@Nullable Player owner) {
         //noinspection rawtypes
-        IStorageDisk disk = API.instance().getStorageDiskManager((ServerWorld) this.world).get(this.getStorageId());
+        IStorageDisk disk = API.instance().getStorageDiskManager((ServerLevel) this.world).get(this.getStorageId());
 
         if (disk == null) {
-            disk = API.instance().createDefaultItemDisk((ServerWorld) this.world, this.type.getCapacity(), owner);
-            API.instance().getStorageDiskManager((ServerWorld) this.world).set(this.getStorageId(), disk);
-            API.instance().getStorageDiskManager((ServerWorld) this.world).markForSaving();
+            disk = API.instance().createDefaultItemDisk((ServerLevel) this.world, this.type.getCapacity(), owner);
+            API.instance().getStorageDiskManager((ServerLevel) this.world).set(this.getStorageId(), disk);
+            API.instance().getStorageDiskManager((ServerLevel) this.world).markForSaving();
         }
+        //noinspection unchecked
         this.storage = new ItemStorageWrapperStorageDisk(this, disk);
     }
 
@@ -118,13 +99,13 @@ public class ExtraItemStorageNetworkNode extends StorageNetworkNode {
     }
 
     @Override
-    public ITextComponent getTitle() {
-        return new TranslationTextComponent("block." + ExtraDisks.MODID + "." + this.type.getName() + "_storage_block");
+    public Component getTitle() {
+        return new TranslatableComponent("block." + ExtraDisks.MODID + "." + this.type.getName() + "_storage_block");
     }
 
     @Override
     public long getStored() {
-        return ExtraItemStorageBlockTile.STORED.getValue();
+        return ExtraItemStorageBlockEntity.STORED.getValue();
     }
 
     @Override

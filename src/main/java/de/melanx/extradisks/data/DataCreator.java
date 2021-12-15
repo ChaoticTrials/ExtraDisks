@@ -5,7 +5,7 @@ import net.minecraft.data.DataGenerator;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.event.lifecycle.GatherDataEvent;
+import net.minecraftforge.forge.event.lifecycle.GatherDataEvent;
 
 @Mod.EventBusSubscriber(modid = ExtraDisks.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class DataCreator {
@@ -20,7 +20,7 @@ public class DataCreator {
             generator.addProvider(blockTagsProvider);
             generator.addProvider(new ModTags.ItemTags(generator, blockTagsProvider));
             generator.addProvider(new Recipes(generator));
-            generator.addProvider(new LootTables(generator));
+            generator.addProvider(new ExtraLootTables(generator));
         }
         if (event.includeClient()) {
             generator.addProvider(new ModItemModels(generator, helper));

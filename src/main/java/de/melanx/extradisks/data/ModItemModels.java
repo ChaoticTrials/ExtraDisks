@@ -3,12 +3,12 @@ package de.melanx.extradisks.data;
 import de.melanx.extradisks.ExtraDisks;
 import de.melanx.extradisks.items.Registration;
 import net.minecraft.data.DataGenerator;
-import net.minecraft.item.BlockItem;
-import net.minecraft.item.Item;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.Item;
 import net.minecraftforge.client.model.generators.ItemModelProvider;
 import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.common.data.ExistingFileHelper;
-import net.minecraftforge.fml.RegistryObject;
+import net.minecraftforge.registries.RegistryObject;
 
 public class ModItemModels extends ItemModelProvider {
     public ModItemModels(DataGenerator generator, ExistingFileHelper helper) {

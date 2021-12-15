@@ -2,12 +2,12 @@ package de.melanx.extradisks;
 
 import de.melanx.extradisks.items.Registration;
 import de.melanx.extradisks.items.item.ExtraItemStorageType;
-import net.minecraft.item.ItemGroup;
-import net.minecraft.item.ItemStack;
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.ItemStack;
 
 import javax.annotation.Nonnull;
 
-public class CreativeTab extends ItemGroup {
+public class CreativeTab extends CreativeModeTab {
 
     public CreativeTab() {
         super(ExtraDisks.MODID);
@@ -15,7 +15,7 @@ public class CreativeTab extends ItemGroup {
 
     @Nonnull
     @Override
-    public ItemStack createIcon() {
+    public ItemStack makeIcon() {
         return new ItemStack(Registration.ITEM_STORAGE_DISK.get(ExtraItemStorageType.TIER_8).get());
     }
 }

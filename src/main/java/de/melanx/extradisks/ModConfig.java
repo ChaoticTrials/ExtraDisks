@@ -2,13 +2,13 @@ package de.melanx.extradisks;
 
 import net.minecraftforge.common.ForgeConfigSpec;
 
-public class ServerConfig {
-    private static final ForgeConfigSpec.Builder SERVER_BUILDER = new ForgeConfigSpec.Builder();
-    public static final ForgeConfigSpec SERVER_CONFIG;
+public class ModConfig {
+    private static final ForgeConfigSpec.Builder CONFIG_BUILDER = new ForgeConfigSpec.Builder();
+    public static final ForgeConfigSpec CONFIG;
 
     static {
-        init(SERVER_BUILDER);
-        SERVER_CONFIG = SERVER_BUILDER.build();
+        init(CONFIG_BUILDER);
+        CONFIG = CONFIG_BUILDER.build();
     }
 
     public static ForgeConfigSpec.IntValue tier5usage;
@@ -26,7 +26,7 @@ public class ServerConfig {
     public static ForgeConfigSpec.IntValue fluid_tier8usage;
     public static ForgeConfigSpec.IntValue fluid_tier9usage;
 
-    private static void init(ForgeConfigSpec.Builder builder) {
+    private static void init(@SuppressWarnings("SameParameterValue") ForgeConfigSpec.Builder builder) {
         builder.push("storageblocks");
         builder.push("item").comment("item storage blocks energy usage");
         tier5usage = builder.defineInRange("256k", 12, 0, Integer.MAX_VALUE);

@@ -4,12 +4,12 @@ import de.melanx.extradisks.ExtraDisks;
 import de.melanx.extradisks.items.Registration;
 import de.melanx.extradisks.items.fluid.ExtraFluidStorageType;
 import de.melanx.extradisks.items.item.ExtraItemStorageType;
-import net.minecraft.block.Block;
-import net.minecraft.data.BlockTagsProvider;
 import net.minecraft.data.DataGenerator;
-import net.minecraft.data.ItemTagsProvider;
-import net.minecraft.item.Item;
-import net.minecraft.tags.ITag;
+import net.minecraft.data.tags.BlockTagsProvider;
+import net.minecraft.data.tags.ItemTagsProvider;
+import net.minecraft.tags.Tag;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.level.block.Block;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -17,11 +17,11 @@ import java.util.Map;
 public class ModTags {
 
     public static class Blocks {
-        public static final ITag.INamedTag<Block> STORAGE_BLOCKS = tag("storage_blocks");
-        public static final ITag.INamedTag<Block> ITEM_STORAGE_BLOCKS = tag("storage_blocks/items");
-        public static final ITag.INamedTag<Block> FLUID_STORAGE_BLOCKS = tag("storage_blocks/fluids");
-        public static final Map<ExtraItemStorageType, ITag.INamedTag<Block>> STORAGE_BLOCKS_ITEM = new HashMap<>();
-        public static final Map<ExtraFluidStorageType, ITag.INamedTag<Block>> STORAGE_BLOCKS_FLUID = new HashMap<>();
+        public static final Tag.Named<Block> STORAGE_BLOCKS = tag("storage_blocks");
+        public static final Tag.Named<Block> ITEM_STORAGE_BLOCKS = tag("storage_blocks/items");
+        public static final Tag.Named<Block> FLUID_STORAGE_BLOCKS = tag("storage_blocks/fluids");
+        public static final Map<ExtraItemStorageType, Tag.Named<Block>> STORAGE_BLOCKS_ITEM = new HashMap<>();
+        public static final Map<ExtraFluidStorageType, Tag.Named<Block>> STORAGE_BLOCKS_FLUID = new HashMap<>();
 
         static {
             for (ExtraItemStorageType type : ExtraItemStorageType.values()) {
@@ -32,29 +32,29 @@ public class ModTags {
             }
         }
 
-        private static ITag.INamedTag<Block> tag(String name) {
-            return net.minecraft.tags.BlockTags.makeWrapperTag("refinedstorage:" + name);
+        private static Tag.Named<Block> tag(String name) {
+            return net.minecraft.tags.BlockTags.bind("refinedstorage:" + name);
         }
     }
 
     public static class Items {
-        public static final ITag.INamedTag<Item> STORAGE_BLOCKS = tag("storage_blocks");
-        public static final ITag.INamedTag<Item> ITEM_STORAGE_BLOCKS = tag("storage_blocks/items");
-        public static final ITag.INamedTag<Item> FLUID_STORAGE_BLOCKS = tag("storage_blocks/fluids");
-        public static final Map<ExtraItemStorageType, ITag.INamedTag<Item>> STORAGE_BLOCKS_ITEM = new HashMap<>();
-        public static final Map<ExtraFluidStorageType, ITag.INamedTag<Item>> STORAGE_BLOCKS_FLUID = new HashMap<>();
+        public static final Tag.Named<Item> STORAGE_BLOCKS = tag("storage_blocks");
+        public static final Tag.Named<Item> ITEM_STORAGE_BLOCKS = tag("storage_blocks/items");
+        public static final Tag.Named<Item> FLUID_STORAGE_BLOCKS = tag("storage_blocks/fluids");
+        public static final Map<ExtraItemStorageType, Tag.Named<Item>> STORAGE_BLOCKS_ITEM = new HashMap<>();
+        public static final Map<ExtraFluidStorageType, Tag.Named<Item>> STORAGE_BLOCKS_FLUID = new HashMap<>();
 
-        public static final ITag.INamedTag<Item> PARTS = tag("parts");
-        public static final ITag.INamedTag<Item> ITEM_PARTS = tag("parts/items");
-        public static final ITag.INamedTag<Item> FLUID_PARTS = tag("parts/fluids");
-        public static final Map<ExtraItemStorageType, ITag.INamedTag<Item>> PARTS_ITEM = new HashMap<>();
-        public static final Map<ExtraFluidStorageType, ITag.INamedTag<Item>> PARTS_FLUID = new HashMap<>();
+        public static final Tag.Named<Item> PARTS = tag("parts");
+        public static final Tag.Named<Item> ITEM_PARTS = tag("parts/items");
+        public static final Tag.Named<Item> FLUID_PARTS = tag("parts/fluids");
+        public static final Map<ExtraItemStorageType, Tag.Named<Item>> PARTS_ITEM = new HashMap<>();
+        public static final Map<ExtraFluidStorageType, Tag.Named<Item>> PARTS_FLUID = new HashMap<>();
 
-        public static final ITag.INamedTag<Item> DISKS = tag("disks");
-        public static final ITag.INamedTag<Item> ITEM_DISKS = tag("disks/items");
-        public static final ITag.INamedTag<Item> FLUID_DISKS = tag("disks/fluids");
-        public static final Map<ExtraItemStorageType, ITag.INamedTag<Item>> DISKS_ITEM = new HashMap<>();
-        public static final Map<ExtraFluidStorageType, ITag.INamedTag<Item>> DISKS_FLUID = new HashMap<>();
+        public static final Tag.Named<Item> DISKS = tag("disks");
+        public static final Tag.Named<Item> ITEM_DISKS = tag("disks/items");
+        public static final Tag.Named<Item> FLUID_DISKS = tag("disks/fluids");
+        public static final Map<ExtraItemStorageType, Tag.Named<Item>> DISKS_ITEM = new HashMap<>();
+        public static final Map<ExtraFluidStorageType, Tag.Named<Item>> DISKS_FLUID = new HashMap<>();
 
         static {
             for (ExtraItemStorageType type : ExtraItemStorageType.values()) {
@@ -69,8 +69,8 @@ public class ModTags {
             }
         }
 
-        private static ITag.INamedTag<Item> tag(String name) {
-            return net.minecraft.tags.ItemTags.makeWrapperTag("refinedstorage:" + name);
+        private static Tag.Named<Item> tag(String name) {
+            return net.minecraft.tags.ItemTags.bind("refinedstorage:" + name);
         }
     }
 
@@ -80,23 +80,23 @@ public class ModTags {
         }
 
         @Override
-        protected void registerTags() {
-            Builder<Block> itemBlocksBuilder = this.getOrCreateBuilder(Blocks.ITEM_STORAGE_BLOCKS);
+        protected void addTags() {
+            TagAppender<Block> itemBlocksBuilder = this.tag(Blocks.ITEM_STORAGE_BLOCKS);
             for (ExtraItemStorageType type : ExtraItemStorageType.values()) {
-                ITag.INamedTag<Block> tag = Blocks.STORAGE_BLOCKS_ITEM.get(type);
-                this.getOrCreateBuilder(tag).add(Registration.ITEM_STORAGE_BLOCK.get(type).get());
+                Tag.Named<Block> tag = Blocks.STORAGE_BLOCKS_ITEM.get(type);
+                this.tag(tag).add(Registration.ITEM_STORAGE_BLOCK.get(type).get());
                 itemBlocksBuilder.addTag(tag);
             }
 
-            Builder<Block> fluidBlocksBuilder = this.getOrCreateBuilder(Blocks.FLUID_STORAGE_BLOCKS);
+            TagAppender<Block> fluidBlocksBuilder = this.tag(Blocks.FLUID_STORAGE_BLOCKS);
             for (ExtraFluidStorageType type : ExtraFluidStorageType.values()) {
-                ITag.INamedTag<Block> tag = Blocks.STORAGE_BLOCKS_FLUID.get(type);
-                this.getOrCreateBuilder(tag).add(Registration.FLUID_STORAGE_BLOCK.get(type).get());
+                Tag.Named<Block> tag = Blocks.STORAGE_BLOCKS_FLUID.get(type);
+                this.tag(tag).add(Registration.FLUID_STORAGE_BLOCK.get(type).get());
                 fluidBlocksBuilder.addTag(tag);
             }
 
             //noinspection unchecked
-            this.getOrCreateBuilder(Blocks.STORAGE_BLOCKS).addTags(Blocks.ITEM_STORAGE_BLOCKS, Blocks.FLUID_STORAGE_BLOCKS);
+            this.tag(Blocks.STORAGE_BLOCKS).addTags(Blocks.ITEM_STORAGE_BLOCKS, Blocks.FLUID_STORAGE_BLOCKS);
         }
     }
 
@@ -106,35 +106,35 @@ public class ModTags {
         }
 
         @Override
-        protected void registerTags() {
-            Builder<Item> itemPartsBuilder = this.getOrCreateBuilder(Items.ITEM_PARTS);
-            Builder<Item> itemDisksBuilder = this.getOrCreateBuilder(Items.ITEM_DISKS);
+        protected void addTags() {
+            TagAppender<Item> itemPartsBuilder = this.tag(Items.ITEM_PARTS);
+            TagAppender<Item> itemDisksBuilder = this.tag(Items.ITEM_DISKS);
             for (ExtraItemStorageType type : ExtraItemStorageType.values()) {
-                ITag.INamedTag<Item> tag = Items.PARTS_ITEM.get(type);
-                this.getOrCreateBuilder(tag).add(Registration.ITEM_STORAGE_PART.get(type).get());
+                Tag.Named<Item> tag = Items.PARTS_ITEM.get(type);
+                this.tag(tag).add(Registration.ITEM_STORAGE_PART.get(type).get());
                 itemPartsBuilder.addTag(tag);
 
                 tag = Items.DISKS_ITEM.get(type);
-                this.getOrCreateBuilder(tag).add(Registration.ITEM_STORAGE_DISK.get(type).get());
+                this.tag(tag).add(Registration.ITEM_STORAGE_DISK.get(type).get());
                 itemDisksBuilder.addTag(tag);
             }
 
-            Builder<Item> fluidPartsBuilder = this.getOrCreateBuilder(Items.FLUID_PARTS);
-            Builder<Item> fluidDisksBuilder = this.getOrCreateBuilder(Items.FLUID_DISKS);
+            TagAppender<Item> fluidPartsBuilder = this.tag(Items.FLUID_PARTS);
+            TagAppender<Item> fluidDisksBuilder = this.tag(Items.FLUID_DISKS);
             for (ExtraFluidStorageType type : ExtraFluidStorageType.values()) {
-                ITag.INamedTag<Item> tag = Items.PARTS_FLUID.get(type);
-                this.getOrCreateBuilder(tag).add(Registration.FLUID_STORAGE_PART.get(type).get());
+                Tag.Named<Item> tag = Items.PARTS_FLUID.get(type);
+                this.tag(tag).add(Registration.FLUID_STORAGE_PART.get(type).get());
                 fluidPartsBuilder.addTag(tag);
 
                 tag = Items.DISKS_FLUID.get(type);
-                this.getOrCreateBuilder(tag).add(Registration.FLUID_STORAGE_DISK.get(type).get());
+                this.tag(tag).add(Registration.FLUID_STORAGE_DISK.get(type).get());
                 fluidDisksBuilder.addTag(tag);
             }
 
             //noinspection unchecked
-            this.getOrCreateBuilder(Items.PARTS).addTags(Items.ITEM_PARTS, Items.FLUID_PARTS);
+            this.tag(Items.PARTS).addTags(Items.ITEM_PARTS, Items.FLUID_PARTS);
             //noinspection unchecked
-            this.getOrCreateBuilder(Items.DISKS).addTags(Items.ITEM_DISKS, Items.FLUID_DISKS);
+            this.tag(Items.DISKS).addTags(Items.ITEM_DISKS, Items.FLUID_DISKS);
 
             // blocks
             this.copy(Blocks.ITEM_STORAGE_BLOCKS, Items.ITEM_STORAGE_BLOCKS);

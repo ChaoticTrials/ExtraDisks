@@ -8,12 +8,13 @@ import de.melanx.extradisks.ExtraDisks;
 import de.melanx.extradisks.items.Registration;
 import de.melanx.extradisks.items.fluid.ExtraFluidStorageType;
 import de.melanx.extradisks.items.item.ExtraItemStorageType;
-import net.minecraft.data.*;
-import net.minecraft.item.Item;
-import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.tags.ITag;
-import net.minecraft.util.IItemProvider;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.data.DataGenerator;
+import net.minecraft.data.recipes.*;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.Tag;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.level.ItemLike;
 import net.minecraftforge.common.Tags;
 
 import javax.annotation.Nonnull;
@@ -25,7 +26,7 @@ public class Recipes extends RecipeProvider {
     }
 
     @Override
-    protected void registerRecipes(@Nonnull Consumer<IFinishedRecipe> consumer) {
+    protected void buildCraftingRecipes(@Nonnull Consumer<FinishedRecipe> consumer) {
         for (ExtraItemStorageType type : ExtraItemStorageType.values()) {
             this.registerDiskRecipes(Registration.ITEM_STORAGE_DISK.get(type).get(), ModTags.Items.PARTS_ITEM.get(type), consumer);
             this.registerStorageBlockRecipe(ModTags.Items.PARTS_ITEM.get(type), Registration.ITEM_STORAGE_BLOCK.get(type).get(), consumer);
@@ -51,113 +52,113 @@ public class Recipes extends RecipeProvider {
         this.registerAdvancedPartRecipe(Registration.FLUID_STORAGE_PART.get(ExtraFluidStorageType.TIER_8_FLUID).get(), ModTags.Items.PARTS_FLUID.get(ExtraFluidStorageType.TIER_7_FLUID), consumer);
         this.registerAdvancedPartRecipe(Registration.FLUID_STORAGE_PART.get(ExtraFluidStorageType.TIER_9_FLUID).get(), ModTags.Items.PARTS_FLUID.get(ExtraFluidStorageType.TIER_8_FLUID), consumer);
 
-        this.registerProcessorRecipe(Registration.WITHERING_PROCESSOR.get(), Registration.RAW_WITHERING_PROCESSOR.get(), Ingredient.fromTag(Tags.Items.NETHER_STARS), consumer);
+        this.registerProcessorRecipe(Registration.WITHERING_PROCESSOR.get(), Registration.RAW_WITHERING_PROCESSOR.get(), Ingredient.of(Tags.Items.NETHER_STARS), consumer);
 
-        ShapedRecipeBuilder.shapedRecipe(Registration.ADVANCED_STORAGE_HOUSING.get())
-                .patternLine("GEG")
-                .patternLine("E E")
-                .patternLine("IAI")
-                .key('G', Tags.Items.GLASS)
-                .key('E', RSItems.QUARTZ_ENRICHED_IRON.get())
-                .key('I', RSItems.PROCESSORS.get(ProcessorItem.Type.IMPROVED).get())
-                .key('A', RSItems.PROCESSORS.get(ProcessorItem.Type.ADVANCED).get())
-                .addCriterion("has_processor", hasItem(RSItems.PROCESSORS.get(ProcessorItem.Type.ADVANCED).get()))
-                .build(consumer);
+        ShapedRecipeBuilder.shaped(Registration.ADVANCED_STORAGE_HOUSING.get())
+                .pattern("GEG")
+                .pattern("E E")
+                .pattern("IAI")
+                .define('G', Tags.Items.GLASS)
+                .define('E', RSItems.QUARTZ_ENRICHED_IRON.get())
+                .define('I', RSItems.PROCESSORS.get(ProcessorItem.Type.IMPROVED).get())
+                .define('A', RSItems.PROCESSORS.get(ProcessorItem.Type.ADVANCED).get())
+                .unlockedBy("has_processor", has(RSItems.PROCESSORS.get(ProcessorItem.Type.ADVANCED).get()))
+                .save(consumer);
 
-        ShapedRecipeBuilder.shapedRecipe(Registration.ADVANCED_MACHINE_CASING.get())
-                .patternLine("DCD")
-                .patternLine("GBG")
-                .patternLine("DOD")
-                .key('D', RSItems.PROCESSORS.get(ProcessorItem.Type.ADVANCED).get())
-                .key('C', RSItems.CONSTRUCTION_CORE.get())
-                .key('G', RSItems.PROCESSORS.get(ProcessorItem.Type.IMPROVED).get())
-                .key('B', RSItems.MACHINE_CASING.get())
-                .key('O', RSItems.DESTRUCTION_CORE.get())
-                .addCriterion("has_processor", hasItem(RSItems.PROCESSORS.get(ProcessorItem.Type.ADVANCED).get()))
-                .build(consumer);
+        ShapedRecipeBuilder.shaped(Registration.ADVANCED_MACHINE_CASING.get())
+                .pattern("DCD")
+                .pattern("GBG")
+                .pattern("DOD")
+                .define('D', RSItems.PROCESSORS.get(ProcessorItem.Type.ADVANCED).get())
+                .define('C', RSItems.CONSTRUCTION_CORE.get())
+                .define('G', RSItems.PROCESSORS.get(ProcessorItem.Type.IMPROVED).get())
+                .define('B', RSItems.MACHINE_CASING.get())
+                .define('O', RSItems.DESTRUCTION_CORE.get())
+                .unlockedBy("has_processor", has(RSItems.PROCESSORS.get(ProcessorItem.Type.ADVANCED).get()))
+                .save(consumer);
     }
 
-    private void registerProcessorRecipe(IItemProvider result, IItemProvider raw, Ingredient ingredient, Consumer<IFinishedRecipe> consumer) {
-        CookingRecipeBuilder.smeltingRecipe(Ingredient.fromItems(raw), result, 0.5F, 200)
-                .addCriterion("has_raw", hasItem(raw))
-                .build(consumer);
-        ShapelessRecipeBuilder.shapelessRecipe(raw)
-                .addIngredient(RSItems.PROCESSOR_BINDING.get())
-                .addIngredient(ingredient)
-                .addIngredient(RSItems.SILICON.get())
-                .addIngredient(Tags.Items.DUSTS_REDSTONE)
-                .addCriterion("has_binding", hasItem(RSItems.PROCESSOR_BINDING.get()))
-                .build(consumer);
+    private void registerProcessorRecipe(ItemLike result, ItemLike raw, Ingredient ingredient, Consumer<FinishedRecipe> consumer) {
+        SimpleCookingRecipeBuilder.smelting(Ingredient.of(raw), result, 0.5F, 200)
+                .unlockedBy("has_raw", has(raw))
+                .save(consumer);
+        ShapelessRecipeBuilder.shapeless(raw)
+                .requires(RSItems.PROCESSOR_BINDING.get())
+                .requires(ingredient)
+                .requires(RSItems.SILICON.get())
+                .requires(Tags.Items.DUSTS_REDSTONE)
+                .unlockedBy("has_binding", has(RSItems.PROCESSOR_BINDING.get()))
+                .save(consumer);
     }
 
-    private void registerPartRecipe(Item result, Item prevPart, Consumer<IFinishedRecipe> consumer) {
-        ShapedRecipeBuilder.shapedRecipe(result)
-                .patternLine("DED")
-                .patternLine("PRP")
-                .patternLine("DPD")
-                .key('D', RSItems.PROCESSORS.get(ProcessorItem.Type.ADVANCED).get())
-                .key('E', RSItems.QUARTZ_ENRICHED_IRON.get())
-                .key('P', prevPart)
-                .key('R', Tags.Items.DUSTS_REDSTONE)
-                .addCriterion("has_prev_part", hasItem(prevPart))
-                .build(consumer, new ResourceLocation(ExtraDisks.MODID, "part/" + result.getRegistryName().getPath()));
+    private void registerPartRecipe(Item result, Item prevPart, Consumer<FinishedRecipe> consumer) {
+        ShapedRecipeBuilder.shaped(result)
+                .pattern("DED")
+                .pattern("PRP")
+                .pattern("DPD")
+                .define('D', RSItems.PROCESSORS.get(ProcessorItem.Type.ADVANCED).get())
+                .define('E', RSItems.QUARTZ_ENRICHED_IRON.get())
+                .define('P', prevPart)
+                .define('R', Tags.Items.DUSTS_REDSTONE)
+                .unlockedBy("has_prev_part", has(prevPart))
+                .save(consumer, new ResourceLocation(ExtraDisks.MODID, "part/" + result.getRegistryName().getPath()));
     }
 
-    private void registerPartRecipe(Item result, ITag.INamedTag<Item> prevPart, Consumer<IFinishedRecipe> consumer) {
-        ShapedRecipeBuilder.shapedRecipe(result)
-                .patternLine("DED")
-                .patternLine("PRP")
-                .patternLine("DPD")
-                .key('D', RSItems.PROCESSORS.get(ProcessorItem.Type.ADVANCED).get())
-                .key('E', RSItems.QUARTZ_ENRICHED_IRON.get())
-                .key('P', prevPart)
-                .key('R', Tags.Items.DUSTS_REDSTONE)
-                .addCriterion("has_prev_part", hasItem(prevPart))
-                .build(consumer, new ResourceLocation(ExtraDisks.MODID, "part/" + result.getRegistryName().getPath()));
+    private void registerPartRecipe(Item result, Tag.Named<Item> prevPart, Consumer<FinishedRecipe> consumer) {
+        ShapedRecipeBuilder.shaped(result)
+                .pattern("DED")
+                .pattern("PRP")
+                .pattern("DPD")
+                .define('D', RSItems.PROCESSORS.get(ProcessorItem.Type.ADVANCED).get())
+                .define('E', RSItems.QUARTZ_ENRICHED_IRON.get())
+                .define('P', prevPart)
+                .define('R', Tags.Items.DUSTS_REDSTONE)
+                .unlockedBy("has_prev_part", has(prevPart))
+                .save(consumer, new ResourceLocation(ExtraDisks.MODID, "part/" + result.getRegistryName().getPath()));
     }
 
-    private void registerAdvancedPartRecipe(Item result, ITag.INamedTag<Item> prevPart, Consumer<IFinishedRecipe> consumer) {
-        ShapedRecipeBuilder.shapedRecipe(result)
-                .patternLine("DED")
-                .patternLine("PRP")
-                .patternLine("DPD")
-                .key('D', Registration.WITHERING_PROCESSOR.get())
-                .key('E', RSItems.QUARTZ_ENRICHED_IRON.get())
-                .key('P', prevPart)
-                .key('R', Tags.Items.DUSTS_REDSTONE)
-                .addCriterion("has_prev_part", hasItem(prevPart))
-                .build(consumer, new ResourceLocation(ExtraDisks.MODID, "part/" + result.getRegistryName().getPath()));
+    private void registerAdvancedPartRecipe(Item result, Tag.Named<Item> prevPart, Consumer<FinishedRecipe> consumer) {
+        ShapedRecipeBuilder.shaped(result)
+                .pattern("DED")
+                .pattern("PRP")
+                .pattern("DPD")
+                .define('D', Registration.WITHERING_PROCESSOR.get())
+                .define('E', RSItems.QUARTZ_ENRICHED_IRON.get())
+                .define('P', prevPart)
+                .define('R', Tags.Items.DUSTS_REDSTONE)
+                .unlockedBy("has_prev_part", has(prevPart))
+                .save(consumer, new ResourceLocation(ExtraDisks.MODID, "part/" + result.getRegistryName().getPath()));
     }
 
-    private void registerDiskRecipes(Item result, ITag.INamedTag<Item> part, Consumer<IFinishedRecipe> consumer) {
-        ShapedRecipeBuilder.shapedRecipe(result)
-                .patternLine("GEG")
-                .patternLine("EPE")
-                .patternLine("IAI")
-                .key('G', Tags.Items.GLASS)
-                .key('E', RSItems.QUARTZ_ENRICHED_IRON.get())
-                .key('P', part)
-                .key('I', RSItems.PROCESSORS.get(ProcessorItem.Type.IMPROVED).get())
-                .key('A', RSItems.PROCESSORS.get(ProcessorItem.Type.ADVANCED).get())
-                .addCriterion("has_part", hasItem(part))
-                .build(consumer, new ResourceLocation(ExtraDisks.MODID, "disk/shaped/" + result.getRegistryName().getPath()));
-        ShapelessRecipeBuilder.shapelessRecipe(result)
-                .addIngredient(Registration.ADVANCED_STORAGE_HOUSING.get())
-                .addIngredient(part)
-                .addCriterion("has_part", hasItem(part))
-                .build(consumer, new ResourceLocation(ExtraDisks.MODID, "disk/shapeless/" + result.getRegistryName().getPath()));
+    private void registerDiskRecipes(Item result, Tag.Named<Item> part, Consumer<FinishedRecipe> consumer) {
+        ShapedRecipeBuilder.shaped(result)
+                .pattern("GEG")
+                .pattern("EPE")
+                .pattern("IAI")
+                .define('G', Tags.Items.GLASS)
+                .define('E', RSItems.QUARTZ_ENRICHED_IRON.get())
+                .define('P', part)
+                .define('I', RSItems.PROCESSORS.get(ProcessorItem.Type.IMPROVED).get())
+                .define('A', RSItems.PROCESSORS.get(ProcessorItem.Type.ADVANCED).get())
+                .unlockedBy("has_part", has(part))
+                .save(consumer, new ResourceLocation(ExtraDisks.MODID, "disk/shaped/" + result.getRegistryName().getPath()));
+        ShapelessRecipeBuilder.shapeless(result)
+                .requires(Registration.ADVANCED_STORAGE_HOUSING.get())
+                .requires(part)
+                .unlockedBy("has_part", has(part))
+                .save(consumer, new ResourceLocation(ExtraDisks.MODID, "disk/shapeless/" + result.getRegistryName().getPath()));
     }
 
-    private void registerStorageBlockRecipe(ITag.INamedTag<Item> part, IItemProvider block, Consumer<IFinishedRecipe> consumer) {
-        ShapedRecipeBuilder.shapedRecipe(block)
-                .patternLine("QPQ")
-                .patternLine("QCQ")
-                .patternLine("QRQ")
-                .key('Q', RSItems.QUARTZ_ENRICHED_IRON.get())
-                .key('P', part)
-                .key('C', Registration.ADVANCED_MACHINE_CASING.get())
-                .key('R', Tags.Items.DUSTS_REDSTONE)
-                .addCriterion("has_part", hasItem(part))
-                .build(consumer, new ResourceLocation(ExtraDisks.MODID, "blocks/" + block.asItem().getRegistryName().getPath()));
+    private void registerStorageBlockRecipe(Tag.Named<Item> part, ItemLike block, Consumer<FinishedRecipe> consumer) {
+        ShapedRecipeBuilder.shaped(block)
+                .pattern("QPQ")
+                .pattern("QCQ")
+                .pattern("QRQ")
+                .define('Q', RSItems.QUARTZ_ENRICHED_IRON.get())
+                .define('P', part)
+                .define('C', Registration.ADVANCED_MACHINE_CASING.get())
+                .define('R', Tags.Items.DUSTS_REDSTONE)
+                .unlockedBy("has_part", has(part))
+                .save(consumer, new ResourceLocation(ExtraDisks.MODID, "blocks/" + block.asItem().getRegistryName().getPath()));
     }
 }

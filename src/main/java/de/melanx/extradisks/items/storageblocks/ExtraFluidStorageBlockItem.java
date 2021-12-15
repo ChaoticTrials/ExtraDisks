@@ -10,18 +10,18 @@ import de.melanx.extradisks.blocks.item.ExtraItemStorageNetworkNode;
 import de.melanx.extradisks.items.Registration;
 import de.melanx.extradisks.items.fluid.ExtraFluidStoragePartItem;
 import de.melanx.extradisks.items.fluid.ExtraFluidStorageType;
-import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.inventory.InventoryHelper;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.ActionResultType;
-import net.minecraft.util.Hand;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.StringTextComponent;
-import net.minecraft.util.text.TranslationTextComponent;
-import net.minecraft.world.World;
-import net.minecraft.world.server.ServerWorld;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TextComponent;
+import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.Containers;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
@@ -41,8 +41,8 @@ public class ExtraFluidStorageBlockItem extends BaseBlockItem {
     @OnlyIn(Dist.CLIENT)
 
     @Override
-    public void addInformation(@Nonnull ItemStack stack, @Nullable World world, @Nonnull List<ITextComponent> tooltip, @Nonnull ITooltipFlag flag) {
-        super.addInformation(stack, world, tooltip, flag);
+    public void appendHoverText(@Nonnull ItemStack stack, @Nullable Level level, @Nonnull List<Component> tooltip, @Nonnull TooltipFlag flag) {
+        super.appendHoverText(stack, level, tooltip, flag);
         if (this.isValid(stack)) {
             UUID id = this.getId(stack);
             API.instance().getStorageDiskSync().sendRequest(id);
@@ -50,60 +50,60 @@ public class ExtraFluidStorageBlockItem extends BaseBlockItem {
 
             if (data != null) {
                 if (data.getCapacity() == -1) {
-                    tooltip.add(new TranslationTextComponent("misc.refinedstorage.storage.stored", API.instance().getQuantityFormatter().format(data.getStored())).setStyle(Styles.GRAY));
+                    tooltip.add(new TranslatableComponent("misc.refinedstorage.storage.stored", API.instance().getQuantityFormatter().format(data.getStored())).setStyle(Styles.GRAY));
                 } else {
-                    tooltip.add(new TranslationTextComponent("misc.refinedstorage.storage.stored_capacity", API.instance().getQuantityFormatter().format(data.getStored()), API.instance().getQuantityFormatter().format(data.getCapacity())).setStyle(Styles.GRAY));
+                    tooltip.add(new TranslatableComponent("misc.refinedstorage.storage.stored_capacity", API.instance().getQuantityFormatter().format(data.getStored()), API.instance().getQuantityFormatter().format(data.getCapacity())).setStyle(Styles.GRAY));
                 }
             }
 
             if (flag.isAdvanced()) {
-                tooltip.add(new StringTextComponent(id.toString()).setStyle(Styles.GRAY));
+                tooltip.add(new TextComponent(id.toString()).setStyle(Styles.GRAY));
             }
         }
     }
 
     @Nonnull
     @Override
-    public ActionResult<ItemStack> onItemRightClick(@Nonnull World world, @Nonnull PlayerEntity player, @Nonnull Hand hand) {
-        ItemStack stack = player.getHeldItem(hand);
+    public InteractionResultHolder<ItemStack> use(@Nonnull Level level, @Nonnull Player player, @Nonnull InteractionHand hand) {
+        ItemStack stack = player.getItemInHand(hand);
 
-        if (!world.isRemote && player.isCrouching()) {
+        if (!level.isClientSide && player.isCrouching()) {
             UUID diskId = null;
             IStorageDisk disk = null;
 
             if (this.isValid(stack)) {
                 diskId = this.getId(stack);
-                disk = API.instance().getStorageDiskManager((ServerWorld) world).get(diskId);
+                disk = API.instance().getStorageDiskManager((ServerLevel) level).get(diskId);
             }
 
             if (disk == null || disk.getStored() == 0) {
                 ItemStack part = new ItemStack(ExtraFluidStoragePartItem.getByType(this.type));
 
-                if (!player.inventory.addItemStackToInventory(part.copy())) {
-                    InventoryHelper.spawnItemStack(world, player.getPosX(), player.getPosY(), player.getPosZ(), part);
+                if (!player.getInventory().add(part.copy())) {
+                    Containers.dropItemStack(level, player.getX(), player.getY(), player.getZ(), part);
                 }
 
                 if (disk != null) {
-                    API.instance().getStorageDiskManager((ServerWorld) world).remove(diskId);
-                    API.instance().getStorageDiskManager((ServerWorld) world).markForSaving();
+                    API.instance().getStorageDiskManager((ServerLevel) level).remove(diskId);
+                    API.instance().getStorageDiskManager((ServerLevel) level).markForSaving();
                 }
 
-                return new ActionResult<>(ActionResultType.SUCCESS, new ItemStack(Registration.ADVANCED_MACHINE_CASING.get()));
+                return new InteractionResultHolder<>(InteractionResult.SUCCESS, new ItemStack(Registration.ADVANCED_MACHINE_CASING.get()));
             }
         }
-        return new ActionResult<>(ActionResultType.PASS, stack);
+        return new InteractionResultHolder<>(InteractionResult.PASS, stack);
     }
 
     @Override
-    public int getEntityLifespan(ItemStack itemStack, World world) {
+    public int getEntityLifespan(ItemStack itemStack, Level level) {
         return Integer.MAX_VALUE;
     }
 
     private UUID getId(ItemStack disk) {
-        return disk.getTag().getUniqueId(ExtraItemStorageNetworkNode.NBT_ID);
+        return disk.getTag().getUUID(ExtraItemStorageNetworkNode.NBT_ID);
     }
 
     private boolean isValid(ItemStack disk) {
-        return disk.hasTag() && disk.getTag().hasUniqueId(ExtraItemStorageNetworkNode.NBT_ID);
+        return disk.hasTag() && disk.getTag().hasUUID(ExtraItemStorageNetworkNode.NBT_ID);
     }
 }

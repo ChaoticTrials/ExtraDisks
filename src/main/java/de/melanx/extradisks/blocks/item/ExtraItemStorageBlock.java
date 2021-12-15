@@ -5,19 +5,19 @@ import com.refinedmods.refinedstorage.container.factory.PositionalTileContainerP
 import com.refinedmods.refinedstorage.util.BlockUtils;
 import com.refinedmods.refinedstorage.util.NetworkUtils;
 import de.melanx.extradisks.items.item.ExtraItemStorageType;
-import net.minecraft.block.BlockState;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.ActionResultType;
-import net.minecraft.util.Hand;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.BlockRayTraceResult;
-import net.minecraft.world.IBlockReader;
-import net.minecraft.world.World;
-import net.minecraftforge.fml.network.NetworkHooks;
+import net.minecraft.core.BlockPos;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraftforge.network.NetworkHooks;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -35,33 +35,36 @@ public class ExtraItemStorageBlock extends NetworkNodeBlock {
     }
 
     @Override
-    public void onBlockPlacedBy(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull BlockState state, @Nullable LivingEntity placer, @Nonnull ItemStack stack) {
-        if (!world.isRemote) {
-            ExtraItemStorageNetworkNode storage = ((ExtraItemStorageBlockTile) world.getTileEntity(pos)).getNode();
-            if (stack.hasTag() && stack.getTag().hasUniqueId(ExtraItemStorageNetworkNode.NBT_ID)) {
-                storage.setStorageId(stack.getTag().getUniqueId(ExtraItemStorageNetworkNode.NBT_ID));
+    public void setPlacedBy(@Nonnull Level level, @Nonnull BlockPos pos, @Nonnull BlockState state, @Nullable LivingEntity placer, @Nonnull ItemStack stack) {
+        if (!level.isClientSide) {
+            //noinspection ConstantConditions
+            ExtraItemStorageNetworkNode storage = ((ExtraItemStorageBlockEntity) level.getBlockEntity(pos)).getNode();
+            CompoundTag tag = stack.getOrCreateTag();
+            if (tag.hasUUID(ExtraItemStorageNetworkNode.NBT_ID)) {
+                storage.setStorageId(tag.getUUID(ExtraItemStorageNetworkNode.NBT_ID));
             }
-            storage.loadStorage(placer instanceof PlayerEntity ? (PlayerEntity) placer : null);
+            storage.loadStorage(placer instanceof Player ? (Player) placer : null);
         }
-        super.onBlockPlacedBy(world, pos, state, placer, stack);
+        super.setPlacedBy(level, pos, state, placer, stack);
     }
 
     @Nullable
     @Override
-    public TileEntity createTileEntity(BlockState state, IBlockReader world) {
-        return new ExtraItemStorageBlockTile(this.type);
+    public BlockEntity newBlockEntity(@Nonnull BlockPos pos, @Nonnull BlockState state) {
+        return new ExtraItemStorageBlockEntity(this.type, pos, state);
     }
 
     @SuppressWarnings("deprecation")
     @Nonnull
     @Override
-    public ActionResultType onBlockActivated(@Nonnull BlockState state, @Nonnull World world, @Nonnull BlockPos pos, @Nonnull PlayerEntity player, @Nonnull Hand hand, @Nonnull BlockRayTraceResult hit) {
-        if (!world.isRemote) {
-            return NetworkUtils.attemptModify(world, pos, player, () -> NetworkHooks.openGui((ServerPlayerEntity) player,
-                    new PositionalTileContainerProvider<ExtraItemStorageBlockTile>(((ExtraItemStorageBlockTile) world.getTileEntity(pos)).getNode().getTitle(),
-                            (tile, windowId, inventory, p) -> new ExtraItemStorageBlockContainer(windowId, player, tile), pos), pos));
+    public InteractionResult use(@Nonnull BlockState state, @Nonnull Level level, @Nonnull BlockPos pos, @Nonnull Player player, @Nonnull InteractionHand hand, @Nonnull BlockHitResult hit) {
+        if (!level.isClientSide) {
+            //noinspection ConstantConditions
+            return NetworkUtils.attemptModify(level, pos, player, () -> NetworkHooks.openGui((ServerPlayer) player,
+                    new PositionalTileContainerProvider<ExtraItemStorageBlockEntity>(((ExtraItemStorageBlockEntity) level.getBlockEntity(pos)).getNode().getTitle(),
+                            (tile, windowId, inventory, p) -> new ExtraItemStorageBlockContainerMenu(windowId, player, tile), pos), pos));
         }
 
-        return ActionResultType.SUCCESS;
+        return InteractionResult.SUCCESS;
     }
 }
