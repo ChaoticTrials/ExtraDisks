@@ -11,7 +11,9 @@
       "conditions": {
         "items": [
           {
-            "item": "extradisks:raw_withering_processor"
+            "items": [
+              "extradisks:raw_withering_processor"
+            ]
           }
         ]
       }

@@ -10,6 +10,7 @@ import net.minecraft.data.tags.ItemTagsProvider;
 import net.minecraft.tags.Tag;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
+import net.minecraftforge.common.data.ExistingFileHelper;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -75,8 +76,8 @@ public class ModTags {
     }
 
     public static class BlockTags extends BlockTagsProvider {
-        public BlockTags(DataGenerator generator) {
-            super(generator, ExtraDisks.MODID, null);
+        public BlockTags(DataGenerator generator, ExistingFileHelper helper) {
+            super(generator, ExtraDisks.MODID, helper);
         }
 
         @Override
@@ -101,8 +102,8 @@ public class ModTags {
     }
 
     public static class ItemTags extends ItemTagsProvider {
-        public ItemTags(DataGenerator generator, BlockTagsProvider provider) {
-            super(generator, provider, ExtraDisks.MODID, null);
+        public ItemTags(DataGenerator generator, ExistingFileHelper helper, BlockTagsProvider provider) {
+            super(generator, provider, ExtraDisks.MODID, helper);
         }
 
         @Override

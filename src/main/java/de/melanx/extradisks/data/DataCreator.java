@@ -16,9 +16,9 @@ public class DataCreator {
         ExistingFileHelper helper = event.getExistingFileHelper();
 
         if (event.includeServer()) {
-            ModTags.BlockTags blockTagsProvider = new ModTags.BlockTags(generator);
+            ModTags.BlockTags blockTagsProvider = new ModTags.BlockTags(generator, helper);
             generator.addProvider(blockTagsProvider);
-            generator.addProvider(new ModTags.ItemTags(generator, blockTagsProvider));
+            generator.addProvider(new ModTags.ItemTags(generator, helper, blockTagsProvider));
             generator.addProvider(new Recipes(generator));
             generator.addProvider(new ExtraLootTables(generator));
         }
