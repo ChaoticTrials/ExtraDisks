@@ -25,8 +25,7 @@ repositories {
 }
 
 dependencies {
-    compileOnly "com.refinedmods:refinedstorage:1.10.0-beta.1"
-    runtimeOnly fg.deobf("com.refinedmods:refinedstorage:1.10.0-beta.1") {
+    implementation fg.deobf("com.refinedmods:refinedstorage:1.10.0-beta.1") {
         transitive false
     }
     runtimeOnly fg.deobf("mezz.jei:jei-1.18:9.0.0.40")

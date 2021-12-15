@@ -5,7 +5,6 @@ import com.refinedmods.refinedstorage.container.slot.filter.FilterSlot;
 import de.melanx.extradisks.items.Registration;
 import net.minecraft.world.entity.player.Player;
 
-import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 public class ExtraItemStorageBlockContainerMenu extends BaseContainerMenu {
@@ -18,10 +17,5 @@ public class ExtraItemStorageBlockContainerMenu extends BaseContainerMenu {
         }
         this.addPlayerInventory(8, 141);
         this.transferManager.addItemFilterTransfer(player.getInventory(), tile.getNode().getFilters());
-    }
-
-    @Override
-    public boolean stillValid(@Nonnull Player player) {
-        return true;
     }
 }
