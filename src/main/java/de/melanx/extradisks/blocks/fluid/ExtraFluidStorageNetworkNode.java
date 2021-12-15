@@ -80,12 +80,12 @@ public class ExtraFluidStorageNetworkNode extends FluidStorageNetworkNode {
     @Override
     public void loadStorage(@Nullable Player owner) {
         //noinspection rawtypes
-        IStorageDisk disk = API.instance().getStorageDiskManager((ServerLevel) this.world).get(this.getStorageId());
+        IStorageDisk disk = API.instance().getStorageDiskManager((ServerLevel) this.level).get(this.getStorageId());
 
         if (disk == null) {
-            disk = API.instance().createDefaultFluidDisk((ServerLevel) this.world, this.type.getCapacity(), owner);
-            API.instance().getStorageDiskManager((ServerLevel) this.world).set(this.getStorageId(), disk);
-            API.instance().getStorageDiskManager((ServerLevel) this.world).markForSaving();
+            disk = API.instance().createDefaultFluidDisk((ServerLevel) this.level, this.type.getCapacity(), owner);
+            API.instance().getStorageDiskManager((ServerLevel) this.level).set(this.getStorageId(), disk);
+            API.instance().getStorageDiskManager((ServerLevel) this.level).markForSaving();
         }
 
         //noinspection unchecked

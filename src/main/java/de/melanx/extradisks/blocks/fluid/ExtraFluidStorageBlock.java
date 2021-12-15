@@ -1,7 +1,7 @@
 package de.melanx.extradisks.blocks.fluid;
 
 import com.refinedmods.refinedstorage.block.NetworkNodeBlock;
-import com.refinedmods.refinedstorage.container.factory.PositionalTileContainerProvider;
+import com.refinedmods.refinedstorage.container.factory.BlockEntityMenuProvider;
 import com.refinedmods.refinedstorage.util.BlockUtils;
 import com.refinedmods.refinedstorage.util.NetworkUtils;
 import de.melanx.extradisks.items.fluid.ExtraFluidStorageType;
@@ -61,7 +61,7 @@ public class ExtraFluidStorageBlock extends NetworkNodeBlock {
         if (!level.isClientSide) {
             //noinspection ConstantConditions
             return NetworkUtils.attemptModify(level, pos, player, () -> NetworkHooks.openGui((ServerPlayer) player,
-                    new PositionalTileContainerProvider<ExtraFluidStorageBlockEntity>(((ExtraFluidStorageBlockEntity) level.getBlockEntity(pos)).getNode().getTitle(),
+                    new BlockEntityMenuProvider<ExtraFluidStorageBlockEntity>(((ExtraFluidStorageBlockEntity) level.getBlockEntity(pos)).getNode().getTitle(),
                             (tile, windowId, inventory, p) -> new ExtraFluidStorageBlockContainerMenu(windowId, player, tile), pos), pos));
         }
         return InteractionResult.SUCCESS;

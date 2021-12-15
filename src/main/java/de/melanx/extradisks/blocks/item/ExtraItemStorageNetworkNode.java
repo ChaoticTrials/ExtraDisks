@@ -82,12 +82,12 @@ public class ExtraItemStorageNetworkNode extends StorageNetworkNode {
     @Override
     public void loadStorage(@Nullable Player owner) {
         //noinspection rawtypes
-        IStorageDisk disk = API.instance().getStorageDiskManager((ServerLevel) this.world).get(this.getStorageId());
+        IStorageDisk disk = API.instance().getStorageDiskManager((ServerLevel) this.level).get(this.getStorageId());
 
         if (disk == null) {
-            disk = API.instance().createDefaultItemDisk((ServerLevel) this.world, this.type.getCapacity(), owner);
-            API.instance().getStorageDiskManager((ServerLevel) this.world).set(this.getStorageId(), disk);
-            API.instance().getStorageDiskManager((ServerLevel) this.world).markForSaving();
+            disk = API.instance().createDefaultItemDisk((ServerLevel) this.level, this.type.getCapacity(), owner);
+            API.instance().getStorageDiskManager((ServerLevel) this.level).set(this.getStorageId(), disk);
+            API.instance().getStorageDiskManager((ServerLevel) this.level).markForSaving();
         }
         //noinspection unchecked
         this.storage = new ItemStorageWrapperStorageDisk(this, disk);

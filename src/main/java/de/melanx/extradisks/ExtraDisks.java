@@ -3,7 +3,7 @@ package de.melanx.extradisks;
 import com.refinedmods.refinedstorage.api.network.node.INetworkNode;
 import com.refinedmods.refinedstorage.apiimpl.API;
 import com.refinedmods.refinedstorage.apiimpl.network.node.NetworkNode;
-import com.refinedmods.refinedstorage.tile.data.TileDataManager;
+import com.refinedmods.refinedstorage.blockentity.data.BlockEntitySynchronizationManager;
 import de.melanx.extradisks.blocks.fluid.ExtraFluidStorageBlockScreen;
 import de.melanx.extradisks.blocks.fluid.ExtraFluidStorageNetworkNode;
 import de.melanx.extradisks.blocks.item.ExtraItemStorageBlockScreen;
@@ -55,12 +55,12 @@ public class ExtraDisks {
         for (ExtraItemStorageType type : ExtraItemStorageType.values()) {
             API.instance().getNetworkNodeRegistry().add(new ResourceLocation(MODID, type.getName() + "_storage_block"), (tag, world, pos) -> readAndReturn(tag, new ExtraItemStorageNetworkNode(world, pos, type)));
             //noinspection ConstantConditions
-            Registration.ITEM_STORAGE_TILE.get(type).get().create(BlockPos.ZERO, null).getDataManager().getParameters().forEach(TileDataManager::registerParameter);
+            Registration.ITEM_STORAGE_TILE.get(type).get().create(BlockPos.ZERO, null).getDataManager().getParameters().forEach(BlockEntitySynchronizationManager::registerParameter);
         }
         for (ExtraFluidStorageType type : ExtraFluidStorageType.values()) {
             API.instance().getNetworkNodeRegistry().add(new ResourceLocation(MODID, type.getName() + "_fluid_storage_block"), (tag, world, pos) -> readAndReturn(tag, new ExtraFluidStorageNetworkNode(world, pos, type)));
             //noinspection ConstantConditions
-            Registration.FLUID_STORAGE_TILE.get(type).get().create(BlockPos.ZERO, null).getDataManager().getParameters().forEach(TileDataManager::registerParameter);
+            Registration.FLUID_STORAGE_TILE.get(type).get().create(BlockPos.ZERO, null).getDataManager().getParameters().forEach(BlockEntitySynchronizationManager::registerParameter);
         }
     }
 
