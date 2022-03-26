@@ -27,12 +27,14 @@ public class ModItemModels extends ItemModelProvider {
     }
 
     private void generateItem(Item item) {
+        //noinspection ConstantConditions
         String path = item.getRegistryName().getPath();
         this.getBuilder(path).parent(this.getExistingFile(this.mcLoc("item/handheld")))
                 .texture("layer0", "item/" + path);
     }
 
     private void generateBlockItemModel(Item item) {
+        //noinspection ConstantConditions
         String path = item.getRegistryName().getPath();
         this.getBuilder(path).parent(new ModelFile.UncheckedModelFile(this.modLoc("block/" + path)));
     }

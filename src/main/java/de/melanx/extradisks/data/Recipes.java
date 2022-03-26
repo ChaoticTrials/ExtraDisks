@@ -21,6 +21,7 @@ import javax.annotation.Nonnull;
 import java.util.function.Consumer;
 
 public class Recipes extends RecipeProvider {
+
     public Recipes(DataGenerator generator) {
         super(generator);
     }
@@ -92,6 +93,7 @@ public class Recipes extends RecipeProvider {
     }
 
     private void registerPartRecipe(Item result, Item prevPart, Consumer<FinishedRecipe> consumer) {
+        //noinspection ConstantConditions
         ShapedRecipeBuilder.shaped(result)
                 .pattern("DED")
                 .pattern("PRP")
@@ -105,6 +107,7 @@ public class Recipes extends RecipeProvider {
     }
 
     private void registerPartRecipe(Item result, Tag.Named<Item> prevPart, Consumer<FinishedRecipe> consumer) {
+        //noinspection ConstantConditions
         ShapedRecipeBuilder.shaped(result)
                 .pattern("DED")
                 .pattern("PRP")
@@ -118,6 +121,7 @@ public class Recipes extends RecipeProvider {
     }
 
     private void registerAdvancedPartRecipe(Item result, Tag.Named<Item> prevPart, Consumer<FinishedRecipe> consumer) {
+        //noinspection ConstantConditions
         ShapedRecipeBuilder.shaped(result)
                 .pattern("DED")
                 .pattern("PRP")
@@ -131,6 +135,7 @@ public class Recipes extends RecipeProvider {
     }
 
     private void registerDiskRecipes(Item result, Tag.Named<Item> part, Consumer<FinishedRecipe> consumer) {
+        //noinspection ConstantConditions
         ShapedRecipeBuilder.shaped(result)
                 .pattern("GEG")
                 .pattern("EPE")
@@ -150,6 +155,7 @@ public class Recipes extends RecipeProvider {
     }
 
     private void registerStorageBlockRecipe(Tag.Named<Item> part, ItemLike block, Consumer<FinishedRecipe> consumer) {
+        //noinspection ConstantConditions
         ShapedRecipeBuilder.shaped(block)
                 .pattern("QPQ")
                 .pattern("QCQ")

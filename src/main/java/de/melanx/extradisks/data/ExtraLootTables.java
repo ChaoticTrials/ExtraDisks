@@ -30,6 +30,7 @@ import java.util.function.Consumer;
 import java.util.function.Supplier;
 
 public class ExtraLootTables extends LootTableProvider {
+
     public ExtraLootTables(DataGenerator generator) {
         super(generator);
     }
@@ -41,8 +42,8 @@ public class ExtraLootTables extends LootTableProvider {
     }
 
     @Override
-    protected void validate(Map<ResourceLocation, LootTable> map, @Nonnull ValidationContext validationtracker) {
-        map.forEach((name, table) -> LootTables.validate(validationtracker, name, table));
+    protected void validate(Map<ResourceLocation, LootTable> map, @Nonnull ValidationContext validationContext) {
+        map.forEach((name, table) -> LootTables.validate(validationContext, name, table));
     }
 
     private static class BlockTables extends BlockLoot {

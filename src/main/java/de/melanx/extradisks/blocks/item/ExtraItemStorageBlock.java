@@ -23,6 +23,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 public class ExtraItemStorageBlock extends NetworkNodeBlock {
+
     private final ExtraItemStorageType type;
 
     public ExtraItemStorageBlock(ExtraItemStorageType type) {
@@ -40,11 +41,14 @@ public class ExtraItemStorageBlock extends NetworkNodeBlock {
             //noinspection ConstantConditions
             ExtraItemStorageNetworkNode storage = ((ExtraItemStorageBlockEntity) level.getBlockEntity(pos)).getNode();
             CompoundTag tag = stack.getOrCreateTag();
+
             if (tag.hasUUID(ExtraItemStorageNetworkNode.NBT_ID)) {
                 storage.setStorageId(tag.getUUID(ExtraItemStorageNetworkNode.NBT_ID));
             }
+
             storage.loadStorage(placer instanceof Player ? (Player) placer : null);
         }
+
         super.setPlacedBy(level, pos, state, placer, stack);
     }
 

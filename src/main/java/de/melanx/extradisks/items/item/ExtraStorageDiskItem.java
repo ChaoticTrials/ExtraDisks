@@ -30,6 +30,7 @@ import java.util.List;
 import java.util.UUID;
 
 public class ExtraStorageDiskItem extends Item implements IStorageDiskProvider {
+
     private static final String NBT_ID = "Id";
     private final ExtraItemStorageType type;
 
@@ -41,6 +42,7 @@ public class ExtraStorageDiskItem extends Item implements IStorageDiskProvider {
     @Override
     public void inventoryTick(@Nonnull ItemStack stack, @Nonnull Level level, @Nonnull Entity entity, int itemSlot, boolean isSelected) {
         super.inventoryTick(stack, level, entity, itemSlot, isSelected);
+
         if (!level.isClientSide && !stack.hasTag()) {
             UUID id = UUID.randomUUID();
             API.instance().getStorageDiskManager((ServerLevel) level).set(id, API.instance().createDefaultItemDisk((ServerLevel) level, this.getCapacity(stack), (Player) entity));
@@ -52,6 +54,7 @@ public class ExtraStorageDiskItem extends Item implements IStorageDiskProvider {
     @Override
     public void appendHoverText(@Nonnull ItemStack stack, @Nullable Level level, @Nonnull List<Component> tooltip, @Nonnull TooltipFlag flag) {
         super.appendHoverText(stack, level, tooltip, flag);
+
         if (this.isValid(stack)) {
             UUID id = this.getId(stack);
             API.instance().getStorageDiskSync().sendRequest(id);
@@ -77,6 +80,7 @@ public class ExtraStorageDiskItem extends Item implements IStorageDiskProvider {
         ItemStack diskStack = player.getItemInHand(hand);
 
         if (!level.isClientSide && player.isCrouching()) {
+            //noinspection rawtypes
             IStorageDisk disk = API.instance().getStorageDiskManager((ServerLevel) level).getByStack(diskStack);
             if (disk != null && disk.getStored() == 0) {
                 ItemStack storagePart = new ItemStack(ExtraStoragePartItem.getByType(this.type), diskStack.getCount());
@@ -86,9 +90,11 @@ public class ExtraStorageDiskItem extends Item implements IStorageDiskProvider {
 
                 API.instance().getStorageDiskManager((ServerLevel) level).remove(this.getId(diskStack));
                 API.instance().getStorageDiskManager((ServerLevel) level).markForSaving();
+
                 return new InteractionResultHolder<>(InteractionResult.SUCCESS, new ItemStack(Registration.ADVANCED_STORAGE_HOUSING.get()));
             }
         }
+
         return new InteractionResultHolder<>(InteractionResult.PASS, diskStack);
     }
 

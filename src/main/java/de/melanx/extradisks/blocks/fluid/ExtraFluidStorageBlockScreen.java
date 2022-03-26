@@ -6,6 +6,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Inventory;
 
 public class ExtraFluidStorageBlockScreen extends StorageScreen<ExtraFluidStorageBlockContainerMenu> {
+
     public ExtraFluidStorageBlockScreen(ExtraFluidStorageBlockContainerMenu menu, Inventory container, Component title) {
         //noinspection ConstantConditions
         super(menu, container, title, "gui/storage.png",

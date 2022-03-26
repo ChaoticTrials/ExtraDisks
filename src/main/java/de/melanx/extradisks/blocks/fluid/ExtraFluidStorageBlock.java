@@ -23,6 +23,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 public class ExtraFluidStorageBlock extends NetworkNodeBlock {
+
     private final ExtraFluidStorageType type;
 
     public ExtraFluidStorageBlock(ExtraFluidStorageType type) {
@@ -40,11 +41,14 @@ public class ExtraFluidStorageBlock extends NetworkNodeBlock {
             //noinspection ConstantConditions
             ExtraFluidStorageNetworkNode storage = ((ExtraFluidStorageBlockEntity) level.getBlockEntity(pos)).getNode();
             CompoundTag tag = stack.getOrCreateTag();
+
             if (tag.hasUUID(ExtraFluidStorageNetworkNode.NBT_ID)) {
                 storage.setStorageId(tag.getUUID(ExtraFluidStorageNetworkNode.NBT_ID));
             }
+
             storage.loadStorage(placer instanceof Player ? (Player) placer : null);
         }
+
         super.setPlacedBy(level, pos, state, placer, stack);
     }
 
@@ -64,6 +68,7 @@ public class ExtraFluidStorageBlock extends NetworkNodeBlock {
                     new BlockEntityMenuProvider<ExtraFluidStorageBlockEntity>(((ExtraFluidStorageBlockEntity) level.getBlockEntity(pos)).getNode().getTitle(),
                             (tile, windowId, inventory, p) -> new ExtraFluidStorageBlockContainerMenu(windowId, player, tile), pos), pos));
         }
+
         return InteractionResult.SUCCESS;
     }
 }

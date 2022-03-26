@@ -31,6 +31,7 @@ import java.util.List;
 import java.util.UUID;
 
 public class ExtraFluidStorageBlockItem extends BaseBlockItem {
+
     private final ExtraFluidStorageType type;
 
     public ExtraFluidStorageBlockItem(ExtraFluidStorageBlock block, Properties builder) {
@@ -43,6 +44,7 @@ public class ExtraFluidStorageBlockItem extends BaseBlockItem {
     @Override
     public void appendHoverText(@Nonnull ItemStack stack, @Nullable Level level, @Nonnull List<Component> tooltip, @Nonnull TooltipFlag flag) {
         super.appendHoverText(stack, level, tooltip, flag);
+
         if (this.isValid(stack)) {
             UUID id = this.getId(stack);
             API.instance().getStorageDiskSync().sendRequest(id);
@@ -69,6 +71,7 @@ public class ExtraFluidStorageBlockItem extends BaseBlockItem {
 
         if (!level.isClientSide && player.isCrouching()) {
             UUID diskId = null;
+            //noinspection rawtypes
             IStorageDisk disk = null;
 
             if (this.isValid(stack)) {
@@ -100,10 +103,10 @@ public class ExtraFluidStorageBlockItem extends BaseBlockItem {
     }
 
     private UUID getId(ItemStack disk) {
-        return disk.getTag().getUUID(ExtraItemStorageNetworkNode.NBT_ID);
+        return disk.getOrCreateTag().getUUID(ExtraItemStorageNetworkNode.NBT_ID);
     }
 
     private boolean isValid(ItemStack disk) {
-        return disk.hasTag() && disk.getTag().hasUUID(ExtraItemStorageNetworkNode.NBT_ID);
+        return disk.hasTag() && disk.getOrCreateTag().hasUUID(ExtraItemStorageNetworkNode.NBT_ID);
     }
 }

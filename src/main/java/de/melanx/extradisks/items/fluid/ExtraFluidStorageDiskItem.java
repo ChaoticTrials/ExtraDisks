@@ -30,6 +30,7 @@ import java.util.List;
 import java.util.UUID;
 
 public class ExtraFluidStorageDiskItem extends Item implements IStorageDiskProvider {
+
     private static final String NBT_ID = "Id";
     private final ExtraFluidStorageType type;
 
@@ -41,6 +42,7 @@ public class ExtraFluidStorageDiskItem extends Item implements IStorageDiskProvi
     @Override
     public void inventoryTick(@Nonnull ItemStack stack, @Nonnull Level level, @Nonnull Entity entity, int itemSlot, boolean isSelected) {
         super.inventoryTick(stack, level, entity, itemSlot, isSelected);
+
         if (!level.isClientSide && !stack.hasTag()) {
             UUID id = UUID.randomUUID();
             API.instance().getStorageDiskManager((ServerLevel) level).set(id, API.instance().createDefaultFluidDisk((ServerLevel) level, this.getCapacity(stack), (Player) entity));
@@ -79,6 +81,7 @@ public class ExtraFluidStorageDiskItem extends Item implements IStorageDiskProvi
         ItemStack diskStack = player.getItemInHand(hand);
 
         if (!level.isClientSide && player.isCrouching()) {
+            //noinspection rawtypes
             IStorageDisk disk = API.instance().getStorageDiskManager((ServerLevel) level).getByStack(diskStack);
             if (disk != null && disk.getStored() == 0) {
                 ItemStack storagePart = new ItemStack(ExtraFluidStoragePartItem.getByType(this.type), diskStack.getCount());
@@ -88,9 +91,11 @@ public class ExtraFluidStorageDiskItem extends Item implements IStorageDiskProvi
 
                 API.instance().getStorageDiskManager((ServerLevel) level).remove(this.getId(diskStack));
                 API.instance().getStorageDiskManager((ServerLevel) level).markForSaving();
+
                 return new InteractionResultHolder<>(InteractionResult.SUCCESS, new ItemStack(Registration.ADVANCED_STORAGE_HOUSING.get()));
             }
         }
+
         return new InteractionResultHolder<>(InteractionResult.PASS, diskStack);
     }
 

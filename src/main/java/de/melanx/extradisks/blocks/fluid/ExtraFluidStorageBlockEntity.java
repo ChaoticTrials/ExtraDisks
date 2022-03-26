@@ -17,6 +17,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import javax.annotation.Nonnull;
 
 public class ExtraFluidStorageBlockEntity extends NetworkNodeBlockEntity<ExtraFluidStorageNetworkNode> {
+
     public static final BlockEntitySynchronizationParameter<Integer, ExtraFluidStorageBlockEntity> PRIORITY = IPrioritizable.createParameter();
     public static final BlockEntitySynchronizationParameter<Integer, ExtraFluidStorageBlockEntity> COMPARE = IComparable.createParameter();
     public static final BlockEntitySynchronizationParameter<Integer, ExtraFluidStorageBlockEntity> WHITELIST_BLACKLIST = IWhitelistBlacklist.createParameter();

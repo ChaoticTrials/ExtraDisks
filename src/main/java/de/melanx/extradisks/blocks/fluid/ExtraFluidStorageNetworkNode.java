@@ -21,6 +21,7 @@ import javax.annotation.Nullable;
 import java.util.List;
 
 public class ExtraFluidStorageNetworkNode extends FluidStorageNetworkNode {
+
     public static final ResourceLocation BLOCK_FLUID_16384K_ID = new ResourceLocation(ExtraDisks.MODID, "16384k_fluid_storage_block");
     public static final ResourceLocation BLOCK_FLUID_65536K_ID = new ResourceLocation(ExtraDisks.MODID, "65536k_fluid_storage_block");
     public static final ResourceLocation BLOCK_FLUID_262144K_ID = new ResourceLocation(ExtraDisks.MODID, "262144k_fluid_storage_block");
@@ -36,20 +37,13 @@ public class ExtraFluidStorageNetworkNode extends FluidStorageNetworkNode {
     }
 
     public static ResourceLocation getId(ExtraFluidStorageType type) {
-        switch (type) {
-            case TIER_5_FLUID:
-                return BLOCK_FLUID_16384K_ID;
-            case TIER_6_FLUID:
-                return BLOCK_FLUID_65536K_ID;
-            case TIER_7_FLUID:
-                return BLOCK_FLUID_262144K_ID;
-            case TIER_8_FLUID:
-                return BLOCK_FLUID_1048576K_ID;
-            case TIER_9_FLUID:
-                return BLOCK_FLUID_INFINITE_ID;
-            default:
-                throw new IllegalArgumentException("Unknown storage type " + type);
-        }
+        return switch (type) {
+            case TIER_5_FLUID -> BLOCK_FLUID_16384K_ID;
+            case TIER_6_FLUID -> BLOCK_FLUID_65536K_ID;
+            case TIER_7_FLUID -> BLOCK_FLUID_262144K_ID;
+            case TIER_8_FLUID -> BLOCK_FLUID_1048576K_ID;
+            case TIER_9_FLUID -> BLOCK_FLUID_INFINITE_ID;
+        };
     }
 
     @Override

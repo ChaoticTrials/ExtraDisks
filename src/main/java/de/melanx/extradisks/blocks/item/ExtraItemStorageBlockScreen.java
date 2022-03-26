@@ -6,7 +6,9 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Inventory;
 
 public class ExtraItemStorageBlockScreen extends StorageScreen<ExtraItemStorageBlockContainerMenu> {
+
     public ExtraItemStorageBlockScreen(ExtraItemStorageBlockContainerMenu menu, Inventory container, Component title) {
+        //noinspection ConstantConditions
         super(menu, container, title, "gui/storage.png",
                 new StorageScreenSynchronizationParameters(null,
                         ExtraItemStorageBlockEntity.REDSTONE_MODE,

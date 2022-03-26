@@ -21,6 +21,7 @@ import javax.annotation.Nullable;
 import java.util.List;
 
 public class ExtraItemStorageNetworkNode extends StorageNetworkNode {
+
     public static final ResourceLocation BLOCK_256K_ID = new ResourceLocation(ExtraDisks.MODID, "256k_storage_block");
     public static final ResourceLocation BLOCK_1024K_ID = new ResourceLocation(ExtraDisks.MODID, "1024k_storage_block");
     public static final ResourceLocation BLOCK_4096K_ID = new ResourceLocation(ExtraDisks.MODID, "4096k_storage_block");

@@ -15,6 +15,7 @@ public class ExtraItemStorageBlockContainerMenu extends BaseContainerMenu {
         for (int i = 0; i < 9; ++i) {
             this.addSlot(new FilterSlot(tile.getNode().getFilters(), i, 8 + (18 * i), 20));
         }
+
         this.addPlayerInventory(8, 141);
         this.transferManager.addItemFilterTransfer(player.getInventory(), tile.getNode().getFilters());
     }

@@ -17,6 +17,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
@@ -26,12 +27,21 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import javax.annotation.Nonnull;
+
 @Mod(ExtraDisks.MODID)
 public class ExtraDisks {
 
     public static final String MODID = "extradisks";
     public static final Logger LOGGER = LogManager.getLogger();
-    public static final CreativeModeTab ModCategory = new CreativeTab();
+    public static final CreativeModeTab ModCategory = new CreativeModeTab(MODID) {
+
+        @Nonnull
+        @Override
+        public ItemStack makeIcon() {
+            return new ItemStack(Registration.ITEM_STORAGE_DISK.get(ExtraItemStorageType.TIER_8).get());
+        }
+    };
 
     public ExtraDisks() {
         Registration.init();
@@ -46,6 +56,7 @@ public class ExtraDisks {
         for (ExtraItemStorageType type : ExtraItemStorageType.values()) {
             MenuScreens.register(Registration.ITEM_STORAGE_CONTAINER.get(type).get(), ExtraItemStorageBlockScreen::new);
         }
+
         for (ExtraFluidStorageType type : ExtraFluidStorageType.values()) {
             MenuScreens.register(Registration.FLUID_STORAGE_CONTAINER.get(type).get(), ExtraFluidStorageBlockScreen::new);
         }
@@ -57,6 +68,7 @@ public class ExtraDisks {
             //noinspection ConstantConditions
             Registration.ITEM_STORAGE_TILE.get(type).get().create(BlockPos.ZERO, null).getDataManager().getParameters().forEach(BlockEntitySynchronizationManager::registerParameter);
         }
+
         for (ExtraFluidStorageType type : ExtraFluidStorageType.values()) {
             API.instance().getNetworkNodeRegistry().add(new ResourceLocation(MODID, type.getName() + "_fluid_storage_block"), (tag, world, pos) -> readAndReturn(tag, new ExtraFluidStorageNetworkNode(world, pos, type)));
             //noinspection ConstantConditions

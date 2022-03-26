@@ -17,6 +17,7 @@ import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
 import javax.annotation.Nonnull;
 
 public class ExtraStorageBlockLootFunction extends LootItemConditionalFunction {
+
     protected ExtraStorageBlockLootFunction(LootItemCondition[] conditions) {
         super(conditions);
     }
@@ -25,19 +26,25 @@ public class ExtraStorageBlockLootFunction extends LootItemConditionalFunction {
     @Override
     protected ItemStack run(@Nonnull ItemStack stack, @Nonnull LootContext context) {
         BlockEntity tile = context.getParamOrNull(LootContextParams.BLOCK_ENTITY);
+
         if (tile instanceof ExtraItemStorageBlockEntity) {
             ExtraItemStorageNetworkNode removedNode = ((ExtraItemStorageBlockEntity) tile).getRemovedNode();
+
             if (removedNode == null) {
                 removedNode = ((ExtraItemStorageBlockEntity) tile).getNode();
             }
+
             stack.getOrCreateTag().putUUID(ExtraItemStorageNetworkNode.NBT_ID, removedNode.getStorageId());
         } else if (tile instanceof ExtraFluidStorageBlockEntity) {
             ExtraFluidStorageNetworkNode removedNode = ((ExtraFluidStorageBlockEntity) tile).getRemovedNode();
+
             if (removedNode == null) {
                 removedNode = ((ExtraFluidStorageBlockEntity) tile).getNode();
             }
+
             stack.getOrCreateTag().putUUID(ExtraFluidStorageNetworkNode.NBT_ID, removedNode.getStorageId());
         }
+
         return stack;
     }
 

@@ -6,6 +6,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.storage.loot.functions.LootItemFunctionType;
 
 public class ExtraLootFunctions {
+
     public static LootItemFunctionType STORAGE_BLOCK;
 
     public static void register() {

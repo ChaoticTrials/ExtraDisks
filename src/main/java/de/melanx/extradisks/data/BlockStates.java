@@ -7,6 +7,7 @@ import net.minecraftforge.client.model.generators.BlockStateProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
 
 public class BlockStates extends BlockStateProvider {
+
     public BlockStates(DataGenerator generator, ExistingFileHelper helper) {
         super(generator, ExtraDisks.MODID, helper);
     }
