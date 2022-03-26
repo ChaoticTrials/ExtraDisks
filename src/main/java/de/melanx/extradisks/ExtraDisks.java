@@ -47,7 +47,6 @@ public class ExtraDisks {
         Registration.init();
         ModLoadingContext.get().registerConfig(net.minecraftforge.fml.config.ModConfig.Type.COMMON, ModConfig.CONFIG);
         MinecraftForge.EVENT_BUS.register(this);
-        ExtraLootFunctions.register();
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::onClientSetup);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::onCommonSetup);
     }
@@ -63,6 +62,8 @@ public class ExtraDisks {
     }
 
     private void onCommonSetup(final FMLCommonSetupEvent event) {
+        ExtraLootFunctions.register();
+
         for (ExtraItemStorageType type : ExtraItemStorageType.values()) {
             API.instance().getNetworkNodeRegistry().add(new ResourceLocation(MODID, type.getName() + "_storage_block"), (tag, world, pos) -> readAndReturn(tag, new ExtraItemStorageNetworkNode(world, pos, type)));
             //noinspection ConstantConditions

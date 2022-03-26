@@ -11,7 +11,7 @@ import de.melanx.extradisks.items.item.ExtraItemStorageType;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.recipes.*;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.tags.Tag;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
@@ -106,7 +106,7 @@ public class Recipes extends RecipeProvider {
                 .save(consumer, new ResourceLocation(ExtraDisks.MODID, "part/" + result.getRegistryName().getPath()));
     }
 
-    private void registerPartRecipe(Item result, Tag.Named<Item> prevPart, Consumer<FinishedRecipe> consumer) {
+    private void registerPartRecipe(Item result, TagKey<Item> prevPart, Consumer<FinishedRecipe> consumer) {
         //noinspection ConstantConditions
         ShapedRecipeBuilder.shaped(result)
                 .pattern("DED")
@@ -120,7 +120,7 @@ public class Recipes extends RecipeProvider {
                 .save(consumer, new ResourceLocation(ExtraDisks.MODID, "part/" + result.getRegistryName().getPath()));
     }
 
-    private void registerAdvancedPartRecipe(Item result, Tag.Named<Item> prevPart, Consumer<FinishedRecipe> consumer) {
+    private void registerAdvancedPartRecipe(Item result, TagKey<Item> prevPart, Consumer<FinishedRecipe> consumer) {
         //noinspection ConstantConditions
         ShapedRecipeBuilder.shaped(result)
                 .pattern("DED")
@@ -134,7 +134,7 @@ public class Recipes extends RecipeProvider {
                 .save(consumer, new ResourceLocation(ExtraDisks.MODID, "part/" + result.getRegistryName().getPath()));
     }
 
-    private void registerDiskRecipes(Item result, Tag.Named<Item> part, Consumer<FinishedRecipe> consumer) {
+    private void registerDiskRecipes(Item result, TagKey<Item> part, Consumer<FinishedRecipe> consumer) {
         //noinspection ConstantConditions
         ShapedRecipeBuilder.shaped(result)
                 .pattern("GEG")
@@ -154,7 +154,7 @@ public class Recipes extends RecipeProvider {
                 .save(consumer, new ResourceLocation(ExtraDisks.MODID, "disk/shapeless/" + result.getRegistryName().getPath()));
     }
 
-    private void registerStorageBlockRecipe(Tag.Named<Item> part, ItemLike block, Consumer<FinishedRecipe> consumer) {
+    private void registerStorageBlockRecipe(TagKey<Item> part, ItemLike block, Consumer<FinishedRecipe> consumer) {
         //noinspection ConstantConditions
         ShapedRecipeBuilder.shaped(block)
                 .pattern("QPQ")
