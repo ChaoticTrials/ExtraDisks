@@ -1,27 +1,27 @@
 {
   "type": "minecraft:crafting_shaped",
+  "key": {
+    "A": {
+      "item": "refinedstorage:advanced_processor"
+    },
+    "E": {
+      "item": "refinedstorage:quartz_enriched_iron"
+    },
+    "G": {
+      "tag": "forge:glass"
+    },
+    "I": {
+      "item": "refinedstorage:improved_processor"
+    },
+    "P": {
+      "tag": "refinedstorage:parts/fluids/65536k"
+    }
+  },
   "pattern": [
     "GEG",
     "EPE",
     "IAI"
   ],
-  "key": {
-    "G": {
-      "tag": "forge:glass"
-    },
-    "E": {
-      "item": "refinedstorage:quartz_enriched_iron"
-    },
-    "P": {
-      "tag": "refinedstorage:parts/fluids/65536k"
-    },
-    "I": {
-      "item": "refinedstorage:improved_processor"
-    },
-    "A": {
-      "item": "refinedstorage:advanced_processor"
-    }
-  },
   "result": {
     "item": "extradisks:65536k_fluid_storage_disk"
   }

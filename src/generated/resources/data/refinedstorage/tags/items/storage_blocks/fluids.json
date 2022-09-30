@@ -1,5 +1,4 @@
 {
-  "replace": false,
   "values": [
     "#refinedstorage:storage_blocks/fluids/16384k",
     "#refinedstorage:storage_blocks/fluids/65536k",

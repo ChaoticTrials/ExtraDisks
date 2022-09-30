@@ -1,5 +1,4 @@
 {
-  "replace": false,
   "values": [
     "extradisks:1048576k_storage_part"
   ]

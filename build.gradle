@@ -1,8 +1,8 @@
 buildscript {
-    apply from: 'https://noeppi-noeppi.github.io/ModUtils/v3/buildscript.gradle', to: buildscript
+    apply from: 'https://moddingx.github.io/ModUtils/v4/buildscript.gradle', to: buildscript
 }
 
-apply from: 'https://noeppi-noeppi.github.io/ModUtils/v3/mod.gradle'
+apply from: 'https://moddingx.github.io/ModUtils/v4/mod.gradle'
 
 repositories {
     maven {
@@ -29,11 +29,11 @@ repositories {
 }
 
 dependencies {
-    implementation fg.deobf("com.refinedmods:refinedstorage:1.10.2") {
+    implementation fg.deobf("com.refinedmods:refinedstorage:1.11.0") {
         transitive false
     }
 
-    runtimeOnly fg.deobf("mezz.jei:jei-1.18.2:9.5.4.171")
-    runtimeOnly fg.deobf("io.github.noeppi_noeppi.mods:LibX:1.18.2-3.2.0")
-    runtimeOnly fg.deobf("de.melanx:RecipePrinter:1.18.2-3.2.0")
+    runtimeOnly fg.deobf("mezz.jei:jei-1.19.2-forge:11.3.0.262")
+//    runtimeOnly fg.deobf("io.github.noeppi_noeppi.mods:LibX:1.18.2-3.2.0")
+//    runtimeOnly fg.deobf("de.melanx:RecipePrinter:1.18.2-3.2.0")
 }

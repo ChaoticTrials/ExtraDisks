@@ -8,6 +8,7 @@ import net.minecraft.world.item.Item;
 import net.minecraftforge.client.model.generators.ItemModelProvider;
 import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.common.data.ExistingFileHelper;
+import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
 public class ModItemModels extends ItemModelProvider {
@@ -28,14 +29,14 @@ public class ModItemModels extends ItemModelProvider {
 
     private void generateItem(Item item) {
         //noinspection ConstantConditions
-        String path = item.getRegistryName().getPath();
+        String path = ForgeRegistries.ITEMS.getKey(item).getPath();
         this.getBuilder(path).parent(this.getExistingFile(this.mcLoc("item/handheld")))
                 .texture("layer0", "item/" + path);
     }
 
     private void generateBlockItemModel(Item item) {
         //noinspection ConstantConditions
-        String path = item.getRegistryName().getPath();
+        String path = ForgeRegistries.ITEMS.getKey(item).getPath();
         this.getBuilder(path).parent(new ModelFile.UncheckedModelFile(this.modLoc("block/" + path)));
     }
 }

@@ -7,6 +7,7 @@ import com.refinedmods.refinedstorage.blockentity.config.IComparable;
 import com.refinedmods.refinedstorage.blockentity.config.IPrioritizable;
 import com.refinedmods.refinedstorage.blockentity.config.IWhitelistBlacklist;
 import com.refinedmods.refinedstorage.blockentity.data.BlockEntitySynchronizationParameter;
+import com.refinedmods.refinedstorage.blockentity.data.BlockEntitySynchronizationSpec;
 import com.refinedmods.refinedstorage.blockentity.data.RSSerializers;
 import de.melanx.extradisks.items.Registration;
 import de.melanx.extradisks.items.item.ExtraItemStorageType;
@@ -23,19 +24,21 @@ public class ExtraItemStorageBlockEntity extends NetworkNodeBlockEntity<ExtraIte
     public static final BlockEntitySynchronizationParameter<Integer, ExtraItemStorageBlockEntity> WHITELIST_BLACKLIST = IWhitelistBlacklist.createParameter();
     public static final BlockEntitySynchronizationParameter<AccessType, ExtraItemStorageBlockEntity> ACCESS_TYPE = IAccessType.createParameter();
     public static final BlockEntitySynchronizationParameter<Long, ExtraItemStorageBlockEntity> STORED = new BlockEntitySynchronizationParameter<>(RSSerializers.LONG_SERIALIZER, 0L, t -> t.getNode().getStorage() != null ? (long) t.getNode().getStorage().getStored() : 0);
+    public static final BlockEntitySynchronizationSpec SPEC = BlockEntitySynchronizationSpec.builder()
+            .addWatchedParameter(REDSTONE_MODE)
+            .addWatchedParameter(PRIORITY)
+            .addWatchedParameter(COMPARE)
+            .addWatchedParameter(WHITELIST_BLACKLIST)
+            .addWatchedParameter(STORED)
+            .addWatchedParameter(ACCESS_TYPE)
+            .build();
 
     @Nonnull
     private final ExtraItemStorageType type;
 
     public ExtraItemStorageBlockEntity(@Nonnull ExtraItemStorageType type, BlockPos pos, BlockState state) {
-        super(Registration.ITEM_STORAGE_TILE.get(type).get(), pos, state);
+        super(Registration.ITEM_STORAGE_TILE.get(type).get(), pos, state, SPEC);
         this.type = type;
-
-        this.dataManager.addWatchedParameter(PRIORITY);
-        this.dataManager.addWatchedParameter(COMPARE);
-        this.dataManager.addWatchedParameter(WHITELIST_BLACKLIST);
-        this.dataManager.addWatchedParameter(ACCESS_TYPE);
-        this.dataManager.addWatchedParameter(STORED);
     }
 
     @Nonnull

@@ -10,7 +10,6 @@ import de.melanx.extradisks.ModConfig;
 import de.melanx.extradisks.items.item.ExtraItemStorageType;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.player.Player;
@@ -101,7 +100,7 @@ public class ExtraItemStorageNetworkNode extends StorageNetworkNode {
 
     @Override
     public Component getTitle() {
-        return new TranslatableComponent("block." + ExtraDisks.MODID + "." + this.type.getName() + "_storage_block");
+        return Component.translatable("block." + ExtraDisks.MODID + "." + this.type.getName() + "_storage_block");
     }
 
     @Override

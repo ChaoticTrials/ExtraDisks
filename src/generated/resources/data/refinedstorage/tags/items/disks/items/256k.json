@@ -1,5 +1,4 @@
 {
-  "replace": false,
   "values": [
     "extradisks:256k_storage_disk"
   ]

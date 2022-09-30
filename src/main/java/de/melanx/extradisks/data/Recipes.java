@@ -16,6 +16,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
 import net.minecraftforge.common.Tags;
+import net.minecraftforge.registries.ForgeRegistries;
 
 import javax.annotation.Nonnull;
 import java.util.function.Consumer;
@@ -103,7 +104,7 @@ public class Recipes extends RecipeProvider {
                 .define('P', prevPart)
                 .define('R', Tags.Items.DUSTS_REDSTONE)
                 .unlockedBy("has_prev_part", has(prevPart))
-                .save(consumer, new ResourceLocation(ExtraDisks.MODID, "part/" + result.getRegistryName().getPath()));
+                .save(consumer, new ResourceLocation(ExtraDisks.MODID, "part/" + ForgeRegistries.ITEMS.getKey(result).getPath()));
     }
 
     private void registerPartRecipe(Item result, TagKey<Item> prevPart, Consumer<FinishedRecipe> consumer) {
@@ -117,7 +118,7 @@ public class Recipes extends RecipeProvider {
                 .define('P', prevPart)
                 .define('R', Tags.Items.DUSTS_REDSTONE)
                 .unlockedBy("has_prev_part", has(prevPart))
-                .save(consumer, new ResourceLocation(ExtraDisks.MODID, "part/" + result.getRegistryName().getPath()));
+                .save(consumer, new ResourceLocation(ExtraDisks.MODID, "part/" + ForgeRegistries.ITEMS.getKey(result).getPath()));
     }
 
     private void registerAdvancedPartRecipe(Item result, TagKey<Item> prevPart, Consumer<FinishedRecipe> consumer) {
@@ -131,7 +132,7 @@ public class Recipes extends RecipeProvider {
                 .define('P', prevPart)
                 .define('R', Tags.Items.DUSTS_REDSTONE)
                 .unlockedBy("has_prev_part", has(prevPart))
-                .save(consumer, new ResourceLocation(ExtraDisks.MODID, "part/" + result.getRegistryName().getPath()));
+                .save(consumer, new ResourceLocation(ExtraDisks.MODID, "part/" + ForgeRegistries.ITEMS.getKey(result).getPath()));
     }
 
     private void registerDiskRecipes(Item result, TagKey<Item> part, Consumer<FinishedRecipe> consumer) {
@@ -146,12 +147,12 @@ public class Recipes extends RecipeProvider {
                 .define('I', RSItems.PROCESSORS.get(ProcessorItem.Type.IMPROVED).get())
                 .define('A', RSItems.PROCESSORS.get(ProcessorItem.Type.ADVANCED).get())
                 .unlockedBy("has_part", has(part))
-                .save(consumer, new ResourceLocation(ExtraDisks.MODID, "disk/shaped/" + result.getRegistryName().getPath()));
+                .save(consumer, new ResourceLocation(ExtraDisks.MODID, "disk/shaped/" + ForgeRegistries.ITEMS.getKey(result).getPath()));
         ShapelessRecipeBuilder.shapeless(result)
                 .requires(Registration.ADVANCED_STORAGE_HOUSING.get())
                 .requires(part)
                 .unlockedBy("has_part", has(part))
-                .save(consumer, new ResourceLocation(ExtraDisks.MODID, "disk/shapeless/" + result.getRegistryName().getPath()));
+                .save(consumer, new ResourceLocation(ExtraDisks.MODID, "disk/shapeless/" + ForgeRegistries.ITEMS.getKey(result).getPath()));
     }
 
     private void registerStorageBlockRecipe(TagKey<Item> part, ItemLike block, Consumer<FinishedRecipe> consumer) {
@@ -165,6 +166,6 @@ public class Recipes extends RecipeProvider {
                 .define('C', Registration.ADVANCED_MACHINE_CASING.get())
                 .define('R', Tags.Items.DUSTS_REDSTONE)
                 .unlockedBy("has_part", has(part))
-                .save(consumer, new ResourceLocation(ExtraDisks.MODID, "blocks/" + block.asItem().getRegistryName().getPath()));
+                .save(consumer, new ResourceLocation(ExtraDisks.MODID, "blocks/" + ForgeRegistries.ITEMS.getKey(block.asItem()).getPath()));
     }
 }

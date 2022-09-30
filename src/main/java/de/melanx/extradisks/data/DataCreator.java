@@ -3,9 +3,9 @@ package de.melanx.extradisks.data;
 import de.melanx.extradisks.ExtraDisks;
 import net.minecraft.data.DataGenerator;
 import net.minecraftforge.common.data.ExistingFileHelper;
+import net.minecraftforge.data.event.GatherDataEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.forge.event.lifecycle.GatherDataEvent;
 
 @Mod.EventBusSubscriber(modid = ExtraDisks.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class DataCreator {
@@ -15,17 +15,16 @@ public class DataCreator {
         DataGenerator generator = event.getGenerator();
         ExistingFileHelper helper = event.getExistingFileHelper();
 
-        if (event.includeServer()) {
-            ModTags.BlockTags blockTagsProvider = new ModTags.BlockTags(generator, helper);
-            generator.addProvider(blockTagsProvider);
-            generator.addProvider(new ModTags.ItemTags(generator, helper, blockTagsProvider));
-            generator.addProvider(new Recipes(generator));
-            generator.addProvider(new ExtraLootTables(generator));
-        }
-        if (event.includeClient()) {
-            generator.addProvider(new ModItemModels(generator, helper));
-            generator.addProvider(new BlockStates(generator, helper));
-        }
+        ModTags.BlockTags blockTagsProvider = new ModTags.BlockTags(generator, helper);
+        boolean server = event.includeServer();
+        generator.addProvider(server, blockTagsProvider);
+        generator.addProvider(server, new ModTags.ItemTags(generator, helper, blockTagsProvider));
+        generator.addProvider(server, new Recipes(generator));
+        generator.addProvider(server, new ExtraLootTables(generator));
+
+        boolean client = event.includeClient();
+        generator.addProvider(client, new ModItemModels(generator, helper));
+        generator.addProvider(client, new BlockStates(generator, helper));
     }
 
 }

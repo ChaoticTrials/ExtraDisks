@@ -1,5 +1,4 @@
 {
-  "replace": false,
   "values": [
     "extradisks:262144k_fluid_storage_disk"
   ]

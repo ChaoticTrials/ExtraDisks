@@ -1,5 +1,4 @@
 {
-  "replace": false,
   "values": [
     "#refinedstorage:storage_blocks/items",
     "#refinedstorage:storage_blocks/fluids"

@@ -64,7 +64,7 @@ public class ExtraFluidStorageBlock extends NetworkNodeBlock {
     public InteractionResult use(@Nonnull BlockState state, Level level, @Nonnull BlockPos pos, @Nonnull Player player, @Nonnull InteractionHand hand, @Nonnull BlockHitResult hit) {
         if (!level.isClientSide) {
             //noinspection ConstantConditions
-            return NetworkUtils.attemptModify(level, pos, player, () -> NetworkHooks.openGui((ServerPlayer) player,
+            return NetworkUtils.attemptModify(level, pos, player, () -> NetworkHooks.openScreen((ServerPlayer) player,
                     new BlockEntityMenuProvider<ExtraFluidStorageBlockEntity>(((ExtraFluidStorageBlockEntity) level.getBlockEntity(pos)).getNode().getTitle(),
                             (tile, windowId, inventory, p) -> new ExtraFluidStorageBlockContainerMenu(windowId, player, tile), pos), pos));
         }

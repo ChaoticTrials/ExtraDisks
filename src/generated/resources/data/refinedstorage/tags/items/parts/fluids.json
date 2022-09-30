@@ -1,5 +1,4 @@
 {
-  "replace": false,
   "values": [
     "#refinedstorage:parts/fluids/16384k",
     "#refinedstorage:parts/fluids/65536k",

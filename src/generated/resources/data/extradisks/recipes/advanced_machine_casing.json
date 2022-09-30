@@ -1,27 +1,27 @@
 {
   "type": "minecraft:crafting_shaped",
-  "pattern": [
-    "DCD",
-    "GBG",
-    "DOD"
-  ],
   "key": {
-    "D": {
-      "item": "refinedstorage:advanced_processor"
+    "B": {
+      "item": "refinedstorage:machine_casing"
     },
     "C": {
       "item": "refinedstorage:construction_core"
     },
+    "D": {
+      "item": "refinedstorage:advanced_processor"
+    },
     "G": {
       "item": "refinedstorage:improved_processor"
-    },
-    "B": {
-      "item": "refinedstorage:machine_casing"
     },
     "O": {
       "item": "refinedstorage:destruction_core"
     }
   },
+  "pattern": [
+    "DCD",
+    "GBG",
+    "DOD"
+  ],
   "result": {
     "item": "extradisks:advanced_machine_casing"
   }
