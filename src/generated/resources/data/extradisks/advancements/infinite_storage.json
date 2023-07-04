@@ -1,0 +1,40 @@
+{
+  "criteria": {
+    "has_storage": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "extradisks:infinite_storage_disk",
+              "extradisks:infinite_fluid_storage_disk",
+              "extradisks:infinite_storage_block",
+              "extradisks:infinite_fluid_storage_block"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancements.extradisks.infinite_storage.description"
+    },
+    "frame": "challenge",
+    "hidden": true,
+    "icon": {
+      "item": "extradisks:infinite_storage_disk"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.extradisks.infinite_storage.title"
+    }
+  },
+  "requirements": [
+    [
+      "has_storage"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

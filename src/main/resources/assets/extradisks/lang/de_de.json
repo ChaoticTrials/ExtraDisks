@@ -49,5 +49,8 @@
   "block.extradisks.65536k_fluid_storage_block": "65536k Flüssigspeicherblock",
   "block.extradisks.262144k_fluid_storage_block": "262m Flüssigspeicherblock",
   "block.extradisks.1048576k_fluid_storage_block": "1048m Flüssigspeicherblock",
-  "block.extradisks.infinite_fluid_storage_block": "Unendlicher Flüssigspeicherblock"
+  "block.extradisks.infinite_fluid_storage_block": "Unendlicher Flüssigspeicherblock",
+
+  "advancements.extradisks.infinite_storage.title": "Unendlich Speicher",
+  "advancements.extradisks.infinite_storage.description": "Unendlicher Speicherplatz ist unendlich nützlich"
 }

@@ -30,6 +30,7 @@ public class DataCreator {
         generator.addProvider(server, blockTagsProvider);
         generator.addProvider(server, new ModTags.ItemTags(output, lookupProvider, blockTagsProvider.contentsGetter(), helper));
         generator.addProvider(server, new Recipes(output));
+        generator.addProvider(server, new AdvancementProvider(output, lookupProvider, helper, List.of()));
         generator.addProvider(server, new LootTableProvider(output, Set.of(), List.of(
                 new LootTableProvider.SubProviderEntry(ExtraLootTables::new, LootContextParamSets.BLOCK)
         )));

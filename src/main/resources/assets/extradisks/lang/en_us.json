@@ -51,5 +51,8 @@
   "block.extradisks.65536k_fluid_storage_block": "65536k Fluid Storage Block",
   "block.extradisks.262144k_fluid_storage_block": "262m Fluid Storage Block",
   "block.extradisks.1048576k_fluid_storage_block": "1048m Fluid Storage Block",
-  "block.extradisks.infinite_fluid_storage_block": "Infinite Fluid Storage Block"
+  "block.extradisks.infinite_fluid_storage_block": "Infinite Fluid Storage Block",
+
+  "advancements.extradisks.infinite_storage.title": "Infinite storage",
+  "advancements.extradisks.infinite_storage.description": "Having infinite storage is infinitely useful"
 }
