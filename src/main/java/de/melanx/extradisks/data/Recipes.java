@@ -8,7 +8,7 @@ import de.melanx.extradisks.ExtraDisks;
 import de.melanx.extradisks.items.Registration;
 import de.melanx.extradisks.items.fluid.ExtraFluidStorageType;
 import de.melanx.extradisks.items.item.ExtraItemStorageType;
-import net.minecraft.data.DataGenerator;
+import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
@@ -23,12 +23,12 @@ import java.util.function.Consumer;
 
 public class Recipes extends RecipeProvider {
 
-    public Recipes(DataGenerator generator) {
-        super(generator);
+    public Recipes(PackOutput output) {
+        super(output);
     }
 
     @Override
-    protected void buildCraftingRecipes(@Nonnull Consumer<FinishedRecipe> consumer) {
+    protected void buildRecipes(@Nonnull Consumer<FinishedRecipe> consumer) {
         for (ExtraItemStorageType type : ExtraItemStorageType.values()) {
             this.registerDiskRecipes(Registration.ITEM_STORAGE_DISK.get(type).get(), ModTags.Items.PARTS_ITEM.get(type), consumer);
             this.registerStorageBlockRecipe(ModTags.Items.PARTS_ITEM.get(type), Registration.ITEM_STORAGE_BLOCK.get(type).get(), consumer);
@@ -56,7 +56,7 @@ public class Recipes extends RecipeProvider {
 
         this.registerProcessorRecipe(Registration.WITHERING_PROCESSOR.get(), Registration.RAW_WITHERING_PROCESSOR.get(), Ingredient.of(Tags.Items.NETHER_STARS), consumer);
 
-        ShapedRecipeBuilder.shaped(Registration.ADVANCED_STORAGE_HOUSING.get())
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, Registration.ADVANCED_STORAGE_HOUSING.get())
                 .pattern("GEG")
                 .pattern("E E")
                 .pattern("IAI")
@@ -67,7 +67,7 @@ public class Recipes extends RecipeProvider {
                 .unlockedBy("has_processor", has(RSItems.PROCESSORS.get(ProcessorItem.Type.ADVANCED).get()))
                 .save(consumer);
 
-        ShapedRecipeBuilder.shaped(Registration.ADVANCED_MACHINE_CASING.get())
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, Registration.ADVANCED_MACHINE_CASING.get())
                 .pattern("DCD")
                 .pattern("GBG")
                 .pattern("DOD")
@@ -81,10 +81,10 @@ public class Recipes extends RecipeProvider {
     }
 
     private void registerProcessorRecipe(ItemLike result, ItemLike raw, Ingredient ingredient, Consumer<FinishedRecipe> consumer) {
-        SimpleCookingRecipeBuilder.smelting(Ingredient.of(raw), result, 0.5F, 200)
+        SimpleCookingRecipeBuilder.smelting(Ingredient.of(raw), RecipeCategory.MISC, result, 0.5F, 200)
                 .unlockedBy("has_raw", has(raw))
                 .save(consumer);
-        ShapelessRecipeBuilder.shapeless(raw)
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, raw)
                 .requires(RSItems.PROCESSOR_BINDING.get())
                 .requires(ingredient)
                 .requires(RSItems.SILICON.get())
@@ -95,7 +95,7 @@ public class Recipes extends RecipeProvider {
 
     private void registerPartRecipe(Item result, Item prevPart, Consumer<FinishedRecipe> consumer) {
         //noinspection ConstantConditions
-        ShapedRecipeBuilder.shaped(result)
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, result)
                 .pattern("DED")
                 .pattern("PRP")
                 .pattern("DPD")
@@ -109,7 +109,7 @@ public class Recipes extends RecipeProvider {
 
     private void registerPartRecipe(Item result, TagKey<Item> prevPart, Consumer<FinishedRecipe> consumer) {
         //noinspection ConstantConditions
-        ShapedRecipeBuilder.shaped(result)
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, result)
                 .pattern("DED")
                 .pattern("PRP")
                 .pattern("DPD")
@@ -123,7 +123,7 @@ public class Recipes extends RecipeProvider {
 
     private void registerAdvancedPartRecipe(Item result, TagKey<Item> prevPart, Consumer<FinishedRecipe> consumer) {
         //noinspection ConstantConditions
-        ShapedRecipeBuilder.shaped(result)
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, result)
                 .pattern("DED")
                 .pattern("PRP")
                 .pattern("DPD")
@@ -137,7 +137,7 @@ public class Recipes extends RecipeProvider {
 
     private void registerDiskRecipes(Item result, TagKey<Item> part, Consumer<FinishedRecipe> consumer) {
         //noinspection ConstantConditions
-        ShapedRecipeBuilder.shaped(result)
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, result)
                 .pattern("GEG")
                 .pattern("EPE")
                 .pattern("IAI")
@@ -148,7 +148,7 @@ public class Recipes extends RecipeProvider {
                 .define('A', RSItems.PROCESSORS.get(ProcessorItem.Type.ADVANCED).get())
                 .unlockedBy("has_part", has(part))
                 .save(consumer, new ResourceLocation(ExtraDisks.MODID, "disk/shaped/" + ForgeRegistries.ITEMS.getKey(result).getPath()));
-        ShapelessRecipeBuilder.shapeless(result)
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, result)
                 .requires(Registration.ADVANCED_STORAGE_HOUSING.get())
                 .requires(part)
                 .unlockedBy("has_part", has(part))
@@ -157,7 +157,7 @@ public class Recipes extends RecipeProvider {
 
     private void registerStorageBlockRecipe(TagKey<Item> part, ItemLike block, Consumer<FinishedRecipe> consumer) {
         //noinspection ConstantConditions
-        ShapedRecipeBuilder.shaped(block)
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, block)
                 .pattern("QPQ")
                 .pattern("QCQ")
                 .pattern("QRQ")

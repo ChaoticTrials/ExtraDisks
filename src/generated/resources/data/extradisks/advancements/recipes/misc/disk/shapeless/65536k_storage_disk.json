@@ -1,0 +1,33 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_part": {
+      "conditions": {
+        "items": [
+          {
+            "tag": "refinedstorage:parts/items/65536k"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "extradisks:disk/shapeless/65536k_storage_disk"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_part",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "extradisks:disk/shapeless/65536k_storage_disk"
+    ]
+  },
+  "sends_telemetry_event": false
+}

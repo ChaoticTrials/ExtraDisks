@@ -1,11 +1,11 @@
 modLoader="javafml"
-loaderVersion="[43,)"
+loaderVersion="[${fml},)"
 license="Apache License 2.0"
 issueTrackerURL="https://github.com/MelanX/ExtraDisks/issues"
 
 [[mods]]
 modId="extradisks"
-version="${file.jarVersion}"
+version="${version}"
 displayName="Extra Disks"
 updateJSONURL="https://assets.melanx.de/updates/extra-disks.json"
 displayURL="https://www.curseforge.com/minecraft/mc-mods/extra-disks/"
@@ -18,20 +18,20 @@ This mod adds a few bigger storage disks and blocks for Refined Storage by raoul
 [[dependencies.extradisks]]
     modId="forge"
     mandatory=true
-    versionRange="[43,)"
+    versionRange="[${forge},)"
     ordering="NONE"
     side="BOTH"
 
 [[dependencies.extradisks]]
     modId="minecraft"
     mandatory=true
-    versionRange="[1.19.2, 1.20)"
+    versionRange="[${minecraft},)"
     ordering="NONE"
     side="BOTH"
 
 [[dependencies.extradisks]]
     modId="refinedstorage"
     mandatory=true
-    versionRange="[1.11,)"
+    versionRange="[1.12.1,)"
     ordering="NONE"
     side="BOTH"

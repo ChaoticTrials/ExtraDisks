@@ -1,5 +1,6 @@
 {
   "type": "minecraft:crafting_shaped",
+  "category": "misc",
   "key": {
     "B": {
       "item": "refinedstorage:machine_casing"
@@ -24,5 +25,6 @@
   ],
   "result": {
     "item": "extradisks:advanced_machine_casing"
-  }
+  },
+  "show_notification": true
 }

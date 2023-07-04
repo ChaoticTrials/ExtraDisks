@@ -4,17 +4,21 @@ import de.melanx.extradisks.ExtraDisks;
 import de.melanx.extradisks.items.Registration;
 import de.melanx.extradisks.items.fluid.ExtraFluidStorageType;
 import de.melanx.extradisks.items.item.ExtraItemStorageType;
-import net.minecraft.data.DataGenerator;
-import net.minecraft.data.tags.BlockTagsProvider;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.ItemTagsProvider;
+import net.minecraft.data.tags.TagsProvider;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
+import net.minecraftforge.common.data.BlockTagsProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
 
+import javax.annotation.Nonnull;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.CompletableFuture;
 
 public class ModTags {
 
@@ -77,12 +81,12 @@ public class ModTags {
     }
 
     public static class BlockTags extends BlockTagsProvider {
-        public BlockTags(DataGenerator generator, ExistingFileHelper helper) {
-            super(generator, ExtraDisks.MODID, helper);
+        public BlockTags(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider, ExistingFileHelper helper) {
+            super(output, lookupProvider, ExtraDisks.MODID, helper);
         }
 
         @Override
-        protected void addTags() {
+        protected void addTags(@Nonnull HolderLookup.Provider provider) {
             TagAppender<Block> itemBlocksBuilder = this.tag(Blocks.ITEM_STORAGE_BLOCKS);
             for (ExtraItemStorageType type : ExtraItemStorageType.values()) {
                 TagKey<Block> tag = Blocks.STORAGE_BLOCKS_ITEM.get(type);
@@ -103,12 +107,12 @@ public class ModTags {
     }
 
     public static class ItemTags extends ItemTagsProvider {
-        public ItemTags(DataGenerator generator, ExistingFileHelper helper, BlockTagsProvider provider) {
-            super(generator, provider, ExtraDisks.MODID, helper);
+        public ItemTags(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider, CompletableFuture<TagsProvider.TagLookup<Block>> blockTags, ExistingFileHelper helper) {
+            super(output, lookupProvider, blockTags, ExtraDisks.MODID, helper);
         }
 
         @Override
-        protected void addTags() {
+        protected void addTags(@Nonnull HolderLookup.Provider provider) {
             TagAppender<Item> itemPartsBuilder = this.tag(Items.ITEM_PARTS);
             TagAppender<Item> itemDisksBuilder = this.tag(Items.ITEM_DISKS);
             for (ExtraItemStorageType type : ExtraItemStorageType.values()) {

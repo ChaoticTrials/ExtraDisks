@@ -1,8 +1,8 @@
 buildscript {
-    apply from: 'https://moddingx.github.io/ModUtils/v4/buildscript.gradle', to: buildscript
+    apply from: 'https://moddingx.github.io/ModUtils/v5/buildscript.gradle', to: buildscript
 }
 
-apply from: 'https://moddingx.github.io/ModUtils/v4/mod.gradle'
+apply from: 'https://moddingx.github.io/ModUtils/v5/mod.gradle'
 
 repositories {
     maven {
@@ -13,14 +13,10 @@ repositories {
            See: https://github.community/t/download-from-github-package-registry-without-authentication/14407/38 and
                 https://github.community/t/download-from-github-package-registry-without-authentication/14407/44
          */
-        credentials {
-            username = "anything"
-            password = "\u0067hp_oGjcDFCn8jeTzIj4Ke9pLoEVtpnZMP4VQgaX"
-        }
     }
     maven {
         name = "JEI maven"
-        url = "https://dvs1.progwml6.com/files/maven/"
+        url = "https://modmaven.dev/"
     }
     maven {
         name = 'MelanX Maven'
@@ -29,11 +25,11 @@ repositories {
 }
 
 dependencies {
-    implementation fg.deobf("com.refinedmods:refinedstorage:1.11.0") {
+    implementation fg.deobf("com.refinedmods:refinedstorage:1.12.1") {
         transitive false
     }
 
-    runtimeOnly fg.deobf("mezz.jei:jei-1.19.2-forge:11.3.0.262")
+    runtimeOnly fg.deobf("mezz.jei:jei-1.20.1-forge:15.2.0.22")
 //    runtimeOnly fg.deobf("io.github.noeppi_noeppi.mods:LibX:1.18.2-3.2.0")
 //    runtimeOnly fg.deobf("de.melanx:RecipePrinter:1.18.2-3.2.0")
 }

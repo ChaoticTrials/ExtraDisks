@@ -2,14 +2,14 @@ package de.melanx.extradisks.data;
 
 import de.melanx.extradisks.ExtraDisks;
 import de.melanx.extradisks.items.Registration;
-import net.minecraft.data.DataGenerator;
+import net.minecraft.data.PackOutput;
 import net.minecraftforge.client.model.generators.BlockStateProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
 
 public class BlockStates extends BlockStateProvider {
 
-    public BlockStates(DataGenerator generator, ExistingFileHelper helper) {
-        super(generator, ExtraDisks.MODID, helper);
+    public BlockStates(PackOutput output, ExistingFileHelper helper) {
+        super(output, ExtraDisks.MODID, helper);
     }
 
     @Override

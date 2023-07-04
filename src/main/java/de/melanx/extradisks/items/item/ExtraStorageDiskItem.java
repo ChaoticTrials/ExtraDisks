@@ -6,7 +6,6 @@ import com.refinedmods.refinedstorage.api.storage.disk.IStorageDiskProvider;
 import com.refinedmods.refinedstorage.api.storage.disk.StorageDiskSyncData;
 import com.refinedmods.refinedstorage.apiimpl.API;
 import com.refinedmods.refinedstorage.render.Styles;
-import de.melanx.extradisks.ExtraDisks;
 import de.melanx.extradisks.items.Registration;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -33,7 +32,7 @@ public class ExtraStorageDiskItem extends Item implements IStorageDiskProvider {
     private final ExtraItemStorageType type;
 
     public ExtraStorageDiskItem(ExtraItemStorageType type) {
-        super(new Properties().tab(ExtraDisks.ModCategory).stacksTo(1));
+        super(new Properties().stacksTo(1));
         this.type = type;
     }
 

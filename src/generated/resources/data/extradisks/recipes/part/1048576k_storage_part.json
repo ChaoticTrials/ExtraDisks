@@ -1,5 +1,6 @@
 {
   "type": "minecraft:crafting_shaped",
+  "category": "misc",
   "key": {
     "D": {
       "item": "extradisks:withering_processor"
@@ -21,5 +22,6 @@
   ],
   "result": {
     "item": "extradisks:1048576k_storage_part"
-  }
+  },
+  "show_notification": true
 }

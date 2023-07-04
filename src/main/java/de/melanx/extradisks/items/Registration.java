@@ -17,9 +17,12 @@ import de.melanx.extradisks.items.item.ExtraStoragePartItem;
 import de.melanx.extradisks.items.storageblocks.ExtraFluidStorageBlockItem;
 import de.melanx.extradisks.items.storageblocks.ExtraItemStorageBlockItem;
 import net.minecraft.core.BlockPos;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -28,6 +31,7 @@ import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.RegisterEvent;
 import net.minecraftforge.registries.RegistryObject;
 
 import java.util.HashMap;
@@ -39,7 +43,7 @@ public class Registration {
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, ExtraDisks.MODID);
     public static final DeferredRegister<BlockEntityType<?>> TILES = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITY_TYPES, ExtraDisks.MODID);
     public static final DeferredRegister<MenuType<?>> CONTAINERS = DeferredRegister.create(ForgeRegistries.MENU_TYPES, ExtraDisks.MODID);
-    private static final Item.Properties ITEM_PROPS = new Item.Properties().tab(ExtraDisks.ModCategory);
+    private static final Item.Properties ITEM_PROPS = new Item.Properties();
 
     // item storage blocks
     public static final Map<ExtraItemStorageType, RegistryObject<ExtraItemStorageBlock>> ITEM_STORAGE_BLOCK = new HashMap<>();
@@ -64,6 +68,21 @@ public class Registration {
     public static final RegistryObject<Item> ADVANCED_STORAGE_HOUSING = ITEMS.register("advanced_storage_housing", () -> new Item(ITEM_PROPS));
     public static final RegistryObject<Item> RAW_WITHERING_PROCESSOR = ITEMS.register("raw_withering_processor", () -> new Item(ITEM_PROPS));
     public static final RegistryObject<Item> WITHERING_PROCESSOR = ITEMS.register("withering_processor", () -> new Item(ITEM_PROPS));
+
+    public static void registerTab(RegisterEvent.RegisterHelper<CreativeModeTab> helper) {
+        helper.register("general", CreativeModeTab.builder()
+                .title(Component.literal("Extra Disks"))
+                .icon(() -> new ItemStack(Registration.ITEM_STORAGE_DISK.get(ExtraItemStorageType.TIER_8).get()))
+                .displayItems((enabledFlags, output) -> {
+                    for (Item item : ForgeRegistries.ITEMS.getValues()) {
+                        //noinspection DataFlowIssue
+                        if (ExtraDisks.MODID.equals(ForgeRegistries.ITEMS.getKey(item).getNamespace())) {
+                            output.accept(item);
+                        }
+                    }
+                })
+                .build());
+    }
 
     public static void init() {
         for (ExtraItemStorageType type : ExtraItemStorageType.values()) {
