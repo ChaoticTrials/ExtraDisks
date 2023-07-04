@@ -22,7 +22,7 @@ import java.util.function.Consumer;
 
 public class AdvancementProvider extends ForgeAdvancementProvider {
 
-    public AdvancementProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> registries, ExistingFileHelper existingFileHelper, List<AdvancementGenerator> subProviders) {
+    public AdvancementProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> registries, ExistingFileHelper existingFileHelper) {
         super(output, registries, existingFileHelper, List.of(new Generator()));
     }
 
