@@ -74,11 +74,37 @@ public class Registration {
                 .title(Component.literal("Extra Disks"))
                 .icon(() -> new ItemStack(Registration.ITEM_STORAGE_DISK.get(ExtraItemStorageType.TIER_8).get()))
                 .displayItems((enabledFlags, output) -> {
-                    for (Item item : ForgeRegistries.ITEMS.getValues()) {
-                        //noinspection DataFlowIssue
-                        if (ExtraDisks.MODID.equals(ForgeRegistries.ITEMS.getKey(item).getNamespace())) {
-                            output.accept(item);
-                        }
+                    output.accept(ADVANCED_MACHINE_CASING.get());
+                    output.accept(ADVANCED_STORAGE_HOUSING.get());
+                    output.accept(RAW_WITHERING_PROCESSOR.get());
+                    output.accept(WITHERING_PROCESSOR.get());
+
+                    // item storage
+                    for (ExtraItemStorageType type : ExtraItemStorageType.values()) {
+                        RegistryObject<ExtraStorageDiskItem> item = ITEM_STORAGE_DISK.get(type);
+                        output.accept(item.get());
+                    }
+                    for (ExtraItemStorageType type : ExtraItemStorageType.values()) {
+                        RegistryObject<Item> item = ITEM_STORAGE.get(type);
+                        output.accept(item.get());
+                    }
+                    for (ExtraItemStorageType type : ExtraItemStorageType.values()) {
+                        RegistryObject<ExtraStoragePartItem> item = ITEM_STORAGE_PART.get(type);
+                        output.accept(item.get());
+                    }
+
+                    // fluid storage
+                    for (ExtraFluidStorageType type : ExtraFluidStorageType.values()) {
+                        RegistryObject<ExtraFluidStorageDiskItem> item = FLUID_STORAGE_DISK.get(type);
+                        output.accept(item.get());
+                    }
+                    for (ExtraFluidStorageType type : ExtraFluidStorageType.values()) {
+                        RegistryObject<Item> item = FLUID_STORAGE.get(type);
+                        output.accept(item.get());
+                    }
+                    for (ExtraFluidStorageType type : ExtraFluidStorageType.values()) {
+                        RegistryObject<ExtraFluidStoragePartItem> item = FLUID_STORAGE_PART.get(type);
+                        output.accept(item.get());
                     }
                 })
                 .build());
