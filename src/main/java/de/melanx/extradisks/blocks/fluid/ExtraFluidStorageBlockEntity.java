@@ -37,7 +37,7 @@ public class ExtraFluidStorageBlockEntity extends NetworkNodeBlockEntity<ExtraFl
     private final ExtraFluidStorageType type;
 
     public ExtraFluidStorageBlockEntity(@Nonnull ExtraFluidStorageType type, BlockPos pos, BlockState state) {
-        super(Registration.FLUID_STORAGE_TILE.get(type).get(), pos, state, SPEC);
+        super(Registration.FLUID_STORAGE_TILE.get(type).get(), pos, state, SPEC, ExtraFluidStorageNetworkNode.class);
         this.type = type;
     }
 
