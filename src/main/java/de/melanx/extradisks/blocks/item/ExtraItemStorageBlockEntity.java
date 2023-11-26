@@ -28,7 +28,7 @@ public class ExtraItemStorageBlockEntity extends NetworkNodeBlockEntity<ExtraIte
     private final ExtraItemStorageType type;
 
     public ExtraItemStorageBlockEntity(@Nonnull ExtraItemStorageType type, BlockPos pos, BlockState state) {
-        super(Registration.ITEM_STORAGE_TILE.get(type).get(), pos, state);
+        super(Registration.ITEM_STORAGE_TILE.get(type).get(), pos, state, ExtraItemStorageNetworkNode.class);
         this.type = type;
 
         this.dataManager.addWatchedParameter(PRIORITY);
