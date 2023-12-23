@@ -1,5 +1,8 @@
 {
-  "item.extradisks.advanced_storage_housing": "고급 빈 저장 디스크",
+  "item.extradisks.advanced_storage_housing": "고급 저장공간 하우징",
+  "item.extradisks.raw_withering_processor": "처리되지 않은 시든 프로세서",
+  "item.extradisks.withering_processor": "시든 프로세서",
+  "block.extradisks.advanced_machine_casing": "고급 기계 케이싱",
 
   "_comment": "Items",
   "item.extradisks.256k_storage_part": "256k 저장 파트",
@@ -20,6 +23,15 @@
   "item.extradisks.1048576k_storage_disk": "1048m 저장 디스크",
   "item.extradisks.infinite_storage_disk": "무한 저장 디스크",
 
+  "block.extradisks.256k_storage_block": "256k 저장공간",
+  "block.extradisks.1024k_storage_block": "1024k 저장공간",
+  "block.extradisks.4096k_storage_block": "4096k 저장공간",
+  "block.extradisks.16384k_storage_block": "16384k 저장공간",
+  "block.extradisks.65536k_storage_block": "65536k 저장공간",
+  "block.extradisks.262144k_storage_block": "262m 저장공간",
+  "block.extradisks.1048576k_storage_block": "1048m 저장공간",
+  "block.extradisks.infinite_storage_block": "무한 저장공간",
+
   "_comment": "Fluid",
   "item.extradisks.16384k_fluid_storage_part": "16384k 액체 저장 파트",
   "item.extradisks.65536k_fluid_storage_part": "65536k 액체 저장 파트",
@@ -31,5 +43,14 @@
   "item.extradisks.65536k_fluid_storage_disk": "65536k 액체 저장 디스크",
   "item.extradisks.262144k_fluid_storage_disk": "262m 액체 저장 디스크",
   "item.extradisks.1048576k_fluid_storage_disk": "1048m 액체 저장 디스크",
-  "item.extradisks.infinite_fluid_storage_disk": "무한 액체 저장 디스크"
+  "item.extradisks.infinite_fluid_storage_disk": "무한 액체 저장 디스크",
+
+  "block.extradisks.16384k_fluid_storage_block": "16384k 액체 저장공간",
+  "block.extradisks.65536k_fluid_storage_block": "65536k 액체 저장공간",
+  "block.extradisks.262144k_fluid_storage_block": "262m 액체 저장공간",
+  "block.extradisks.1048576k_fluid_storage_block": "1048m 액체 저장공간",
+  "block.extradisks.infinite_fluid_storage_block": "무한 액체 저장공간",
+
+  "advancements.extradisks.infinite_storage.title": "무한 저장소",
+  "advancements.extradisks.infinite_storage.description": "무한 저장소를 갖는것은 무한하게 유용합니다"
 }
