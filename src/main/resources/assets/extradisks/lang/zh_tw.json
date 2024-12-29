@@ -23,13 +23,13 @@
   "_comment": "液體",
   "item.extradisks.16384k_fluid_storage_part": "16384k 液體儲存元件",
   "item.extradisks.65536k_fluid_storage_part": "65536k 液體儲存元件",
-  "item.extradisks.262144k_fluid_storage_part": "262m 液體儲存元件",
-  "item.extradisks.1048576k_fluid_storage_part": "1048m 液體儲存元件",
+  "item.extradisks.262144k_fluid_storage_part": "262kB 液體儲存元件",
+  "item.extradisks.1048576k_fluid_storage_part": "1048kB 液體儲存元件",
   "item.extradisks.infinite_fluid_storage_part": "無限 液體儲存元件",
 
   "item.extradisks.16384k_fluid_storage_disk": "16384k 液體儲存硬碟",
   "item.extradisks.65536k_fluid_storage_disk": "65536k 液體儲存硬碟",
-  "item.extradisks.262144k_fluid_storage_disk": "262m 液體儲存硬碟",
-  "item.extradisks.1048576k_fluid_storage_disk": "1048m 液體儲存硬碟",
+  "item.extradisks.262144k_fluid_storage_disk": "262kB 液體儲存硬碟",
+  "item.extradisks.1048576k_fluid_storage_disk": "1048kB 液體儲存硬碟",
   "item.extradisks.infinite_fluid_storage_disk": "無限 液體儲存硬碟"
 }

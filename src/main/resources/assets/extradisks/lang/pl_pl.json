@@ -35,19 +35,19 @@
     "_comment": "Fluid",
     "item.extradisks.16384k_fluid_storage_part": "Pamięć przechowywania cieczy 16384k",
     "item.extradisks.65536k_fluid_storage_part": "Pamięć przechowywania cieczy 65536k",
-    "item.extradisks.262144k_fluid_storage_part": "Pamięć przechowywania cieczy 262M",
-    "item.extradisks.1048576k_fluid_storage_part": "Pamięć przechowywania cieczy 1048M",
+    "item.extradisks.262144k_fluid_storage_part": "Pamięć przechowywania cieczy 262kB",
+    "item.extradisks.1048576k_fluid_storage_part": "Pamięć przechowywania cieczy 1048kB",
     "item.extradisks.infinite_fluid_storage_part": "Nieskończona pamięć przechowywania cieczy",
 
     "item.extradisks.16384k_fluid_storage_disk": "Dysk przechowywania cieczy 16384k",
     "item.extradisks.65536k_fluid_storage_disk": "Dysk przechowywania cieczy 65536k",
-    "item.extradisks.262144k_fluid_storage_disk": "Dysk przechowywania cieczy 262M",
-    "item.extradisks.1048576k_fluid_storage_disk": "Dysk przechowywania cieczy 1048M",
+    "item.extradisks.262144k_fluid_storage_disk": "Dysk przechowywania cieczy 262kB",
+    "item.extradisks.1048576k_fluid_storage_disk": "Dysk przechowywania cieczy 1048kB",
     "item.extradisks.infinite_fluid_storage_disk": "Nieskończony dysk przechowywania cieczy",
 
     "block.extradisks.16384k_fluid_storage_block": "Blok przechowywania cieczy 16384k",
     "block.extradisks.65536k_fluid_storage_block": "Blok przechowywania cieczy 65536k",
-    "block.extradisks.262144k_fluid_storage_block": "Blok przechowywania cieczy 262M",
-    "block.extradisks.1048576k_fluid_storage_block": "Blok przechowywania cieczy 1048M",
+    "block.extradisks.262144k_fluid_storage_block": "Blok przechowywania cieczy 262kB",
+    "block.extradisks.1048576k_fluid_storage_block": "Blok przechowywania cieczy 1048kB",
     "block.extradisks.infinite_fluid_storage_block": "Nieskończony blok przechowywania cieczy"
 }

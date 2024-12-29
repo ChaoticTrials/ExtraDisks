@@ -1,32 +1,32 @@
 package de.melanx.extradisks;
 
-import net.minecraftforge.common.ForgeConfigSpec;
+import net.neoforged.neoforge.common.ModConfigSpec;
 
 public class ModConfig {
-    private static final ForgeConfigSpec.Builder CONFIG_BUILDER = new ForgeConfigSpec.Builder();
-    public static final ForgeConfigSpec CONFIG;
+    private static final ModConfigSpec.Builder CONFIG_BUILDER = new ModConfigSpec.Builder();
+    public static final ModConfigSpec CONFIG;
 
     static {
         init(CONFIG_BUILDER);
         CONFIG = CONFIG_BUILDER.build();
     }
 
-    public static ForgeConfigSpec.IntValue tier5usage;
-    public static ForgeConfigSpec.IntValue tier6usage;
-    public static ForgeConfigSpec.IntValue tier7usage;
-    public static ForgeConfigSpec.IntValue tier8usage;
-    public static ForgeConfigSpec.IntValue tier9usage;
-    public static ForgeConfigSpec.IntValue tier10usage;
-    public static ForgeConfigSpec.IntValue tier11usage;
-    public static ForgeConfigSpec.IntValue tier12usage;
+    public static ModConfigSpec.IntValue tier5usage;
+    public static ModConfigSpec.IntValue tier6usage;
+    public static ModConfigSpec.IntValue tier7usage;
+    public static ModConfigSpec.IntValue tier8usage;
+    public static ModConfigSpec.IntValue tier9usage;
+    public static ModConfigSpec.IntValue tier10usage;
+    public static ModConfigSpec.IntValue tier11usage;
+    public static ModConfigSpec.IntValue tier12usage;
 
-    public static ForgeConfigSpec.IntValue fluid_tier5usage;
-    public static ForgeConfigSpec.IntValue fluid_tier6usage;
-    public static ForgeConfigSpec.IntValue fluid_tier7usage;
-    public static ForgeConfigSpec.IntValue fluid_tier8usage;
-    public static ForgeConfigSpec.IntValue fluid_tier9usage;
+    public static ModConfigSpec.IntValue fluid_tier5usage;
+    public static ModConfigSpec.IntValue fluid_tier6usage;
+    public static ModConfigSpec.IntValue fluid_tier7usage;
+    public static ModConfigSpec.IntValue fluid_tier8usage;
+    public static ModConfigSpec.IntValue fluid_tier9usage;
 
-    private static void init(@SuppressWarnings("SameParameterValue") ForgeConfigSpec.Builder builder) {
+    private static void init(@SuppressWarnings("SameParameterValue") ModConfigSpec.Builder builder) {
         builder.push("storageblocks");
         builder.push("item").comment("item storage blocks energy usage");
         tier5usage = builder.defineInRange("256k", 12, 0, Integer.MAX_VALUE);

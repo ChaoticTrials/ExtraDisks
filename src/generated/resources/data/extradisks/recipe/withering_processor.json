@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:smelting",
+  "category": "misc",
+  "cookingtime": 200,
+  "experience": 0.5,
+  "ingredient": {
+    "item": "extradisks:raw_withering_processor"
+  },
+  "result": {
+    "count": 1,
+    "id": "extradisks:withering_processor"
+  }
+}

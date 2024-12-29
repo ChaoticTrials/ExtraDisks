@@ -35,19 +35,19 @@
   "_comment": "Fluid",
   "item.extradisks.16384k_fluid_storage_part": "Жидкостный компонент хранения 16384k",
   "item.extradisks.65536k_fluid_storage_part": "Жидкостный компонент хранения 65536k",
-  "item.extradisks.262144k_fluid_storage_part": "Жидкостный компонент хранения 262m",
-  "item.extradisks.1048576k_fluid_storage_part": "Жидкостный компонент хранения 1048m",
+  "item.extradisks.262144k_fluid_storage_part": "Жидкостный компонент хранения 262kB",
+  "item.extradisks.1048576k_fluid_storage_part": "Жидкостный компонент хранения 1048kB",
   "item.extradisks.infinite_fluid_storage_part": "Бесконечный жидкостный компонент хранения",
 
   "item.extradisks.16384k_fluid_storage_disk": "Жидкостный диск хранения 16384k",
   "item.extradisks.65536k_fluid_storage_disk": "Жидкостный диск хранения 65536k",
-  "item.extradisks.262144k_fluid_storage_disk": "Жидкостный диск хранения 262m",
-  "item.extradisks.1048576k_fluid_storage_disk": "Жидкостный диск хранения 1048m",
+  "item.extradisks.262144k_fluid_storage_disk": "Жидкостный диск хранения 262kB",
+  "item.extradisks.1048576k_fluid_storage_disk": "Жидкостный диск хранения 1048kB",
   "item.extradisks.infinite_fluid_storage_disk": "Бесконечный жидкостный диск хранения",
 
   "block.extradisks.16384k_fluid_storage_block": "Жидкостный блок хранения 16384k",
   "block.extradisks.65536k_fluid_storage_block": "Жидкостный блок хранения 65536k",
-  "block.extradisks.262144k_fluid_storage_block": "Жидкостный блок хранения 262m",
-  "block.extradisks.1048576k_fluid_storage_block": "Жидкостный блок хранения 1048m",
+  "block.extradisks.262144k_fluid_storage_block": "Жидкостный блок хранения 262kB",
+  "block.extradisks.1048576k_fluid_storage_block": "Жидкостный блок хранения 1048kB",
   "block.extradisks.infinite_fluid_storage_block": "Бесконечный жидкостный блок хранения"
 }

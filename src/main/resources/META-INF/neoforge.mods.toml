@@ -1,0 +1,36 @@
+modLoader="javafml"
+loaderVersion="${loader_version_range}"
+license="${license}"
+issueTrackerURL="https://github.com/ChaoticTrials/ExtraDisks/issues"
+
+[[mods]]
+modId="${modid}"
+version="${mod_version}"
+displayName="Extra Disks"
+updateJSONURL = "https://assets.melanx.de/updates/extra-disks.json"
+displayURL="https://modrinth.com/user/MelanX"
+authors="MelanX"
+description="""
+Extra Disks adds bigger disks to Refined Storage
+"""
+
+[[dependencies.${modid}]]
+   modId="neoforge"
+   type="required"
+   versionRange="[${neo_version},)"
+   ordering="NONE"
+   side="BOTH"
+
+[[dependencies.${modid}]]
+   modId="minecraft"
+   type="required"
+   versionRange="[${minecraft_version},)"
+   ordering="NONE"
+   side="BOTH"
+
+[[dependencies.${ modid }]]
+   modId="refinedstorage"
+   type="required"
+   versionRange="[2.0.0-milestone.4.11,)"
+   ordering="NONE"
+   side="BOTH"

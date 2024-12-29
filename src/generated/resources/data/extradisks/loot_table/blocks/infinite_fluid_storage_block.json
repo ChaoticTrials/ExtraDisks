@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "function": "extradisks:storage_block"
+            },
+            {
+              "function": "minecraft:copy_components",
+              "include": [
+                "minecraft:custom_name"
+              ],
+              "source": "block_entity"
+            }
+          ],
+          "name": "extradisks:infinite_fluid_storage_block"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "extradisks:blocks/infinite_fluid_storage_block"
+}

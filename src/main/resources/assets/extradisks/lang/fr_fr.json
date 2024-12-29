@@ -32,19 +32,19 @@
   "_comment": "Fluid",
   "item.extradisks.16384k_fluid_storage_part": "Pièce de stockage de fluides 16384k",
   "item.extradisks.65536k_fluid_storage_part": "Pièce de stockage de fluides 65536k",
-  "item.extradisks.262144k_fluid_storage_part": "Pièce de stockage de fluides 262m",
-  "item.extradisks.1048576k_fluid_storage_part": "Pièce de stockage de fluides 1048m",
+  "item.extradisks.262144k_fluid_storage_part": "Pièce de stockage de fluides 262kB",
+  "item.extradisks.1048576k_fluid_storage_part": "Pièce de stockage de fluides 1048kB",
   "item.extradisks.infinite_fluid_storage_part": "Pièce de stockage de fluides infini",
 
   "item.extradisks.16384k_fluid_storage_disk": "Disque de stockage de fluides 16384k",
   "item.extradisks.65536k_fluid_storage_disk": "Disque de stockage de fluides 65536k",
-  "item.extradisks.262144k_fluid_storage_disk": "Disque de stockage de fluides 262m",
-  "item.extradisks.1048576k_fluid_storage_disk": "Disque de stockage de fluides 1048m",
+  "item.extradisks.262144k_fluid_storage_disk": "Disque de stockage de fluides 262kB",
+  "item.extradisks.1048576k_fluid_storage_disk": "Disque de stockage de fluides 1048kB",
   "item.extradisks.infinite_fluid_storage_disk": "Disque de stockage de fluides infini",
 
   "block.extradisks.16384k_fluid_storage_block": "Bloc de stockage de fluides 16384k",
   "block.extradisks.65536k_fluid_storage_block": "Bloc de stockage de fluides 65536k",
-  "block.extradisks.262144k_fluid_storage_block": "Bloc de stockage de fluides 262m",
-  "block.extradisks.1048576k_fluid_storage_block": "Bloc de stockage de fluides 1048m",
+  "block.extradisks.262144k_fluid_storage_block": "Bloc de stockage de fluides 262kB",
+  "block.extradisks.1048576k_fluid_storage_block": "Bloc de stockage de fluides 1048kB",
   "block.extradisks.infinite_fluid_storage_block": "Bloc de stockage de fluides infini"
 }

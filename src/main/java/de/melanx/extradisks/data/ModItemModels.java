@@ -5,11 +5,10 @@ import de.melanx.extradisks.items.Registration;
 import net.minecraft.data.PackOutput;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
-import net.minecraftforge.client.model.generators.ItemModelProvider;
-import net.minecraftforge.client.model.generators.ModelFile;
-import net.minecraftforge.common.data.ExistingFileHelper;
-import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.RegistryObject;
+import net.neoforged.neoforge.client.model.generators.ItemModelProvider;
+import net.neoforged.neoforge.client.model.generators.ModelFile;
+import net.neoforged.neoforge.common.data.ExistingFileHelper;
+import net.neoforged.neoforge.registries.DeferredHolder;
 
 public class ModItemModels extends ItemModelProvider {
 
@@ -19,25 +18,23 @@ public class ModItemModels extends ItemModelProvider {
 
     @Override
     protected void registerModels() {
-        Registration.ITEMS.getEntries().stream().map(RegistryObject::get).forEach(item -> {
-            if (item instanceof BlockItem) {
-                this.generateBlockItemModel(item);
+        Registration.ITEMS.getEntries().forEach(holder -> {
+            if (holder.get() instanceof BlockItem) {
+                this.generateBlockItemModel(holder);
             } else {
-                this.generateItem(item);
+                this.generateItem(holder);
             }
         });
     }
 
-    private void generateItem(Item item) {
-        //noinspection ConstantConditions
-        String path = ForgeRegistries.ITEMS.getKey(item).getPath();
+    private void generateItem(DeferredHolder<Item, ? extends Item> holder) {
+        String path = holder.getId().getPath();
         this.getBuilder(path).parent(this.getExistingFile(this.mcLoc("item/handheld")))
                 .texture("layer0", "item/" + path);
     }
 
-    private void generateBlockItemModel(Item item) {
-        //noinspection ConstantConditions
-        String path = ForgeRegistries.ITEMS.getKey(item).getPath();
+    private void generateBlockItemModel(DeferredHolder<Item, ? extends Item> holder) {
+        String path = holder.getId().getPath();
         this.getBuilder(path).parent(new ModelFile.UncheckedModelFile(this.modLoc("block/" + path)));
     }
 }

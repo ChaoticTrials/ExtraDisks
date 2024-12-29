@@ -1,5 +1,5 @@
 name: Bug Report
-description: Report an issue with supported versions of ExtraDisks
+description: Report an issue with supported versions of Extra Disks
 labels: [ bug ]
 body:
   - type: dropdown
@@ -7,22 +7,21 @@ body:
     attributes:
       label: Minecraft version
       options:
-        - 1.19.2
-        - 1.20.1
+        - 1.21.x
     validations:
       required: true
   - type: input
     id: mod-version
     attributes:
       label: Extra Disks version
-      placeholder: eg. 1.18.1-1.0.0
+      placeholder: eg. 1.21-1.0.0
     validations:
       required: true
   - type: input
     id: forge-version
     attributes:
-      label: Forge version
-      placeholder: eg. 39.0.5
+      label: NeoForge version
+      placeholder: eg. 21.0.0-beta
     validations:
       required: true
   - type: input

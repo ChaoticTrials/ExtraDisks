@@ -1,23 +1,25 @@
 package de.melanx.extradisks.items;
 
-import com.refinedmods.refinedstorage.util.BlockUtils;
+import com.refinedmods.refinedstorage.common.api.RefinedStorageApi;
+import com.refinedmods.refinedstorage.common.api.support.network.AbstractNetworkNodeContainerBlockEntity;
+import com.refinedmods.refinedstorage.common.content.*;
+import com.refinedmods.refinedstorage.common.storage.storageblock.StorageBlock;
 import de.melanx.extradisks.ExtraDisks;
-import de.melanx.extradisks.blocks.fluid.ExtraFluidStorageBlock;
-import de.melanx.extradisks.blocks.fluid.ExtraFluidStorageBlockContainerMenu;
-import de.melanx.extradisks.blocks.fluid.ExtraFluidStorageBlockEntity;
-import de.melanx.extradisks.blocks.item.ExtraItemStorageBlock;
-import de.melanx.extradisks.blocks.item.ExtraItemStorageBlockContainerMenu;
-import de.melanx.extradisks.blocks.item.ExtraItemStorageBlockEntity;
+import de.melanx.extradisks.blocks.fluid.ExtraFluidStorageBlockProvider;
+import de.melanx.extradisks.blocks.item.ExtraItemStorageBlockProvider;
 import de.melanx.extradisks.items.fluid.ExtraFluidStorageDiskItem;
-import de.melanx.extradisks.items.fluid.ExtraFluidStoragePartItem;
-import de.melanx.extradisks.items.fluid.ExtraFluidStorageType;
-import de.melanx.extradisks.items.item.ExtraItemStorageType;
-import de.melanx.extradisks.items.item.ExtraStorageDiskItem;
-import de.melanx.extradisks.items.item.ExtraStoragePartItem;
+import de.melanx.extradisks.items.fluid.ExtraFluidStorageVariant;
+import de.melanx.extradisks.items.item.ExtraItemStorageDiskItem;
+import de.melanx.extradisks.items.item.ExtraItemStorageVariant;
 import de.melanx.extradisks.items.storageblocks.ExtraFluidStorageBlockItem;
 import de.melanx.extradisks.items.storageblocks.ExtraItemStorageBlockItem;
-import net.minecraft.core.BlockPos;
+import de.melanx.extradisks.loottable.ExtraLootFunctions;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
@@ -26,137 +28,138 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
-import net.minecraftforge.common.extensions.IForgeMenuType;
-import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.RegisterEvent;
-import net.minecraftforge.registries.RegistryObject;
+import net.minecraft.world.level.storage.loot.functions.LootItemFunctionType;
+import net.neoforged.bus.api.IEventBus;
+import net.neoforged.neoforge.common.extensions.IMenuTypeExtension;
+import net.neoforged.neoforge.registries.*;
 
-import java.util.HashMap;
-import java.util.Map;
+import javax.annotation.Nonnull;
+import java.util.*;
 
 public class Registration {
 
-    public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, ExtraDisks.MODID);
-    public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, ExtraDisks.MODID);
-    public static final DeferredRegister<BlockEntityType<?>> TILES = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITY_TYPES, ExtraDisks.MODID);
-    public static final DeferredRegister<MenuType<?>> CONTAINERS = DeferredRegister.create(ForgeRegistries.MENU_TYPES, ExtraDisks.MODID);
+    public static final DeferredRegister.Blocks BLOCKS = DeferredRegister.createBlocks(ExtraDisks.MODID);
+    public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(ExtraDisks.MODID);
+    public static final DeferredRegister<BlockEntityType<?>> TILES = DeferredRegister.create(Registries.BLOCK_ENTITY_TYPE, ExtraDisks.MODID);
+    public static final DeferredRegister<MenuType<?>> CONTAINERS = DeferredRegister.create(Registries.MENU, ExtraDisks.MODID);
+    public static final DeferredRegister<LootItemFunctionType<?>> LOOT_FUNCTIONS = DeferredRegister.create(Registries.LOOT_FUNCTION_TYPE, ExtraDisks.MODID);
     private static final Item.Properties ITEM_PROPS = new Item.Properties();
 
     // item storage blocks
-    public static final Map<ExtraItemStorageType, RegistryObject<ExtraItemStorageBlock>> ITEM_STORAGE_BLOCK = new HashMap<>();
-    public static final Map<ExtraItemStorageType, RegistryObject<Item>> ITEM_STORAGE = new HashMap<>();
-    public static final Map<ExtraItemStorageType, RegistryObject<BlockEntityType<ExtraItemStorageBlockEntity>>> ITEM_STORAGE_TILE = new HashMap<>();
-    public static final Map<ExtraItemStorageType, RegistryObject<MenuType<ExtraItemStorageBlockContainerMenu>>> ITEM_STORAGE_CONTAINER = new HashMap<>();
+    public static final Map<ExtraItemStorageVariant, DeferredBlock<Block>> ITEM_STORAGE_BLOCK = new HashMap<>();
+    public static final Map<ExtraItemStorageVariant, DeferredItem<Item>> ITEM_STORAGE = new HashMap<>();
+    public static final Map<ExtraItemStorageVariant, DeferredHolder<BlockEntityType<?>, BlockEntityType<AbstractNetworkNodeContainerBlockEntity<?>>>> ITEM_STORAGE_TILE = new HashMap<>();
+    public static final Map<ExtraItemStorageVariant, DeferredHolder<MenuType<?>, MenuType<AbstractContainerMenu>>> ITEM_STORAGE_CONTAINER = new HashMap<>();
 
     // fluid storage blocks
-    public static final Map<ExtraFluidStorageType, RegistryObject<ExtraFluidStorageBlock>> FLUID_STORAGE_BLOCK = new HashMap<>();
-    public static final Map<ExtraFluidStorageType, RegistryObject<Item>> FLUID_STORAGE = new HashMap<>();
-    public static final Map<ExtraFluidStorageType, RegistryObject<BlockEntityType<ExtraFluidStorageBlockEntity>>> FLUID_STORAGE_TILE = new HashMap<>();
-    public static final Map<ExtraFluidStorageType, RegistryObject<MenuType<ExtraFluidStorageBlockContainerMenu>>> FLUID_STORAGE_CONTAINER = new HashMap<>();
+    public static final Map<ExtraFluidStorageVariant, DeferredBlock<Block>> FLUID_STORAGE_BLOCK = new HashMap<>();
+    public static final Map<ExtraFluidStorageVariant, DeferredItem<Item>> FLUID_STORAGE = new HashMap<>();
+    public static final Map<ExtraFluidStorageVariant, DeferredHolder<BlockEntityType<?>, BlockEntityType<AbstractNetworkNodeContainerBlockEntity<?>>>> FLUID_STORAGE_TILE = new HashMap<>();
+    public static final Map<ExtraFluidStorageVariant, DeferredHolder<MenuType<?>, MenuType<AbstractContainerMenu>>> FLUID_STORAGE_CONTAINER = new HashMap<>();
 
     // item storage disks/parts
-    public static final Map<ExtraItemStorageType, RegistryObject<ExtraStoragePartItem>> ITEM_STORAGE_PART = new HashMap<>();
-    public static final Map<ExtraFluidStorageType, RegistryObject<ExtraFluidStoragePartItem>> FLUID_STORAGE_PART = new HashMap<>();
-    public static final Map<ExtraItemStorageType, RegistryObject<ExtraStorageDiskItem>> ITEM_STORAGE_DISK = new HashMap<>();
-    public static final Map<ExtraFluidStorageType, RegistryObject<ExtraFluidStorageDiskItem>> FLUID_STORAGE_DISK = new HashMap<>();
+    public static final Map<ExtraItemStorageVariant, DeferredItem<Item>> ITEM_STORAGE_PART = new HashMap<>();
+    public static final Map<ExtraFluidStorageVariant, DeferredItem<Item>> FLUID_STORAGE_PART = new HashMap<>();
+    public static final Map<ExtraItemStorageVariant, DeferredItem<ExtraItemStorageDiskItem>> ITEM_STORAGE_DISK = new HashMap<>();
+    public static final Map<ExtraFluidStorageVariant, DeferredItem<ExtraFluidStorageDiskItem>> FLUID_STORAGE_DISK = new HashMap<>();
 
-    public static final RegistryObject<Block> ADVANCED_MACHINE_CASING_BLOCK = BLOCKS.register("advanced_machine_casing", () -> new Block(BlockUtils.DEFAULT_ROCK_PROPERTIES));
-    public static final RegistryObject<Item> ADVANCED_MACHINE_CASING = ITEMS.register("advanced_machine_casing", () -> new BlockItem(ADVANCED_MACHINE_CASING_BLOCK.get(), ITEM_PROPS));
-    public static final RegistryObject<Item> ADVANCED_STORAGE_HOUSING = ITEMS.register("advanced_storage_housing", () -> new Item(ITEM_PROPS));
-    public static final RegistryObject<Item> RAW_WITHERING_PROCESSOR = ITEMS.register("raw_withering_processor", () -> new Item(ITEM_PROPS));
-    public static final RegistryObject<Item> WITHERING_PROCESSOR = ITEMS.register("withering_processor", () -> new Item(ITEM_PROPS));
+    public static final DeferredBlock<Block> ADVANCED_MACHINE_CASING_BLOCK = BLOCKS.registerSimpleBlock("advanced_machine_casing", BlockConstants.PROPERTIES);
+    public static final DeferredItem<BlockItem> ADVANCED_MACHINE_CASING = ITEMS.registerSimpleBlockItem("advanced_machine_casing", ADVANCED_MACHINE_CASING_BLOCK, ITEM_PROPS);
+    public static final DeferredItem<Item> ADVANCED_STORAGE_HOUSING = ITEMS.registerSimpleItem("advanced_storage_housing", ITEM_PROPS);
+    public static final DeferredItem<Item> RAW_WITHERING_PROCESSOR = ITEMS.registerSimpleItem("raw_withering_processor", ITEM_PROPS);
+    public static final DeferredItem<Item> WITHERING_PROCESSOR = ITEMS.registerSimpleItem("withering_processor", ITEM_PROPS);
 
-    public static void registerTab(RegisterEvent.RegisterHelper<CreativeModeTab> helper) {
-        helper.register("general", CreativeModeTab.builder()
-                .title(Component.literal("Extra Disks"))
-                .icon(() -> new ItemStack(Registration.ITEM_STORAGE_DISK.get(ExtraItemStorageType.TIER_8).get()))
-                .displayItems((enabledFlags, output) -> {
-                    output.accept(ADVANCED_MACHINE_CASING.get());
-                    output.accept(ADVANCED_STORAGE_HOUSING.get());
-                    output.accept(RAW_WITHERING_PROCESSOR.get());
-                    output.accept(WITHERING_PROCESSOR.get());
+    public static void registerExtras(RegisterEvent event) {
+        event.register(Registries.CREATIVE_MODE_TAB, helper -> {
+            helper.register(ResourceLocation.fromNamespaceAndPath(ExtraDisks.MODID, "general"), CreativeModeTab.builder()
+                    .title(Component.literal("Extra Disks"))
+                    .icon(() -> new ItemStack(Registration.ITEM_STORAGE_DISK.get(ExtraItemStorageVariant.TIER_8).get()))
+                    .displayItems((enabledFlags, output) -> {
+                        output.accept(ADVANCED_MACHINE_CASING.get());
+                        output.accept(ADVANCED_STORAGE_HOUSING.get());
+                        output.accept(RAW_WITHERING_PROCESSOR.get());
+                        output.accept(WITHERING_PROCESSOR.get());
 
-                    // item storage
-                    for (ExtraItemStorageType type : ExtraItemStorageType.values()) {
-                        RegistryObject<ExtraStorageDiskItem> item = ITEM_STORAGE_DISK.get(type);
-                        output.accept(item.get());
-                    }
-                    for (ExtraItemStorageType type : ExtraItemStorageType.values()) {
-                        RegistryObject<Item> item = ITEM_STORAGE.get(type);
-                        output.accept(item.get());
-                    }
-                    for (ExtraItemStorageType type : ExtraItemStorageType.values()) {
-                        RegistryObject<ExtraStoragePartItem> item = ITEM_STORAGE_PART.get(type);
-                        output.accept(item.get());
-                    }
+                        // item storage
+                        for (ExtraItemStorageVariant variant : ExtraItemStorageVariant.values()) {
+                            DeferredItem<ExtraItemStorageDiskItem> item = ITEM_STORAGE_DISK.get(variant);
+                            output.accept(item.get());
+                        }
+                        for (ExtraItemStorageVariant variant : ExtraItemStorageVariant.values()) {
+                            DeferredItem<Item> item = ITEM_STORAGE.get(variant);
+                            output.accept(item.get());
+                        }
+                        for (ExtraItemStorageVariant variant : ExtraItemStorageVariant.values()) {
+                            DeferredItem<Item> item = ITEM_STORAGE_PART.get(variant);
+                            output.accept(item.get());
+                        }
 
-                    // fluid storage
-                    for (ExtraFluidStorageType type : ExtraFluidStorageType.values()) {
-                        RegistryObject<ExtraFluidStorageDiskItem> item = FLUID_STORAGE_DISK.get(type);
-                        output.accept(item.get());
-                    }
-                    for (ExtraFluidStorageType type : ExtraFluidStorageType.values()) {
-                        RegistryObject<Item> item = FLUID_STORAGE.get(type);
-                        output.accept(item.get());
-                    }
-                    for (ExtraFluidStorageType type : ExtraFluidStorageType.values()) {
-                        RegistryObject<ExtraFluidStoragePartItem> item = FLUID_STORAGE_PART.get(type);
-                        output.accept(item.get());
-                    }
-                })
-                .build());
+                        // fluid storage
+                        for (ExtraFluidStorageVariant variant : ExtraFluidStorageVariant.values()) {
+                            DeferredItem<ExtraFluidStorageDiskItem> item = FLUID_STORAGE_DISK.get(variant);
+                            output.accept(item.get());
+                        }
+                        for (ExtraFluidStorageVariant variant : ExtraFluidStorageVariant.values()) {
+                            DeferredItem<Item> item = FLUID_STORAGE.get(variant);
+                            output.accept(item.get());
+                        }
+                        for (ExtraFluidStorageVariant variant : ExtraFluidStorageVariant.values()) {
+                            DeferredItem<Item> item = FLUID_STORAGE_PART.get(variant);
+                            output.accept(item.get());
+                        }
+                    })
+                    .build());
+        });
+
+        event.register(Registries.LOOT_FUNCTION_TYPE, helper -> ExtraLootFunctions.register());
     }
 
-    public static void init() {
-        for (ExtraItemStorageType type : ExtraItemStorageType.values()) {
-            String name = type.getName() + "_storage_block";
-            ITEM_STORAGE_BLOCK.put(type, BLOCKS.register(name, () -> new ExtraItemStorageBlock(type)));
-            ITEM_STORAGE.put(type, ITEMS.register(name, () -> new ExtraItemStorageBlockItem(ITEM_STORAGE_BLOCK.get(type).get(), ITEM_PROPS)));
-            ITEM_STORAGE_TILE.put(type, TILES.register(name, () -> BlockEntityType.Builder.of((pos, state) -> new ExtraItemStorageBlockEntity(type, pos, state), ITEM_STORAGE_BLOCK.get(type).get()).build(null)));
-            ITEM_STORAGE_CONTAINER.put(type, CONTAINERS.register(name, () -> IForgeMenuType.create((windowId, inv, data) -> {
-                BlockPos pos = data.readBlockPos();
-                BlockEntity tile = inv.player.getCommandSenderWorld().getBlockEntity(pos);
-                if (!(tile instanceof ExtraItemStorageBlockEntity)) {
-                    ExtraDisks.LOGGER.error("Wrong tile type.");
-                    return null;
-                }
-                return new ExtraItemStorageBlockContainerMenu(windowId, inv.player, (ExtraItemStorageBlockEntity) tile);
-            })));
+    public static void init(IEventBus modBus) {
+        BlockEntityTypeFactory blockEntityTypeFactory = new BlockEntityTypeFactory() {
+            @Nonnull
+            @Override
+            public <T extends BlockEntity> BlockEntityType<T> create(@Nonnull BlockEntityProvider<T> blockEntityProvider, @Nonnull Block... allowedBlocks) {
+                Objects.requireNonNull(blockEntityProvider);
+                return new BlockEntityType<>(blockEntityProvider::create, new HashSet<>(Arrays.asList(allowedBlocks)), null);
+            }
+        };
 
-            ITEM_STORAGE_PART.put(type, ITEMS.register(type.getName() + "_storage_part", ExtraStoragePartItem::new));
-            ITEM_STORAGE_DISK.put(type, ITEMS.register(type.getName() + "_storage_disk", () -> new ExtraStorageDiskItem(type)));
+        ExtendedMenuTypeFactory extendedMenuTypeFactory = new ExtendedMenuTypeFactory() {
+            @Nonnull
+            @Override
+            public <T extends AbstractContainerMenu, D> MenuType<T> create(@Nonnull MenuSupplier<T, D> menuSupplier, @Nonnull StreamCodec<RegistryFriendlyByteBuf, D> streamCodec) {
+                return IMenuTypeExtension.create((syncId, inventory, buffer) -> {
+                    D data = streamCodec.decode(buffer);
+                    return menuSupplier.create(syncId, inventory, data);
+                });
+            }
+        };
+
+        for (ExtraItemStorageVariant variant : ExtraItemStorageVariant.values()) {
+            String name = variant.getName() + "_storage_block";
+            ITEM_STORAGE_BLOCK.put(variant, BLOCKS.register(name, () -> new StorageBlock<>(BlockConstants.PROPERTIES, new ExtraItemStorageBlockProvider(variant))));
+            ITEM_STORAGE.put(variant, ITEMS.register(name, () -> new ExtraItemStorageBlockItem(ITEM_STORAGE_BLOCK.get(variant).get(), variant)));
+            ITEM_STORAGE_TILE.put(variant, TILES.register(name, () -> blockEntityTypeFactory.create((pos, state) -> RefinedStorageApi.INSTANCE.createStorageBlockEntity(pos, state, new ExtraItemStorageBlockProvider(variant)), ITEM_STORAGE_BLOCK.get(variant).get())));
+            ITEM_STORAGE_CONTAINER.put(variant, CONTAINERS.register(name, () -> extendedMenuTypeFactory.create((syncId, playerInventory, data) -> RefinedStorageApi.INSTANCE.createStorageBlockContainerMenu(syncId, playerInventory.player, data, RefinedStorageApi.INSTANCE.getItemResourceFactory(), Menus.INSTANCE.getItemStorage()), RefinedStorageApi.INSTANCE.getStorageBlockDataStreamCodec())));
+
+            ITEM_STORAGE_PART.put(variant, ITEMS.register(variant.getName() + "_storage_part", () -> new Item(new Item.Properties())));
+            ITEM_STORAGE_DISK.put(variant, ITEMS.register(variant.getName() + "_storage_disk", () -> new ExtraItemStorageDiskItem(variant)));
         }
 
-        for (ExtraFluidStorageType type : ExtraFluidStorageType.values()) {
-            String name = type.getName() + "_fluid_storage_block";
-            FLUID_STORAGE_BLOCK.put(type, BLOCKS.register(name, () -> new ExtraFluidStorageBlock(type)));
-            FLUID_STORAGE.put(type, ITEMS.register(name, () -> new ExtraFluidStorageBlockItem(FLUID_STORAGE_BLOCK.get(type).get(), ITEM_PROPS)));
-            FLUID_STORAGE_TILE.put(type, TILES.register(name, () -> BlockEntityType.Builder.of((pos, state) -> new ExtraFluidStorageBlockEntity(type, pos, state), FLUID_STORAGE_BLOCK.get(type).get()).build(null)));
-            FLUID_STORAGE_CONTAINER.put(type, CONTAINERS.register(name, () -> IForgeMenuType.create((windowId, inv, data) -> {
-                BlockPos pos = data.readBlockPos();
-                BlockEntity tile = inv.player.getCommandSenderWorld().getBlockEntity(pos);
-                if (!(tile instanceof ExtraFluidStorageBlockEntity)) {
-                    ExtraDisks.LOGGER.error("Wrong tile type.");
-                    return null;
-                }
-                return new ExtraFluidStorageBlockContainerMenu(windowId, inv.player, (ExtraFluidStorageBlockEntity) tile);
-            })));
+        for (ExtraFluidStorageVariant variant : ExtraFluidStorageVariant.values()) {
+            String name = variant.getName() + "_fluid_storage_block";
+            FLUID_STORAGE_BLOCK.put(variant, BLOCKS.register(name, () -> new StorageBlock<>(BlockConstants.PROPERTIES, new ExtraFluidStorageBlockProvider(variant))));
+            FLUID_STORAGE.put(variant, ITEMS.register(name, () -> new ExtraFluidStorageBlockItem(FLUID_STORAGE_BLOCK.get(variant).get(), variant)));
+            FLUID_STORAGE_TILE.put(variant, TILES.register(name, () -> blockEntityTypeFactory.create((pos, state) -> RefinedStorageApi.INSTANCE.createStorageBlockEntity(pos, state, new ExtraFluidStorageBlockProvider(variant)), FLUID_STORAGE_BLOCK.get(variant).get())));
+            FLUID_STORAGE_CONTAINER.put(variant, CONTAINERS.register(name, () -> extendedMenuTypeFactory.create((syncId, playerInventory, data) -> RefinedStorageApi.INSTANCE.createStorageBlockContainerMenu(syncId, playerInventory.player, data, RefinedStorageApi.INSTANCE.getFluidResourceFactory(), Menus.INSTANCE.getFluidStorage()), RefinedStorageApi.INSTANCE.getStorageBlockDataStreamCodec())));
 
-            FLUID_STORAGE_PART.put(type, ITEMS.register(type.getName() + "_fluid_storage_part", ExtraFluidStoragePartItem::new));
-            FLUID_STORAGE_DISK.put(type, ITEMS.register(type.getName() + "_fluid_storage_disk", () -> new ExtraFluidStorageDiskItem(type)));
+            FLUID_STORAGE_PART.put(variant, ITEMS.register(variant.getName() + "_fluid_storage_part", () -> new Item(new Item.Properties())));
+            FLUID_STORAGE_DISK.put(variant, ITEMS.register(variant.getName() + "_fluid_storage_disk", () -> new ExtraFluidStorageDiskItem(variant)));
         }
 
-        IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
-        BLOCKS.register(bus);
-        ExtraDisks.LOGGER.info(BLOCKS.getEntries().size() + " blocks registered.");
-        ITEMS.register(bus);
-        ExtraDisks.LOGGER.info(ITEMS.getEntries().size() - BLOCKS.getEntries().size() + " items registered.");
-        TILES.register(bus);
-        ExtraDisks.LOGGER.info(TILES.getEntries().size() + " tiles registered.");
-        CONTAINERS.register(bus);
-        ExtraDisks.LOGGER.info(CONTAINERS.getEntries().size() + " containers registered.");
+        BLOCKS.register(modBus);
+        ITEMS.register(modBus);
+        TILES.register(modBus);
+        CONTAINERS.register(modBus);
     }
 }

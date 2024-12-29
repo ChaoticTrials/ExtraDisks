@@ -6,16 +6,16 @@ import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.loot.LootTableProvider;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
-import net.minecraftforge.common.data.ExistingFileHelper;
-import net.minecraftforge.data.event.GatherDataEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.common.data.ExistingFileHelper;
+import net.neoforged.neoforge.data.event.GatherDataEvent;
 
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.CompletableFuture;
 
-@Mod.EventBusSubscriber(modid = ExtraDisks.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
+@EventBusSubscriber(modid = ExtraDisks.MODID, bus = EventBusSubscriber.Bus.MOD)
 public class DataCreator {
 
     @SubscribeEvent
@@ -29,11 +29,11 @@ public class DataCreator {
         boolean server = event.includeServer();
         generator.addProvider(server, blockTagsProvider);
         generator.addProvider(server, new ModTags.ItemTags(output, lookupProvider, blockTagsProvider.contentsGetter(), helper));
-        generator.addProvider(server, new Recipes(output));
-        generator.addProvider(server, new AdvancementProvider(output, lookupProvider, helper));
+        generator.addProvider(server, new Recipes(output, lookupProvider));
+        generator.addProvider(server, new ExtraAdvancementProvider(output, lookupProvider, helper));
         generator.addProvider(server, new LootTableProvider(output, Set.of(), List.of(
                 new LootTableProvider.SubProviderEntry(ExtraLootTables::new, LootContextParamSets.BLOCK)
-        )));
+        ), lookupProvider));
 
         boolean client = event.includeClient();
         generator.addProvider(client, new ModItemModels(output, helper));
