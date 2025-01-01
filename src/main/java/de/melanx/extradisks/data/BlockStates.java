@@ -1,7 +1,7 @@
 package de.melanx.extradisks.data;
 
 import de.melanx.extradisks.ExtraDisks;
-import de.melanx.extradisks.items.Registration;
+import de.melanx.extradisks.Registration;
 import net.minecraft.data.PackOutput;
 import net.neoforged.neoforge.client.model.generators.BlockStateProvider;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;

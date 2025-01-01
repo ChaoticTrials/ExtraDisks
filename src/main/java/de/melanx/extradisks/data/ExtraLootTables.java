@@ -1,7 +1,7 @@
 package de.melanx.extradisks.data;
 
 import com.refinedmods.refinedstorage.common.storage.storageblock.StorageBlock;
-import de.melanx.extradisks.items.Registration;
+import de.melanx.extradisks.Registration;
 import de.melanx.extradisks.loottable.ExtraStorageBlockLootFunction;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.component.DataComponents;

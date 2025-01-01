@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "extradisks:block/infinite_item_storage_block"
+  }
+}

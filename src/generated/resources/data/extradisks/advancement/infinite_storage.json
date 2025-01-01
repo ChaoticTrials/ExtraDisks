@@ -5,9 +5,9 @@
         "items": [
           {
             "items": [
-              "extradisks:infinite_storage_disk",
+              "extradisks:infinite_item_storage_disk",
               "extradisks:infinite_fluid_storage_disk",
-              "extradisks:infinite_storage_block",
+              "extradisks:infinite_item_storage_block",
               "extradisks:infinite_fluid_storage_block"
             ]
           }
@@ -24,7 +24,7 @@
     "hidden": true,
     "icon": {
       "count": 1,
-      "id": "extradisks:infinite_storage_disk"
+      "id": "extradisks:infinite_item_storage_disk"
     },
     "title": {
       "translate": "advancements.extradisks.infinite_storage.title"

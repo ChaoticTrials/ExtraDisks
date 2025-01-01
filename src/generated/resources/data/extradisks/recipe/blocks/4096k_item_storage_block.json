@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": {
+      "item": "extradisks:advanced_machine_casing"
+    },
+    "P": {
+      "tag": "refinedstorage:parts/items/4096k"
+    },
+    "Q": {
+      "item": "refinedstorage:quartz_enriched_iron"
+    },
+    "R": {
+      "tag": "c:dusts/redstone"
+    }
+  },
+  "pattern": [
+    "QPQ",
+    "QCQ",
+    "QRQ"
+  ],
+  "result": {
+    "count": 1,
+    "id": "extradisks:4096k_item_storage_block"
+  }
+}

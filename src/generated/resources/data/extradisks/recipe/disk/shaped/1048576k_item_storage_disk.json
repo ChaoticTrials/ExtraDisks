@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "item": "refinedstorage:advanced_processor"
+    },
+    "E": {
+      "item": "refinedstorage:quartz_enriched_iron"
+    },
+    "G": {
+      "tag": "c:glass_blocks"
+    },
+    "I": {
+      "item": "refinedstorage:improved_processor"
+    },
+    "P": {
+      "tag": "refinedstorage:parts/items/1048576k"
+    }
+  },
+  "pattern": [
+    "GEG",
+    "EPE",
+    "IAI"
+  ],
+  "result": {
+    "count": 1,
+    "id": "extradisks:1048576k_item_storage_disk"
+  }
+}

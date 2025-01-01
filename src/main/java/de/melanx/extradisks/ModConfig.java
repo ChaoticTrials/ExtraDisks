@@ -40,10 +40,10 @@ public class ModConfig {
         builder.pop();
 
         builder.push("fluid").comment("fluid storage blocks energy usage");
-        fluid_tier5usage = builder.defineInRange("16384k", 12, 0, Integer.MAX_VALUE);
-        fluid_tier6usage = builder.defineInRange("65536k", 14, 0, Integer.MAX_VALUE);
-        fluid_tier7usage = builder.defineInRange("262144k", 16, 0, Integer.MAX_VALUE);
-        fluid_tier8usage = builder.defineInRange("1048576k", 18, 0, Integer.MAX_VALUE);
+        fluid_tier5usage = builder.defineInRange("16384b", 12, 0, Integer.MAX_VALUE);
+        fluid_tier6usage = builder.defineInRange("65536b", 14, 0, Integer.MAX_VALUE);
+        fluid_tier7usage = builder.defineInRange("262144b", 16, 0, Integer.MAX_VALUE);
+        fluid_tier8usage = builder.defineInRange("1048576b", 18, 0, Integer.MAX_VALUE);
         fluid_tier9usage = builder.defineInRange("infinite", 20, 0, Integer.MAX_VALUE);
         builder.pop();
     }

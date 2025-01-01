@@ -1,6 +1,5 @@
 package de.melanx.extradisks;
 
-import de.melanx.extradisks.items.Registration;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.common.Mod;

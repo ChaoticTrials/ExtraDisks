@@ -1,9 +1,9 @@
 package de.melanx.extradisks.data;
 
 import de.melanx.extradisks.ExtraDisks;
-import de.melanx.extradisks.items.Registration;
-import de.melanx.extradisks.items.fluid.ExtraFluidStorageVariant;
-import de.melanx.extradisks.items.item.ExtraItemStorageVariant;
+import de.melanx.extradisks.Registration;
+import de.melanx.extradisks.content.fluid.ExtraFluidStorageVariant;
+import de.melanx.extradisks.content.item.ExtraItemStorageVariant;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementHolder;
 import net.minecraft.advancements.AdvancementType;

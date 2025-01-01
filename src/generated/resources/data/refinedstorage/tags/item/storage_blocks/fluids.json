@@ -1,9 +1,9 @@
 {
   "values": [
-    "#refinedstorage:storage_blocks/fluids/16384k",
-    "#refinedstorage:storage_blocks/fluids/65536k",
-    "#refinedstorage:storage_blocks/fluids/262144k",
-    "#refinedstorage:storage_blocks/fluids/1048576k",
+    "#refinedstorage:storage_blocks/fluids/16384b",
+    "#refinedstorage:storage_blocks/fluids/65536b",
+    "#refinedstorage:storage_blocks/fluids/262144b",
+    "#refinedstorage:storage_blocks/fluids/1048576b",
     "#refinedstorage:storage_blocks/fluids/infinite"
   ]
 }

@@ -1,7 +1,7 @@
 package de.melanx.extradisks.data;
 
 import de.melanx.extradisks.ExtraDisks;
-import de.melanx.extradisks.items.Registration;
+import de.melanx.extradisks.Registration;
 import net.minecraft.data.PackOutput;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;

@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "extradisks:block/4096k_item_storage_block"
+    }
+  }
+}
