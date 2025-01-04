@@ -1,5 +1,6 @@
 package de.melanx.extradisks.data;
 
+import com.refinedmods.refinedstorage.common.content.Tags;
 import de.melanx.extradisks.ExtraDisks;
 import de.melanx.extradisks.Registration;
 import de.melanx.extradisks.content.chemical.ExtraChemicalStorageVariant;
@@ -77,6 +78,7 @@ public class ModTags {
         public static final Map<ExtraChemicalStorageVariant, TagKey<Item>> DISKS_CHEMICAL = new HashMap<>();
 
         public static final TagKey<Item> OSMIUM_INGOTS = net.minecraft.tags.ItemTags.create(ResourceLocation.fromNamespaceAndPath("c", "ingots/osmium"));
+        public static final TagKey<Item> CHEMICAL_STORAGE_DISKS = net.minecraft.tags.ItemTags.create(ResourceLocation.fromNamespaceAndPath("refinedstorage_mekanism_integration", "chemical_storage_disks"));
 
         static {
             for (ExtraItemStorageVariant variant : ExtraItemStorageVariant.values()) {
@@ -184,6 +186,10 @@ public class ModTags {
             this.tag(Items.PARTS).addTags(Items.ITEM_PARTS, Items.FLUID_PARTS, Items.CHEMICAL_PARTS);
             //noinspection unchecked
             this.tag(Items.DISKS).addTags(Items.ITEM_DISKS, Items.FLUID_DISKS, Items.CHEMICAL_DISKS);
+
+            this.tag(Tags.STORAGE_DISKS).addTag(Items.ITEM_DISKS);
+            this.tag(Tags.FLUID_STORAGE_DISKS).addTag(Items.FLUID_DISKS);
+            this.tag(Items.CHEMICAL_STORAGE_DISKS).addOptionalTag(Items.CHEMICAL_DISKS);
 
             // blocks
             this.copy(Blocks.ITEM_STORAGE_BLOCKS, Items.ITEM_STORAGE_BLOCKS);
