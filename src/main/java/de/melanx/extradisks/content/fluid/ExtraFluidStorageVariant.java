@@ -15,20 +15,25 @@ public enum ExtraFluidStorageVariant implements StringRepresentable, StorageVari
     TIER_9_FLUID(null);
 
     private final String name;
-    private final Long capacity;
+    private final Long capacityInBuckets;
 
-    ExtraFluidStorageVariant(Long capacity) {
-        if (capacity == null) {
+    ExtraFluidStorageVariant(Long capacityInBuckets) {
+        if (capacityInBuckets == null) {
             this.name = "infinite";
-            this.capacity = null;
+            this.capacityInBuckets = null;
         } else {
-            this.name = capacity + "b";
-            this.capacity = capacity * 1024;
+            this.name = capacityInBuckets + "b";
+            this.capacityInBuckets = capacityInBuckets;
         }
     }
 
+    public Long getCapacityInBuckets() {
+        return this.capacityInBuckets;
+    }
+
+    @Override
     public Long getCapacity() {
-        return this.capacity;
+        return this.capacityInBuckets == null ? null : this.capacityInBuckets * 1000;
     }
 
     @Nonnull
@@ -38,7 +43,7 @@ public enum ExtraFluidStorageVariant implements StringRepresentable, StorageVari
     }
 
     public boolean hasCapacity() {
-        return this.capacity != null;
+        return this.capacityInBuckets != null;
     }
 
     public String getName() {

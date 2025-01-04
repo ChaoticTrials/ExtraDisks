@@ -32,6 +32,7 @@ public enum ExtraItemStorageVariant implements StringRepresentable, StorageVaria
     }
 
     @Nullable
+    @Override
     public Long getCapacity() {
         return this.capacity;
     }
