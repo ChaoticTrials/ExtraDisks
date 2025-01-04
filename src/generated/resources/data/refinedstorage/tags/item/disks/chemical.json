@@ -1,0 +1,24 @@
+{
+  "values": [
+    {
+      "id": "#refinedstorage:disks/chemical/65536b",
+      "required": false
+    },
+    {
+      "id": "#refinedstorage:disks/chemical/262144b",
+      "required": false
+    },
+    {
+      "id": "#refinedstorage:disks/chemical/1048576b",
+      "required": false
+    },
+    {
+      "id": "#refinedstorage:disks/chemical/8388608b",
+      "required": false
+    },
+    {
+      "id": "#refinedstorage:disks/chemical/infinite",
+      "required": false
+    }
+  ]
+}

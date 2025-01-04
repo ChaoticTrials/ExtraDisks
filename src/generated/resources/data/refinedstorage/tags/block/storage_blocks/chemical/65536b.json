@@ -1,0 +1,8 @@
+{
+  "values": [
+    {
+      "id": "extradisks:65536b_chemical_storage_block",
+      "required": false
+    }
+  ]
+}

@@ -1,6 +1,10 @@
 {
   "values": [
     "#refinedstorage:storage_blocks/items",
-    "#refinedstorage:storage_blocks/fluids"
+    "#refinedstorage:storage_blocks/fluids",
+    {
+      "id": "#refinedstorage:storage_blocks/chemical",
+      "required": false
+    }
   ]
 }

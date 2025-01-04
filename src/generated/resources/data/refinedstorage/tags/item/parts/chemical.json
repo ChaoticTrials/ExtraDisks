@@ -1,0 +1,24 @@
+{
+  "values": [
+    {
+      "id": "#refinedstorage:parts/chemical/65536b",
+      "required": false
+    },
+    {
+      "id": "#refinedstorage:parts/chemical/262144b",
+      "required": false
+    },
+    {
+      "id": "#refinedstorage:parts/chemical/1048576b",
+      "required": false
+    },
+    {
+      "id": "#refinedstorage:parts/chemical/8388608b",
+      "required": false
+    },
+    {
+      "id": "#refinedstorage:parts/chemical/infinite",
+      "required": false
+    }
+  ]
+}

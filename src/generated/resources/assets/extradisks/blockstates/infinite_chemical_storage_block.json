@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "extradisks:block/infinite_chemical_storage_block"
+    }
+  }
+}

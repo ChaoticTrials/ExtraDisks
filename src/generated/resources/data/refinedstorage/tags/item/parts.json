@@ -1,6 +1,7 @@
 {
   "values": [
     "#refinedstorage:parts/items",
-    "#refinedstorage:parts/fluids"
+    "#refinedstorage:parts/fluids",
+    "#refinedstorage:parts/chemical"
   ]
 }

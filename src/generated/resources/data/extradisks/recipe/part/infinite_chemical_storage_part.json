@@ -1,0 +1,37 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "mekanism"
+    },
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "refinedstorage_mekanism_integration"
+    }
+  ],
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "item": "mekanism:alloy_atomic"
+    },
+    "D": {
+      "item": "extradisks:withering_processor"
+    },
+    "O": {
+      "tag": "c:ingots/osmium"
+    },
+    "P": {
+      "tag": "refinedstorage:parts/chemical/8388608b"
+    }
+  },
+  "pattern": [
+    "DOD",
+    "PAP",
+    "DPD"
+  ],
+  "result": {
+    "count": 1,
+    "id": "extradisks:infinite_chemical_storage_part"
+  }
+}

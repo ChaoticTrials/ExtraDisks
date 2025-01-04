@@ -51,6 +51,25 @@
   "block.extradisks.1048576b_fluid_storage_block": "1048kB Flüssigspeicherblock",
   "block.extradisks.infinite_fluid_storage_block": "Unendlicher Flüssigspeicherblock",
 
+  "_comment": "Chemical",
+  "item.extradisks.65536b_chemical_storage_part": "65536B Chemischer Speicherkern",
+  "item.extradisks.262144b_chemical_storage_part": "262kB Chemischer Speicherkern",
+  "item.extradisks.1048576b_chemical_storage_part": "1048kB Chemischer Speicherkern",
+  "item.extradisks.8388608b_chemical_storage_part": "8388kB Chemischer Speicherkern",
+  "item.extradisks.infinite_chemical_storage_part": "Unendlicher Chemischer Speicherkern",
+
+  "item.extradisks.65536b_chemical_storage_disk": "65536B Chemische Speicherzelle",
+  "item.extradisks.262144b_chemical_storage_disk": "262kB Chemische Speicherzelle",
+  "item.extradisks.1048576b_chemical_storage_disk": "1048kB Chemische Speicherzelle",
+  "item.extradisks.8388608b_chemical_storage_disk": "8388kB Chemische Speicherzelle",
+  "item.extradisks.infinite_chemical_storage_disk": "Unendliche Chemische Speicherzelle",
+
+  "block.extradisks.65536b_chemical_storage_block": "65536B Chemischer Speicherblock",
+  "block.extradisks.262144b_chemical_storage_block": "262kB Chemischer Speicherblock",
+  "block.extradisks.1048576b_chemical_storage_block": "1048kB Chemischer Speicherblock",
+  "block.extradisks.8388608b_chemical_storage_block": "8388kB Chemischer Speicherblock",
+  "block.extradisks.infinite_chemical_storage_block": "Unendlicher Chemischer Speicherblock",
+
   "advancements.extradisks.infinite_storage.title": "Unendlich Speicher",
   "advancements.extradisks.infinite_storage.description": "Unendlicher Speicherplatz ist unendlich nützlich"
 }

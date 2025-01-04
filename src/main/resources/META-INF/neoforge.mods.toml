@@ -34,3 +34,17 @@ Extra Disks adds bigger disks to Refined Storage
    versionRange="[2.0.0-milestone.4.11,)"
    ordering="NONE"
    side="BOTH"
+
+[[dependencies.${ modid }]]
+   modId="mekanism"
+   type="optional"
+   versionRange="[10.6,11-)"
+   ordering="NONE"
+   side="BOTH"
+
+[[dependencies.${ modid }]]
+   modId="refinedstorage_mekanism_integration"
+   type="optional"
+   versionRange="[0.1.0,)"
+   ordering="NONE"
+   side="BOTH"

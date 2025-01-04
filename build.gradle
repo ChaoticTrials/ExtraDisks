@@ -30,11 +30,25 @@ repositories {
     maven {
         name = 'ModMaven'
         url = 'https://modmaven.dev/'
+        content {
+            includeGroup("mekanism")
+            includeGroup("mezz.jei")
+        }
+    }
+    maven {
+        name = "EMI"
+        url = uri("https://maven.terraformersmc.com/")
     }
 }
 
 dependencies {
     implementation 'com.refinedmods.refinedstorage:refinedstorage-neoforge:2.0.0-milestone.4.11'
+
+    implementation 'com.refinedmods.refinedstorage:refinedstorage-mekanism-integration:0.1.0'
+
+//    compileOnlyApi("mekanism:Mekanism:1.21.1-10.7.7.64:api")
+
+    implementation("mekanism:Mekanism:1.21.1-10.7.7.64:all")
     runtimeOnly "mezz.jei:jei-1.21.1-neoforge:19.21.0.247"
 }
 

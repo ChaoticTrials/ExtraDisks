@@ -4,10 +4,13 @@ import com.refinedmods.refinedstorage.common.content.Blocks;
 import com.refinedmods.refinedstorage.common.content.Items;
 import com.refinedmods.refinedstorage.common.misc.ProcessorItem;
 import com.refinedmods.refinedstorage.common.storage.ItemStorageVariant;
+import com.refinedmods.refinedstorage.mekanism.storage.ChemicalStorageVariant;
 import de.melanx.extradisks.ExtraDisks;
 import de.melanx.extradisks.Registration;
+import de.melanx.extradisks.content.chemical.ExtraChemicalStorageVariant;
 import de.melanx.extradisks.content.fluid.ExtraFluidStorageVariant;
 import de.melanx.extradisks.content.item.ExtraItemStorageVariant;
+import mekanism.common.registries.MekanismItems;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
@@ -18,6 +21,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
 import net.neoforged.neoforge.common.Tags;
+import net.neoforged.neoforge.common.conditions.ModLoadedCondition;
 
 import javax.annotation.Nonnull;
 import java.util.concurrent.CompletableFuture;
@@ -30,6 +34,8 @@ public class Recipes extends RecipeProvider {
 
     @Override
     protected void buildRecipes(@Nonnull RecipeOutput recipeOutput, @Nonnull HolderLookup.Provider holderLookup) {
+        RecipeOutput mekanismRecipeOutput = recipeOutput.withConditions(new ModLoadedCondition("mekanism"), new ModLoadedCondition("refinedstorage_mekanism_integration"));
+
         for (ExtraItemStorageVariant variant : ExtraItemStorageVariant.values()) {
             this.registerDiskRecipes(Registration.ITEM_STORAGE_DISK.get(variant).get(), ModTags.Items.PARTS_ITEM.get(variant), recipeOutput);
             this.registerStorageBlockRecipe(ModTags.Items.PARTS_ITEM.get(variant), Registration.ITEM_STORAGE_BLOCK.get(variant).get(), recipeOutput);
@@ -38,6 +44,11 @@ public class Recipes extends RecipeProvider {
         for (ExtraFluidStorageVariant variant : ExtraFluidStorageVariant.values()) {
             this.registerDiskRecipes(Registration.FLUID_STORAGE_DISK.get(variant).get(), ModTags.Items.PARTS_FLUID.get(variant), recipeOutput);
             this.registerStorageBlockRecipe(ModTags.Items.PARTS_FLUID.get(variant), Registration.FLUID_STORAGE_BLOCK.get(variant).get(), recipeOutput);
+        }
+
+        for (ExtraChemicalStorageVariant variant : ExtraChemicalStorageVariant.values()) {
+            this.registerMekanismDiskRecipes(Registration.CHEMICAL_STORAGE_DISK.get(variant).get(), ModTags.Items.PARTS_CHEMICAL.get(variant), mekanismRecipeOutput);
+            this.registerMekanismStorageBlockRecipe(ModTags.Items.PARTS_CHEMICAL.get(variant), Registration.CHEMICAL_STORAGE_BLOCK.get(variant).get(), mekanismRecipeOutput);
         }
 
         this.registerPartRecipe(Registration.ITEM_STORAGE_PART.get(ExtraItemStorageVariant.TIER_5).get(), Items.INSTANCE.getItemStoragePart(ItemStorageVariant.SIXTY_FOUR_K), recipeOutput);
@@ -54,6 +65,12 @@ public class Recipes extends RecipeProvider {
         this.registerPartRecipe(Registration.FLUID_STORAGE_PART.get(ExtraFluidStorageVariant.TIER_7_FLUID).get(), ModTags.Items.PARTS_FLUID.get(ExtraFluidStorageVariant.TIER_6_FLUID), recipeOutput);
         this.registerAdvancedPartRecipe(Registration.FLUID_STORAGE_PART.get(ExtraFluidStorageVariant.TIER_8_FLUID).get(), ModTags.Items.PARTS_FLUID.get(ExtraFluidStorageVariant.TIER_7_FLUID), recipeOutput);
         this.registerAdvancedPartRecipe(Registration.FLUID_STORAGE_PART.get(ExtraFluidStorageVariant.TIER_9_FLUID).get(), ModTags.Items.PARTS_FLUID.get(ExtraFluidStorageVariant.TIER_8_FLUID), recipeOutput);
+
+        this.registerMekanismPartRecipe(Registration.CHEMICAL_STORAGE_PART.get(ExtraChemicalStorageVariant.TIER_5_CHEMICAL).get(), com.refinedmods.refinedstorage.mekanism.content.Items.getChemicalStoragePart(ChemicalStorageVariant.EIGHT_THOUSAND_NINETY_TWO_B), mekanismRecipeOutput);
+        this.registerMekanismPartRecipe(Registration.CHEMICAL_STORAGE_PART.get(ExtraChemicalStorageVariant.TIER_6_CHEMICAL).get(), ModTags.Items.PARTS_CHEMICAL.get(ExtraChemicalStorageVariant.TIER_5_CHEMICAL), mekanismRecipeOutput);
+        this.registerMekanismPartRecipe(Registration.CHEMICAL_STORAGE_PART.get(ExtraChemicalStorageVariant.TIER_7_CHEMICAL).get(), ModTags.Items.PARTS_CHEMICAL.get(ExtraChemicalStorageVariant.TIER_6_CHEMICAL), mekanismRecipeOutput);
+        this.registerMekanismAdvancedPartRecipe(Registration.CHEMICAL_STORAGE_PART.get(ExtraChemicalStorageVariant.TIER_8_CHEMICAL).get(), ModTags.Items.PARTS_CHEMICAL.get(ExtraChemicalStorageVariant.TIER_7_CHEMICAL), mekanismRecipeOutput);
+        this.registerMekanismAdvancedPartRecipe(Registration.CHEMICAL_STORAGE_PART.get(ExtraChemicalStorageVariant.TIER_9_CHEMICAL).get(), ModTags.Items.PARTS_CHEMICAL.get(ExtraChemicalStorageVariant.TIER_8_CHEMICAL), mekanismRecipeOutput);
 
         this.registerProcessorRecipe(Registration.WITHERING_PROCESSOR.get(), Registration.RAW_WITHERING_PROCESSOR.get(), Ingredient.of(Tags.Items.NETHER_STARS), recipeOutput);
 
@@ -163,6 +180,81 @@ public class Recipes extends RecipeProvider {
                 .pattern("QCQ")
                 .pattern("QRQ")
                 .define('Q', Items.INSTANCE.getQuartzEnrichedIron())
+                .define('P', part)
+                .define('C', Registration.ADVANCED_MACHINE_CASING.get())
+                .define('R', Tags.Items.DUSTS_REDSTONE)
+                .unlockedBy("has_part", has(part))
+                .save(recipeOutput, ResourceLocation.fromNamespaceAndPath(ExtraDisks.MODID, "blocks/" + BuiltInRegistries.ITEM.getKey(block.asItem()).getPath()));
+    }
+
+    private void registerMekanismPartRecipe(Item result, Item prevPart, RecipeOutput recipeOutput) {
+        //noinspection ConstantConditions
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, result)
+                .pattern("DOD")
+                .pattern("PAP")
+                .pattern("DPD")
+                .define('D', Items.INSTANCE.getProcessor(ProcessorItem.Type.ADVANCED))
+                .define('O', ModTags.Items.OSMIUM_INGOTS)
+                .define('P', prevPart)
+                .define('A', MekanismItems.ATOMIC_ALLOY)
+                .unlockedBy("has_prev_part", has(prevPart))
+                .save(recipeOutput, ResourceLocation.fromNamespaceAndPath(ExtraDisks.MODID, "part/" + BuiltInRegistries.ITEM.getKey(result).getPath()));
+    }
+
+    private void registerMekanismPartRecipe(Item result, TagKey<Item> prevPart, RecipeOutput recipeOutput) {
+        //noinspection ConstantConditions
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, result)
+                .pattern("DOD")
+                .pattern("PAP")
+                .pattern("DPD")
+                .define('D', Items.INSTANCE.getProcessor(ProcessorItem.Type.ADVANCED))
+                .define('O', ModTags.Items.OSMIUM_INGOTS)
+                .define('P', prevPart)
+                .define('A', MekanismItems.ATOMIC_ALLOY)
+                .unlockedBy("has_prev_part", has(prevPart))
+                .save(recipeOutput, ResourceLocation.fromNamespaceAndPath(ExtraDisks.MODID, "part/" + BuiltInRegistries.ITEM.getKey(result).getPath()));
+    }
+
+    private void registerMekanismAdvancedPartRecipe(Item result, TagKey<Item> prevPart, RecipeOutput recipeOutput) {
+        //noinspection ConstantConditions
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, result)
+                .pattern("DOD")
+                .pattern("PAP")
+                .pattern("DPD")
+                .define('D', Registration.WITHERING_PROCESSOR.get())
+                .define('O', ModTags.Items.OSMIUM_INGOTS)
+                .define('P', prevPart)
+                .define('A', MekanismItems.ATOMIC_ALLOY)
+                .unlockedBy("has_prev_part", has(prevPart))
+                .save(recipeOutput, ResourceLocation.fromNamespaceAndPath(ExtraDisks.MODID, "part/" + BuiltInRegistries.ITEM.getKey(result).getPath()));
+    }
+
+    private void registerMekanismDiskRecipes(Item result, TagKey<Item> part, RecipeOutput recipeOutput) {
+        //noinspection ConstantConditions
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, result)
+                .pattern("GRG")
+                .pattern("RPR")
+                .pattern("OOO")
+                .define('G', Tags.Items.GLASS_BLOCKS)
+                .define('R', Items.INSTANCE.getQuartzEnrichedIron())
+                .define('P', part)
+                .define('O', ModTags.Items.OSMIUM_INGOTS)
+                .unlockedBy("has_part", has(part))
+                .save(recipeOutput, ResourceLocation.fromNamespaceAndPath(ExtraDisks.MODID, "disk/shaped/" + BuiltInRegistries.ITEM.getKey(result).getPath()));
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, result)
+                .requires(Registration.ADVANCED_STORAGE_HOUSING.get())
+                .requires(part)
+                .unlockedBy("has_part", has(part))
+                .save(recipeOutput, ResourceLocation.fromNamespaceAndPath(ExtraDisks.MODID, "disk/shapeless/" + BuiltInRegistries.ITEM.getKey(result).getPath()));
+    }
+
+    private void registerMekanismStorageBlockRecipe(TagKey<Item> part, ItemLike block, RecipeOutput recipeOutput) {
+        //noinspection ConstantConditions
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, block)
+                .pattern("OPO")
+                .pattern("OCO")
+                .pattern("ORO")
+                .define('O', ModTags.Items.OSMIUM_INGOTS)
                 .define('P', part)
                 .define('C', Registration.ADVANCED_MACHINE_CASING.get())
                 .define('R', Tags.Items.DUSTS_REDSTONE)

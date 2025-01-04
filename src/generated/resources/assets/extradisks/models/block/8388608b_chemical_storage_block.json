@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "extradisks:block/8388608b_chemical_storage_block"
+  }
+}

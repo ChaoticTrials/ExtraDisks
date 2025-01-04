@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/handheld",
+  "textures": {
+    "layer0": "extradisks:item/1048576b_chemical_storage_disk"
+  }
+}

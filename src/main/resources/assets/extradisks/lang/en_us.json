@@ -51,6 +51,25 @@
   "block.extradisks.1048576b_fluid_storage_block": "1048kB Fluid Storage Block",
   "block.extradisks.infinite_fluid_storage_block": "Infinite Fluid Storage Block",
 
+  "_comment": "Chemical",
+  "item.extradisks.65536b_chemical_storage_part": "65536B Chemical Storage Part",
+  "item.extradisks.262144b_chemical_storage_part": "262kB Chemical Storage Part",
+  "item.extradisks.1048576b_chemical_storage_part": "1048kB Chemical Storage Part",
+  "item.extradisks.8388608b_chemical_storage_part": "8388kB Chemical Storage Part",
+  "item.extradisks.infinite_chemical_storage_part": "Infinite Chemical Storage Part",
+
+  "item.extradisks.65536b_chemical_storage_disk": "65536B Chemical Storage Disk",
+  "item.extradisks.262144b_chemical_storage_disk": "262kB Chemical Storage Disk",
+  "item.extradisks.1048576b_chemical_storage_disk": "1048kB Chemical Storage Disk",
+  "item.extradisks.8388608b_chemical_storage_disk": "8388kB Chemical Storage Disk",
+  "item.extradisks.infinite_chemical_storage_disk": "Infinite Chemical Storage Disk",
+
+  "block.extradisks.65536b_chemical_storage_block": "65536B Chemical Storage Block",
+  "block.extradisks.262144b_chemical_storage_block": "262kB Chemical Storage Block",
+  "block.extradisks.1048576b_chemical_storage_block": "1048kB Chemical Storage Block",
+  "block.extradisks.8388608b_chemical_storage_block": "8388kB Chemical Storage Block",
+  "block.extradisks.infinite_chemical_storage_block": "Infinite Chemical Storage Block",
+
   "advancements.extradisks.infinite_storage.title": "Infinite storage",
   "advancements.extradisks.infinite_storage.description": "Having infinite storage is infinitely useful"
 }

@@ -4,6 +4,11 @@ import com.refinedmods.refinedstorage.common.api.RefinedStorageApi;
 import com.refinedmods.refinedstorage.common.api.support.network.AbstractNetworkNodeContainerBlockEntity;
 import com.refinedmods.refinedstorage.common.content.*;
 import com.refinedmods.refinedstorage.common.storage.storageblock.StorageBlock;
+import com.refinedmods.refinedstorage.mekanism.ChemicalResourceFactory;
+import de.melanx.extradisks.content.chemical.ExtraChemicalStorageBlockItem;
+import de.melanx.extradisks.content.chemical.ExtraChemicalStorageBlockProvider;
+import de.melanx.extradisks.content.chemical.ExtraChemicalStorageDiskItem;
+import de.melanx.extradisks.content.chemical.ExtraChemicalStorageVariant;
 import de.melanx.extradisks.content.fluid.ExtraFluidStorageBlockItem;
 import de.melanx.extradisks.content.fluid.ExtraFluidStorageBlockProvider;
 import de.melanx.extradisks.content.fluid.ExtraFluidStorageDiskItem;
@@ -28,6 +33,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.neoforged.bus.api.IEventBus;
+import net.neoforged.fml.ModList;
 import net.neoforged.neoforge.common.extensions.IMenuTypeExtension;
 import net.neoforged.neoforge.registries.*;
 
@@ -54,11 +60,19 @@ public class Registration {
     public static final Map<ExtraFluidStorageVariant, DeferredHolder<BlockEntityType<?>, BlockEntityType<AbstractNetworkNodeContainerBlockEntity<?>>>> FLUID_STORAGE_TILE = new HashMap<>();
     public static final Map<ExtraFluidStorageVariant, DeferredHolder<MenuType<?>, MenuType<AbstractContainerMenu>>> FLUID_STORAGE_CONTAINER = new HashMap<>();
 
+    // chemical storage blocks
+    public static final Map<ExtraChemicalStorageVariant, DeferredBlock<Block>> CHEMICAL_STORAGE_BLOCK = new HashMap<>();
+    public static final Map<ExtraChemicalStorageVariant, DeferredItem<Item>> CHEMICAL_STORAGE = new HashMap<>();
+    public static final Map<ExtraChemicalStorageVariant, DeferredHolder<BlockEntityType<?>, BlockEntityType<AbstractNetworkNodeContainerBlockEntity<?>>>> CHEMICAL_STORAGE_TILE = new HashMap<>();
+    public static final Map<ExtraChemicalStorageVariant, DeferredHolder<MenuType<?>, MenuType<AbstractContainerMenu>>> CHEMICAL_STORAGE_CONTAINER = new HashMap<>();
+
     // item storage disks/parts
     public static final Map<ExtraItemStorageVariant, DeferredItem<Item>> ITEM_STORAGE_PART = new HashMap<>();
     public static final Map<ExtraFluidStorageVariant, DeferredItem<Item>> FLUID_STORAGE_PART = new HashMap<>();
+    public static final Map<ExtraChemicalStorageVariant, DeferredItem<Item>> CHEMICAL_STORAGE_PART = new HashMap<>();
     public static final Map<ExtraItemStorageVariant, DeferredItem<ExtraItemStorageDiskItem>> ITEM_STORAGE_DISK = new HashMap<>();
     public static final Map<ExtraFluidStorageVariant, DeferredItem<ExtraFluidStorageDiskItem>> FLUID_STORAGE_DISK = new HashMap<>();
+    public static final Map<ExtraChemicalStorageVariant, DeferredItem<ExtraChemicalStorageDiskItem>> CHEMICAL_STORAGE_DISK = new HashMap<>();
 
     public static final DeferredBlock<Block> ADVANCED_MACHINE_CASING_BLOCK = BLOCKS.registerSimpleBlock("advanced_machine_casing", BlockConstants.PROPERTIES);
     public static final DeferredItem<BlockItem> ADVANCED_MACHINE_CASING = ITEMS.registerSimpleBlockItem("advanced_machine_casing", ADVANCED_MACHINE_CASING_BLOCK, ITEM_PROPS);
@@ -103,6 +117,22 @@ public class Registration {
                         for (ExtraFluidStorageVariant variant : ExtraFluidStorageVariant.values()) {
                             DeferredItem<Item> item = FLUID_STORAGE_PART.get(variant);
                             output.accept(item.get());
+                        }
+
+                        if (ModList.get().isLoaded("mekanism") && ModList.get().isLoaded("refinedstorage_mekanism_integration")) {
+                            // chemical storage
+                            for (ExtraChemicalStorageVariant variant : ExtraChemicalStorageVariant.values()) {
+                                DeferredItem<ExtraChemicalStorageDiskItem> item = CHEMICAL_STORAGE_DISK.get(variant);
+                                output.accept(item.get());
+                            }
+                            for (ExtraChemicalStorageVariant variant : ExtraChemicalStorageVariant.values()) {
+                                DeferredItem<Item> item = CHEMICAL_STORAGE.get(variant);
+                                output.accept(item.get());
+                            }
+                            for (ExtraChemicalStorageVariant variant : ExtraChemicalStorageVariant.values()) {
+                                DeferredItem<Item> item = CHEMICAL_STORAGE_PART.get(variant);
+                                output.accept(item.get());
+                            }
                         }
                     })
                     .build());
@@ -152,6 +182,19 @@ public class Registration {
 
             FLUID_STORAGE_PART.put(variant, ITEMS.register(variant.getName() + "_fluid_storage_part", () -> new Item(new Item.Properties())));
             FLUID_STORAGE_DISK.put(variant, ITEMS.register(variant.getName() + "_fluid_storage_disk", () -> new ExtraFluidStorageDiskItem(variant)));
+        }
+
+        if (ModList.get().isLoaded("mekanism") && ModList.get().isLoaded("refinedstorage_mekanism_integration")) {
+            for (ExtraChemicalStorageVariant variant : ExtraChemicalStorageVariant.values()) {
+                String name = variant.getName() + "_chemical_storage_block";
+                CHEMICAL_STORAGE_BLOCK.put(variant, BLOCKS.register(name, () -> new StorageBlock<>(BlockConstants.PROPERTIES, new ExtraChemicalStorageBlockProvider(variant))));
+                CHEMICAL_STORAGE.put(variant, ITEMS.register(name, () -> new ExtraChemicalStorageBlockItem(CHEMICAL_STORAGE_BLOCK.get(variant).get(), variant)));
+                CHEMICAL_STORAGE_TILE.put(variant, TILES.register(name, () -> blockEntityTypeFactory.create((pos, state) -> RefinedStorageApi.INSTANCE.createStorageBlockEntity(pos, state, new ExtraChemicalStorageBlockProvider(variant)), CHEMICAL_STORAGE_BLOCK.get(variant).get())));
+                CHEMICAL_STORAGE_CONTAINER.put(variant, CONTAINERS.register(name, () -> extendedMenuTypeFactory.create((syncId, playerInventory, data) -> RefinedStorageApi.INSTANCE.createStorageBlockContainerMenu(syncId, playerInventory.player, data, ChemicalResourceFactory.INSTANCE, com.refinedmods.refinedstorage.mekanism.content.Menus.getChemicalStorage()), RefinedStorageApi.INSTANCE.getStorageBlockDataStreamCodec())));
+
+                CHEMICAL_STORAGE_PART.put(variant, ITEMS.register(variant.getName() + "_chemical_storage_part", () -> new Item(new Item.Properties())));
+                CHEMICAL_STORAGE_DISK.put(variant, ITEMS.register(variant.getName() + "_chemical_storage_disk", () -> new ExtraChemicalStorageDiskItem(variant)));
+            }
         }
 
         BLOCKS.register(modBus);
