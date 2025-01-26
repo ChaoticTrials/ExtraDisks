@@ -1,0 +1,6 @@
+{
+  "parent": "refinedstorage:block/disk/disk",
+  "textures": {
+    "base": "extradisks:block/disk/item_disk"
+  }
+}

@@ -38,6 +38,6 @@ public class DataCreator {
         boolean client = event.includeClient();
         generator.addProvider(client, new ModItemModels(output, helper));
         generator.addProvider(client, new BlockStates(output, helper));
+        generator.addProvider(client, new BlockModels(output, helper));
     }
-
 }
