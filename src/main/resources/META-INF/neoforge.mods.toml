@@ -6,7 +6,7 @@ issueTrackerURL = "${mod.issue_url}"
 [[mods]]
 modId = "${mod.modid}"
 version = "${mod.version}"
-displayName="Extra Disks"
+displayName = "Extra Disks"
 displayURL = "${mod.source_url}"
 updateJSONURL = "https://assets.melanx.de/updates/extra-disks.json"
 authors = "MelanX"

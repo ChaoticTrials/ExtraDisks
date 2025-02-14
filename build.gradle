@@ -69,7 +69,7 @@ mod.configure {
 
     upload {
         all {
-            type 'release'
+            type 'alpha'
             require 'refined-storage'
 //            optional 'refinedstorage_mekanism_integration' todo add when released
         }
