@@ -7,6 +7,7 @@ body:
     attributes:
       label: Minecraft version
       options:
+        - 1.20.x
         - 1.21.x
     validations:
       required: true
@@ -14,14 +15,21 @@ body:
     id: mod-version
     attributes:
       label: Extra Disks version
-      placeholder: eg. 1.21-1.0.0
+      placeholder: eg. 1.21.1-4.0.0
+    validations:
+      required: true
+  - type: input
+    id: rs-version
+    attributes:
+      label: Refined Storage 2 version
+      placeholder: eg. v2.0.0-milestone.4.13
     validations:
       required: true
   - type: input
     id: forge-version
     attributes:
       label: NeoForge version
-      placeholder: eg. 21.0.0-beta
+      placeholder: eg. 21.1.0
     validations:
       required: true
   - type: input

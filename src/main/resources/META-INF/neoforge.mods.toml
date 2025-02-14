@@ -1,50 +1,50 @@
-modLoader="javafml"
-loaderVersion="${loader_version_range}"
-license="${license}"
-issueTrackerURL="https://github.com/ChaoticTrials/ExtraDisks/issues"
+modLoader = "javafml"
+loaderVersion = "[4,)"
+license = "${mod.license}"
+issueTrackerURL = "${mod.issue_url}"
 
 [[mods]]
-modId="${modid}"
-version="${mod_version}"
+modId = "${mod.modid}"
+version = "${mod.version}"
 displayName="Extra Disks"
+displayURL = "${mod.source_url}"
 updateJSONURL = "https://assets.melanx.de/updates/extra-disks.json"
-displayURL="https://modrinth.com/user/MelanX"
-authors="MelanX"
-description="""
+authors = "MelanX"
+description = """
 Extra Disks adds bigger disks to Refined Storage
 """
 
-[[dependencies.${modid}]]
-   modId="neoforge"
-   type="required"
-   versionRange="[${neo_version},)"
-   ordering="NONE"
-   side="BOTH"
+[[dependencies.${ mod.modid }]]
+   modId = "neoforge"
+   type = "required"
+   versionRange = "[${mod.neoforge},)"
+   ordering = "NONE"
+   side = "BOTH"
 
-[[dependencies.${modid}]]
-   modId="minecraft"
-   type="required"
-   versionRange="[${minecraft_version},)"
-   ordering="NONE"
-   side="BOTH"
+[[dependencies.${ mod.modid }]]
+   modId = "minecraft"
+   type = "required"
+   versionRange = "[${mod.minecraft},)"
+   ordering = "NONE"
+   side = "BOTH"
 
-[[dependencies.${ modid }]]
-   modId="refinedstorage"
-   type="required"
-   versionRange="[2.0.0-milestone.4.11,)"
-   ordering="NONE"
-   side="BOTH"
+[[dependencies.${ mod.modid }]]
+   modId = "refinedstorage"
+   type = "required"
+   versionRange = "[2.0.0-milestone.4.11,)"
+   ordering = "NONE"
+   side = "BOTH"
 
-[[dependencies.${ modid }]]
-   modId="mekanism"
-   type="optional"
-   versionRange="[10.6,11-)"
-   ordering="NONE"
-   side="BOTH"
+[[dependencies.${ mod.modid }]]
+   modId = "mekanism"
+   type = "optional"
+   versionRange = "[10.6,11-)"
+   ordering = "NONE"
+   side = "BOTH"
 
-[[dependencies.${ modid }]]
-   modId="refinedstorage_mekanism_integration"
-   type="optional"
-   versionRange="[0.1.0,)"
-   ordering="NONE"
-   side="BOTH"
+[[dependencies.${ mod.modid }]]
+   modId = "refinedstorage_mekanism_integration"
+   type = "optional"
+   versionRange = "[0.1.0,)"
+   ordering = "NONE"
+   side = "BOTH"
