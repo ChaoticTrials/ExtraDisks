@@ -3,6 +3,7 @@ package de.melanx.extradisks.data;
 import com.refinedmods.refinedstorage.common.content.Blocks;
 import com.refinedmods.refinedstorage.common.content.Items;
 import com.refinedmods.refinedstorage.common.misc.ProcessorItem;
+import com.refinedmods.refinedstorage.common.storage.FluidStorageVariant;
 import com.refinedmods.refinedstorage.common.storage.ItemStorageVariant;
 import com.refinedmods.refinedstorage.mekanism.storage.ChemicalStorageVariant;
 import de.melanx.extradisks.ExtraDisks;
@@ -60,7 +61,7 @@ public class Recipes extends RecipeProvider {
         this.registerAdvancedPartRecipe(Registration.ITEM_STORAGE_PART.get(ExtraItemStorageVariant.TIER_11).get(), ModTags.Items.PARTS_ITEM.get(ExtraItemStorageVariant.TIER_10), recipeOutput);
         this.registerAdvancedPartRecipe(Registration.ITEM_STORAGE_PART.get(ExtraItemStorageVariant.TIER_12).get(), ModTags.Items.PARTS_ITEM.get(ExtraItemStorageVariant.TIER_11), recipeOutput);
 
-        this.registerPartRecipe(Registration.FLUID_STORAGE_PART.get(ExtraFluidStorageVariant.TIER_5_FLUID).get(), Items.INSTANCE.getItemStoragePart(ItemStorageVariant.SIXTY_FOUR_K), recipeOutput);
+        this.registerPartRecipe(Registration.FLUID_STORAGE_PART.get(ExtraFluidStorageVariant.TIER_5_FLUID).get(), Items.INSTANCE.getFluidStoragePart(FluidStorageVariant.FOUR_THOUSAND_NINETY_SIX_B), recipeOutput);
         this.registerPartRecipe(Registration.FLUID_STORAGE_PART.get(ExtraFluidStorageVariant.TIER_6_FLUID).get(), ModTags.Items.PARTS_FLUID.get(ExtraFluidStorageVariant.TIER_5_FLUID), recipeOutput);
         this.registerPartRecipe(Registration.FLUID_STORAGE_PART.get(ExtraFluidStorageVariant.TIER_7_FLUID).get(), ModTags.Items.PARTS_FLUID.get(ExtraFluidStorageVariant.TIER_6_FLUID), recipeOutput);
         this.registerAdvancedPartRecipe(Registration.FLUID_STORAGE_PART.get(ExtraFluidStorageVariant.TIER_8_FLUID).get(), ModTags.Items.PARTS_FLUID.get(ExtraFluidStorageVariant.TIER_7_FLUID), recipeOutput);

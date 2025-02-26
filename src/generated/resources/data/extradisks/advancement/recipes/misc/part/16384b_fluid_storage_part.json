@@ -5,7 +5,7 @@
       "conditions": {
         "items": [
           {
-            "items": "refinedstorage:64k_storage_part"
+            "items": "refinedstorage:4096b_fluid_storage_part"
           }
         ]
       },
