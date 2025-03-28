@@ -24,8 +24,8 @@ var dev = System.getenv('IS_DEV')?.toBoolean() ?: false
 var baseVersion = '21.1'
 var jeiVersion = '19.21.0.247'
 var mekanismVersion = '1.21.1-10.7.7.64'
-var rsmekanismVersion = '0.3.0'
-var rsVersion = '2.0.0-milestone.4.14'
+var rsmekanismVersion = '1.0.0'
+var rsVersion = '2.0.0-beta.1'
 var modBaseVersion = '1.21.1-4.0'
 mod.configure {
     modid 'extradisks'
@@ -69,12 +69,13 @@ mod.configure {
 
     upload {
         all {
-            type 'alpha'
+            type 'beta'
             require 'refined-storage'
-//            optional 'refinedstorage_mekanism_integration' todo add when released
+//            optional 'refinedstorage_mekanism_integration' todo add when released on Modrinth
         }
         curseforge {
             projectId 351491
+            optional 'refinedstorage_mekanism_integration'
         }
         modrinth {
             projectId 'Tlo2tahX'
