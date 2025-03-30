@@ -71,11 +71,10 @@ mod.configure {
         all {
             type 'beta'
             require 'refined-storage'
-//            optional 'refined-storage-mekanism-integration' todo add when released on Modrinth
+            optional 'refined-storage-mekanism-integration'
         }
         curseforge {
             projectId 351491
-            optional 'refined-storage-mekanism-integration'
         }
         modrinth {
             projectId 'Tlo2tahX'
