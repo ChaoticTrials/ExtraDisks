@@ -30,7 +30,7 @@ public class AdvancementProvider extends ForgeAdvancementProvider {
 
         @Override
         public void generate(@Nonnull HolderLookup.Provider registries, @Nonnull Consumer<Advancement> saver, @Nonnull ExistingFileHelper helper) {
-            Advancement.Builder.advancement().display(Registration.ITEM_STORAGE_DISK.get(ExtraItemStorageType.TIER_12).get(), Component.translatable("advancements.extradisks.infinite_storage.title"), Component.translatable("advancements.extradisks.infinite_storage.description"), null, FrameType.CHALLENGE, true, true, true)
+            Advancement.Builder.advancement().display(Registration.ITEM_STORAGE_DISK.get(ExtraItemStorageType.TIER_12).get(), Component.translatable("advancements.extradisks.infinite_storage.title"), Component.translatable("advancements.extradisks.infinite_storage.description"), new ResourceLocation(ExtraDisks.MODID, "textures/gui/advancements.png"), FrameType.CHALLENGE, true, true, true)
                     .addCriterion("has_storage", InventoryChangeTrigger.TriggerInstance.hasItems(
                             ItemPredicate.Builder.item().of(
                                     Registration.ITEM_STORAGE_DISK.get(ExtraItemStorageType.TIER_12).get(),
