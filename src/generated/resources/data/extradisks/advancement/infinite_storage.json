@@ -17,6 +17,7 @@
     }
   },
   "display": {
+    "background": "extradisks:textures/gui/advancements.png",
     "description": {
       "translate": "advancements.extradisks.infinite_storage.description"
     },

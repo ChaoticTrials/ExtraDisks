@@ -31,7 +31,7 @@ public class ExtraAdvancementProvider extends AdvancementProvider {
 
         @Override
         public void generate(@Nonnull HolderLookup.Provider registries, @Nonnull Consumer<AdvancementHolder> saver, @Nonnull ExistingFileHelper helper) {
-            Advancement.Builder.advancement().display(Registration.ITEM_STORAGE_DISK.get(ExtraItemStorageVariant.TIER_12).get(), Component.translatable("advancements.extradisks.infinite_storage.title"), Component.translatable("advancements.extradisks.infinite_storage.description"), null, AdvancementType.CHALLENGE, true, true, true)
+            Advancement.Builder.advancement().display(Registration.ITEM_STORAGE_DISK.get(ExtraItemStorageVariant.TIER_12).get(), Component.translatable("advancements.extradisks.infinite_storage.title"), Component.translatable("advancements.extradisks.infinite_storage.description"), ResourceLocation.fromNamespaceAndPath(ExtraDisks.MODID, "textures/gui/advancements.png"), AdvancementType.CHALLENGE, true, true, true)
                     .addCriterion("has_storage", InventoryChangeTrigger.TriggerInstance.hasItems(
                             ItemPredicate.Builder.item().of(
                                     Registration.ITEM_STORAGE_DISK.get(ExtraItemStorageVariant.TIER_12).get(),
