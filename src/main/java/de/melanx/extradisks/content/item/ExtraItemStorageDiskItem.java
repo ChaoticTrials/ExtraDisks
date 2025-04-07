@@ -55,7 +55,7 @@ public class ExtraItemStorageDiskItem extends AbstractStorageContainerItem imple
     @Nonnull
     @Override
     protected ItemStack createPrimaryDisassemblyByproduct(int count) {
-        return new ItemStack(Registration.ADVANCED_MACHINE_CASING.asItem(), count);
+        return new ItemStack(Registration.ADVANCED_STORAGE_HOUSING.asItem(), count);
     }
 
     @Nullable
