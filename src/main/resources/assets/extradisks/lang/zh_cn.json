@@ -43,7 +43,7 @@
   "item.extradisks.65536b_fluid_storage_disk": "65536B 流体存储磁盘",
   "item.extradisks.262144b_fluid_storage_disk": "262kB 流体存储磁盘",
   "item.extradisks.1048576b_fluid_storage_disk": "1048kB 流体存储磁盘",
-  "item.extradisks.infinite_fluid_storage_disk": "无限流体存储磁盘"
+  "item.extradisks.infinite_fluid_storage_disk": "无限流体存储磁盘",
 
   "block.extradisks.16384b_fluid_storage_block": "16384B 流体存储方块",
   "block.extradisks.65536b_fluid_storage_block": "65536B 流体存储方块",
