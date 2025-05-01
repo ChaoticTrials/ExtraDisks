@@ -7,6 +7,8 @@ import com.refinedmods.refinedstorage.common.api.storage.SerializableStorage;
 import com.refinedmods.refinedstorage.common.api.storage.StorageRepository;
 import com.refinedmods.refinedstorage.common.api.support.HelpTooltipComponent;
 import com.refinedmods.refinedstorage.common.storage.StorageTypes;
+import com.refinedmods.refinedstorage.common.storage.StorageVariant;
+import com.refinedmods.refinedstorage.common.storage.UpgradeableStorageContainer;
 import com.refinedmods.refinedstorage.common.support.resource.ItemResource;
 import com.refinedmods.refinedstorage.common.util.IdentifierUtil;
 import de.melanx.extradisks.Registration;
@@ -20,7 +22,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.Optional;
 
-public class ExtraItemStorageBlockItem extends AbstractStorageContainerBlockItem {
+public class ExtraItemStorageBlockItem extends AbstractStorageContainerBlockItem implements UpgradeableStorageContainer {
 
     private final ExtraItemStorageVariant variant;
     private final Component helpText;
@@ -67,5 +69,16 @@ public class ExtraItemStorageBlockItem extends AbstractStorageContainerBlockItem
     @Override
     public Optional<TooltipComponent> getTooltipImage(@Nonnull ItemStack stack) {
         return Optional.of(new HelpTooltipComponent(this.helpText));
+    }
+
+    @Nonnull
+    @Override
+    public StorageVariant getVariant() {
+        return this.variant;
+    }
+
+    @Override
+    public void transferTo(@Nonnull ItemStack from, @Nonnull ItemStack to) {
+        this.helper.markAsToTransfer(from, to);
     }
 }

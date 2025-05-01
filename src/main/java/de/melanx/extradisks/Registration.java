@@ -17,7 +17,9 @@ import de.melanx.extradisks.content.item.ExtraItemStorageBlockItem;
 import de.melanx.extradisks.content.item.ExtraItemStorageBlockProvider;
 import de.melanx.extradisks.content.item.ExtraItemStorageDiskItem;
 import de.melanx.extradisks.content.item.ExtraItemStorageVariant;
+import de.melanx.extradisks.data.recipes.StorageContainerUpgradeRecipe;
 import de.melanx.extradisks.loottable.ExtraLootFunctions;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.chat.Component;
@@ -29,6 +31,7 @@ import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -46,6 +49,7 @@ public class Registration {
     public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(ExtraDisks.MODID);
     public static final DeferredRegister<BlockEntityType<?>> TILES = DeferredRegister.create(Registries.BLOCK_ENTITY_TYPE, ExtraDisks.MODID);
     public static final DeferredRegister<MenuType<?>> CONTAINERS = DeferredRegister.create(Registries.MENU, ExtraDisks.MODID);
+    public static final DeferredRegister<RecipeSerializer<?>> RECIPE_SERIALIZERS = DeferredRegister.create(BuiltInRegistries.RECIPE_SERIALIZER, ExtraDisks.MODID);
     private static final Item.Properties ITEM_PROPS = new Item.Properties();
 
     // item storage blocks
@@ -79,6 +83,8 @@ public class Registration {
     public static final DeferredItem<Item> ADVANCED_STORAGE_HOUSING = ITEMS.registerSimpleItem("advanced_storage_housing", ITEM_PROPS);
     public static final DeferredItem<Item> RAW_WITHERING_PROCESSOR = ITEMS.registerSimpleItem("raw_withering_processor", ITEM_PROPS);
     public static final DeferredItem<Item> WITHERING_PROCESSOR = ITEMS.registerSimpleItem("withering_processor", ITEM_PROPS);
+
+    public static final DeferredHolder<RecipeSerializer<?>, RecipeSerializer<StorageContainerUpgradeRecipe>> UPGRADE_RECIPE = RECIPE_SERIALIZERS.register("upgrade_recipe", StorageContainerUpgradeRecipe.Serializer::new);
 
     public static void registerExtras(RegisterEvent event) {
         event.register(Registries.CREATIVE_MODE_TAB, helper -> {
@@ -201,5 +207,6 @@ public class Registration {
         ITEMS.register(modBus);
         TILES.register(modBus);
         CONTAINERS.register(modBus);
+        RECIPE_SERIALIZERS.register(modBus);
     }
 }

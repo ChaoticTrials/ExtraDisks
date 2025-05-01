@@ -1,0 +1,33 @@
+{
+  "type": "extradisks:upgrade_recipe",
+  "base_disk": [
+    {
+      "item": "refinedstorage_mekanism_integration:1024b_chemical_storage_block"
+    },
+    {
+      "item": "extradisks:262144b_chemical_storage_block"
+    },
+    {
+      "item": "refinedstorage_mekanism_integration:256b_chemical_storage_block"
+    },
+    {
+      "item": "extradisks:1048576b_chemical_storage_block"
+    },
+    {
+      "item": "refinedstorage_mekanism_integration:64b_chemical_storage_block"
+    },
+    {
+      "item": "refinedstorage_mekanism_integration:8192b_chemical_storage_block"
+    },
+    {
+      "item": "extradisks:65536b_chemical_storage_block"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "extradisks:8388608b_chemical_storage_block"
+  },
+  "storage_part": {
+    "item": "extradisks:8388608b_chemical_storage_part"
+  }
+}

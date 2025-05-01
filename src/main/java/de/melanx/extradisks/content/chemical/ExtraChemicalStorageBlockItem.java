@@ -6,6 +6,8 @@ import com.refinedmods.refinedstorage.common.api.storage.AbstractStorageContaine
 import com.refinedmods.refinedstorage.common.api.storage.SerializableStorage;
 import com.refinedmods.refinedstorage.common.api.storage.StorageRepository;
 import com.refinedmods.refinedstorage.common.api.support.HelpTooltipComponent;
+import com.refinedmods.refinedstorage.common.storage.StorageVariant;
+import com.refinedmods.refinedstorage.common.storage.UpgradeableStorageContainer;
 import com.refinedmods.refinedstorage.common.util.IdentifierUtil;
 import com.refinedmods.refinedstorage.mekanism.ChemicalResource;
 import com.refinedmods.refinedstorage.mekanism.ChemicalResourceType;
@@ -20,7 +22,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.Optional;
 
-public class ExtraChemicalStorageBlockItem extends AbstractStorageContainerBlockItem {
+public class ExtraChemicalStorageBlockItem extends AbstractStorageContainerBlockItem implements UpgradeableStorageContainer {
 
     private final ExtraChemicalStorageVariant variant;
     private final Component helpText;
@@ -67,5 +69,16 @@ public class ExtraChemicalStorageBlockItem extends AbstractStorageContainerBlock
     @Override
     public Optional<TooltipComponent> getTooltipImage(@Nonnull ItemStack stack) {
         return Optional.of(new HelpTooltipComponent(this.helpText));
+    }
+
+    @Nonnull
+    @Override
+    public StorageVariant getVariant() {
+        return this.variant;
+    }
+
+    @Override
+    public void transferTo(@Nonnull ItemStack from, @Nonnull ItemStack to) {
+        this.helper.markAsToTransfer(from, to);
     }
 }

@@ -8,9 +8,13 @@ import com.refinedmods.refinedstorage.common.storage.ItemStorageVariant;
 import com.refinedmods.refinedstorage.mekanism.storage.ChemicalStorageVariant;
 import de.melanx.extradisks.ExtraDisks;
 import de.melanx.extradisks.Registration;
+import de.melanx.extradisks.content.chemical.ExtraChemicalStorageDiskItem;
 import de.melanx.extradisks.content.chemical.ExtraChemicalStorageVariant;
+import de.melanx.extradisks.content.fluid.ExtraFluidStorageDiskItem;
 import de.melanx.extradisks.content.fluid.ExtraFluidStorageVariant;
+import de.melanx.extradisks.content.item.ExtraItemStorageDiskItem;
 import de.melanx.extradisks.content.item.ExtraItemStorageVariant;
+import de.melanx.extradisks.data.recipes.builder.StorageContainerUpgradeRecipeBuilder;
 import mekanism.common.registries.MekanismItems;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -21,10 +25,15 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
+import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.common.conditions.ModLoadedCondition;
+import net.neoforged.neoforge.registries.DeferredBlock;
+import net.neoforged.neoforge.registries.DeferredItem;
 
 import javax.annotation.Nonnull;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.concurrent.CompletableFuture;
 
 public class Recipes extends RecipeProvider {
@@ -75,6 +84,8 @@ public class Recipes extends RecipeProvider {
 
         this.registerProcessorRecipe(Registration.WITHERING_PROCESSOR.get(), Registration.RAW_WITHERING_PROCESSOR.get(), Ingredient.of(Tags.Items.NETHER_STARS), recipeOutput);
 
+        this.registerUpgrades(recipeOutput);
+
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, Registration.ADVANCED_STORAGE_HOUSING.get())
                 .pattern("GEG")
                 .pattern("E E")
@@ -106,7 +117,7 @@ public class Recipes extends RecipeProvider {
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, raw)
                 .requires(Items.INSTANCE.getProcessorBinding())
                 .requires(ingredient)
-                .requires(Items.INSTANCE.INSTANCE.getSilicon())
+                .requires(Items.INSTANCE.getSilicon())
                 .requires(Tags.Items.DUSTS_REDSTONE)
                 .unlockedBy("has_binding", has(Items.INSTANCE.getProcessorBinding()))
                 .save(recipeOutput);
@@ -261,5 +272,131 @@ public class Recipes extends RecipeProvider {
                 .define('R', Tags.Items.DUSTS_REDSTONE)
                 .unlockedBy("has_part", has(part))
                 .save(recipeOutput, ResourceLocation.fromNamespaceAndPath(ExtraDisks.MODID, "blocks/" + BuiltInRegistries.ITEM.getKey(block.asItem()).getPath()));
+    }
+
+    private void registerUpgrades(RecipeOutput recipeOutput) {
+        this.registerItemStorageUpgrades(recipeOutput);
+        this.registerFluidStorageUpgrades(recipeOutput);
+        this.registerChemicalStorageUpgrades(recipeOutput);
+    }
+
+    private void registerItemStorageUpgrades(RecipeOutput recipeOutput) {
+        Set<Ingredient.Value> disks = new HashSet<>();
+        for (ItemStorageVariant value : ItemStorageVariant.values()) {
+            if (value == ItemStorageVariant.CREATIVE) {
+                continue;
+            }
+
+            disks.add(new Ingredient.ItemValue(Items.INSTANCE.getItemStorageDisk(value).getDefaultInstance()));
+        }
+
+        for (ExtraItemStorageVariant value : ExtraItemStorageVariant.values()) {
+            DeferredItem<ExtraItemStorageDiskItem> disk = Registration.ITEM_STORAGE_DISK.get(value);
+            StorageContainerUpgradeRecipeBuilder.shapeless(disk)
+                    .disk(Ingredient.fromValues(disks.stream()))
+                    .part(Ingredient.of(Registration.ITEM_STORAGE_PART.get(value)))
+                    .save(recipeOutput);
+
+            disks.add(new Ingredient.TagValue(ModTags.Items.DISKS_ITEM.get(value)));
+        }
+
+        Set<ItemLike> storageBlocks = new HashSet<>();
+        for (ItemStorageVariant value : ItemStorageVariant.values()) {
+            if (value == ItemStorageVariant.CREATIVE) {
+                continue;
+            }
+
+            storageBlocks.add(Blocks.INSTANCE.getItemStorageBlock(value));
+        }
+
+        for (ExtraItemStorageVariant value : ExtraItemStorageVariant.values()) {
+            DeferredBlock<Block> storageBlock = Registration.ITEM_STORAGE_BLOCK.get(value);
+            StorageContainerUpgradeRecipeBuilder.shapeless(storageBlock)
+                    .disk(Ingredient.of(storageBlocks.toArray(new ItemLike[0])))
+                    .part(Ingredient.of(Registration.ITEM_STORAGE_PART.get(value)))
+                    .save(recipeOutput);
+
+            storageBlocks.add(storageBlock);
+        }
+    }
+
+    private void registerFluidStorageUpgrades(RecipeOutput recipeOutput) {
+        Set<ItemLike> disks = new HashSet<>();
+        for (FluidStorageVariant value : FluidStorageVariant.values()) {
+            if (value == FluidStorageVariant.CREATIVE) {
+                continue;
+            }
+
+            disks.add(Items.INSTANCE.getFluidStorageDisk(value));
+        }
+
+        for (ExtraFluidStorageVariant value : ExtraFluidStorageVariant.values()) {
+            DeferredItem<ExtraFluidStorageDiskItem> disk = Registration.FLUID_STORAGE_DISK.get(value);
+            StorageContainerUpgradeRecipeBuilder.shapeless(disk)
+                    .disk(Ingredient.of(disks.toArray(new ItemLike[0])))
+                    .part(Ingredient.of(Registration.FLUID_STORAGE_PART.get(value)))
+                    .save(recipeOutput);
+
+            disks.add(disk);
+        }
+
+        Set<ItemLike> storageBlocks = new HashSet<>();
+        for (FluidStorageVariant value : FluidStorageVariant.values()) {
+            if (value == FluidStorageVariant.CREATIVE) {
+                continue;
+            }
+
+            storageBlocks.add(Blocks.INSTANCE.getFluidStorageBlock(value));
+        }
+
+        for (ExtraFluidStorageVariant value : ExtraFluidStorageVariant.values()) {
+            DeferredBlock<Block> storageBlock = Registration.FLUID_STORAGE_BLOCK.get(value);
+            StorageContainerUpgradeRecipeBuilder.shapeless(storageBlock)
+                    .disk(Ingredient.of(storageBlocks.toArray(new ItemLike[0])))
+                    .part(Ingredient.of(Registration.FLUID_STORAGE_PART.get(value)))
+                    .save(recipeOutput);
+
+            storageBlocks.add(storageBlock);
+        }
+    }
+
+    private void registerChemicalStorageUpgrades(RecipeOutput recipeOutput) {
+        Set<ItemLike> disks = new HashSet<>();
+        for (ChemicalStorageVariant value : ChemicalStorageVariant.values()) {
+            if (value == ChemicalStorageVariant.CREATIVE) {
+                continue;
+            }
+
+            disks.add(com.refinedmods.refinedstorage.mekanism.content.Items.getChemicalStorageDisk(value));
+        }
+
+        for (ExtraChemicalStorageVariant value : ExtraChemicalStorageVariant.values()) {
+            DeferredItem<ExtraChemicalStorageDiskItem> disk = Registration.CHEMICAL_STORAGE_DISK.get(value);
+            StorageContainerUpgradeRecipeBuilder.shapeless(disk)
+                    .disk(Ingredient.of(disks.toArray(new ItemLike[0])))
+                    .part(Ingredient.of(Registration.CHEMICAL_STORAGE_PART.get(value)))
+                    .save(recipeOutput);
+
+            disks.add(disk);
+        }
+
+        Set<ItemLike> storageBlocks = new HashSet<>();
+        for (ChemicalStorageVariant value : ChemicalStorageVariant.values()) {
+            if (value == ChemicalStorageVariant.CREATIVE) {
+                continue;
+            }
+
+            storageBlocks.add(com.refinedmods.refinedstorage.mekanism.content.Blocks.getChemicalStorageBlock(value));
+        }
+
+        for (ExtraChemicalStorageVariant value : ExtraChemicalStorageVariant.values()) {
+            DeferredBlock<Block> storageBlock = Registration.CHEMICAL_STORAGE_BLOCK.get(value);
+            StorageContainerUpgradeRecipeBuilder.shapeless(storageBlock)
+                    .disk(Ingredient.of(storageBlocks.toArray(new ItemLike[0])))
+                    .part(Ingredient.of(Registration.CHEMICAL_STORAGE_PART.get(value)))
+                    .save(recipeOutput);
+
+            storageBlocks.add(storageBlock);
+        }
     }
 }

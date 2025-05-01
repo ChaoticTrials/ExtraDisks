@@ -1,9 +1,17 @@
 package de.melanx.extradisks;
 
+import com.refinedmods.refinedstorage.common.storage.StorageContainerUpgradeRecipe;
+import com.refinedmods.refinedstorage.common.storage.StorageContainerUpgradeRecipeSerializer;
+import de.melanx.extradisks.content.chemical.ExtraChemicalStorageVariant;
+import de.melanx.extradisks.content.fluid.ExtraFluidStorageVariant;
+import de.melanx.extradisks.content.item.ExtraItemStorageVariant;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.config.ModConfig;
+import net.neoforged.neoforge.registries.DeferredRegister;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -17,5 +25,72 @@ public final class ExtraDisks {
         Registration.init(modBus);
         modBus.addListener(Registration::registerExtras);
         container.registerConfig(ModConfig.Type.SERVER, de.melanx.extradisks.ModConfig.CONFIG);
+
+        DeferredRegister<RecipeSerializer<?>> recipeSerializerRegistry = DeferredRegister.create(
+                BuiltInRegistries.RECIPE_SERIALIZER,
+                ExtraDisks.MODID
+        );
+
+        ExtraDisks.registerRecipeSerializers(recipeSerializerRegistry);
+        recipeSerializerRegistry.register(modBus);
+    }
+
+    private static void registerRecipeSerializers(DeferredRegister<RecipeSerializer<?>> registry) {
+        registry.register(
+                "item_storage_disk_upgrade",
+                () -> new StorageContainerUpgradeRecipeSerializer<>(
+                        ExtraItemStorageVariant.values(),
+                        to -> new StorageContainerUpgradeRecipe<>(
+                                ExtraItemStorageVariant.values(), to, Registration.ITEM_STORAGE_DISK::get
+                        )
+                )
+        );
+        registry.register(
+                "item_storage_block_upgrade",
+                () -> new StorageContainerUpgradeRecipeSerializer<>(
+                        ExtraItemStorageVariant.values(),
+                        to -> new StorageContainerUpgradeRecipe<>(
+                                ExtraItemStorageVariant.values(), to, Registration.ITEM_STORAGE_BLOCK::get
+                        )
+                )
+        );
+
+        registry.register(
+                "fluid_storage_disk_upgrade",
+                () -> new StorageContainerUpgradeRecipeSerializer<>(
+                        ExtraFluidStorageVariant.values(),
+                        to -> new StorageContainerUpgradeRecipe<>(
+                                ExtraFluidStorageVariant.values(), to, Registration.FLUID_STORAGE_DISK::get
+                        )
+                )
+        );
+        registry.register(
+                "fluid_storage_block_upgrade",
+                () -> new StorageContainerUpgradeRecipeSerializer<>(
+                        ExtraFluidStorageVariant.values(),
+                        to -> new StorageContainerUpgradeRecipe<>(
+                                ExtraFluidStorageVariant.values(), to, Registration.FLUID_STORAGE_BLOCK::get
+                        )
+                )
+        );
+
+        registry.register(
+                "chemical_storage_disk_upgrade",
+                () -> new StorageContainerUpgradeRecipeSerializer<>(
+                        ExtraChemicalStorageVariant.values(),
+                        to -> new StorageContainerUpgradeRecipe<>(
+                                ExtraChemicalStorageVariant.values(), to, Registration.CHEMICAL_STORAGE_DISK::get
+                        )
+                )
+        );
+        registry.register(
+                "chemical_storage_block_upgrade",
+                () -> new StorageContainerUpgradeRecipeSerializer<>(
+                        ExtraChemicalStorageVariant.values(),
+                        to -> new StorageContainerUpgradeRecipe<>(
+                                ExtraChemicalStorageVariant.values(), to, Registration.CHEMICAL_STORAGE_BLOCK::get
+                        )
+                )
+        );
     }
 }
