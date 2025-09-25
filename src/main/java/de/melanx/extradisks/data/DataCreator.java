@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.concurrent.CompletableFuture;
 
-@EventBusSubscriber(modid = ExtraDisks.MODID, bus = EventBusSubscriber.Bus.MOD)
+@EventBusSubscriber(modid = ExtraDisks.MODID)
 public class DataCreator {
 
     @SubscribeEvent

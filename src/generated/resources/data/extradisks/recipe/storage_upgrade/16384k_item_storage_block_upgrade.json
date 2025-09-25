@@ -2,7 +2,16 @@
   "type": "extradisks:upgrade_recipe",
   "base_disk": [
     {
-      "item": "refinedstorage:16k_storage_block"
+      "item": "refinedstorage:1k_storage_block"
+    },
+    {
+      "item": "refinedstorage:64k_storage_block"
+    },
+    {
+      "item": "refinedstorage:4k_storage_block"
+    },
+    {
+      "item": "extradisks:1024k_item_storage_block"
     },
     {
       "item": "extradisks:256k_item_storage_block"
@@ -11,16 +20,7 @@
       "item": "extradisks:4096k_item_storage_block"
     },
     {
-      "item": "refinedstorage:4k_storage_block"
-    },
-    {
-      "item": "refinedstorage:64k_storage_block"
-    },
-    {
-      "item": "extradisks:1024k_item_storage_block"
-    },
-    {
-      "item": "refinedstorage:1k_storage_block"
+      "item": "refinedstorage:16k_storage_block"
     }
   ],
   "result": {

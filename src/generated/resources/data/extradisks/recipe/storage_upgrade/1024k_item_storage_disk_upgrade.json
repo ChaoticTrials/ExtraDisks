@@ -2,6 +2,12 @@
   "type": "extradisks:upgrade_recipe",
   "base_disk": [
     {
+      "item": "refinedstorage:64k_storage_disk"
+    },
+    {
+      "item": "refinedstorage:1k_storage_disk"
+    },
+    {
       "item": "refinedstorage:4k_storage_disk"
     },
     {
@@ -9,12 +15,6 @@
     },
     {
       "tag": "refinedstorage:disks/items/256k"
-    },
-    {
-      "item": "refinedstorage:1k_storage_disk"
-    },
-    {
-      "item": "refinedstorage:64k_storage_disk"
     }
   ],
   "result": {

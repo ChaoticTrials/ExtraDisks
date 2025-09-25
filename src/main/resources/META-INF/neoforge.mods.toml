@@ -31,7 +31,7 @@ Extra Disks adds bigger disks to Refined Storage
 [[dependencies.${ mod.modid }]]
    modId = "refinedstorage"
    type = "required"
-   versionRange = "[2.0.0-beta.1,)"
+   versionRange = "[2.0.0-beta.12,)"
    ordering = "NONE"
    side = "BOTH"
 

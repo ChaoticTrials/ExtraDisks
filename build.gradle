@@ -25,7 +25,7 @@ var baseVersion = '21.1'
 var jeiVersion = '19.21.0.247'
 var mekanismVersion = '1.21.1-10.7.7.64'
 var rsmekanismVersion = '1.0.0'
-var rsVersion = '2.0.0-beta.2'
+var rsVersion = '2.0.0-beta.12'
 var modBaseVersion = '1.21.1-4.0'
 mod.configure {
     modid 'extradisks'
@@ -40,7 +40,7 @@ mod.configure {
         }
     }
 
-    neoforge project.hasProperty('neo_version') ? project.neo_version : "${baseVersion}.118"
+    neoforge project.hasProperty('neo_version') ? project.neo_version : "${baseVersion}.181"
 
     license 'The Apache License, Version 2.0'
     github 'ChaoticTrials/ExtraDisks'

@@ -2,6 +2,7 @@ package de.melanx.extradisks;
 
 import com.refinedmods.refinedstorage.common.storage.StorageContainerUpgradeRecipe;
 import com.refinedmods.refinedstorage.common.storage.StorageContainerUpgradeRecipeSerializer;
+import com.refinedmods.refinedstorage.neoforge.api.RefinedStorageNeoForgeApi;
 import de.melanx.extradisks.content.chemical.ExtraChemicalStorageVariant;
 import de.melanx.extradisks.content.fluid.ExtraFluidStorageVariant;
 import de.melanx.extradisks.content.item.ExtraItemStorageVariant;
@@ -11,6 +12,7 @@ import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.config.ModConfig;
+import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,6 +26,7 @@ public final class ExtraDisks {
     public ExtraDisks(IEventBus modBus, ModContainer container) {
         Registration.init(modBus);
         modBus.addListener(Registration::registerExtras);
+        modBus.addListener(ExtraDisks::registerCapabilities);
         container.registerConfig(ModConfig.Type.SERVER, de.melanx.extradisks.ModConfig.CONFIG);
 
         DeferredRegister<RecipeSerializer<?>> recipeSerializerRegistry = DeferredRegister.create(
@@ -33,6 +36,18 @@ public final class ExtraDisks {
 
         ExtraDisks.registerRecipeSerializers(recipeSerializerRegistry);
         recipeSerializerRegistry.register(modBus);
+    }
+
+    private static void registerCapabilities(RegisterCapabilitiesEvent event) {
+        for (ExtraItemStorageVariant variant : ExtraItemStorageVariant.values()) {
+            event.registerBlockEntity(RefinedStorageNeoForgeApi.INSTANCE.getNetworkNodeContainerProviderCapability(),
+                    Registration.ITEM_STORAGE_TILE.get(variant).get(), (be, side) -> be.getContainerProvider());
+        }
+
+        for (ExtraFluidStorageVariant variant : ExtraFluidStorageVariant.values()) {
+            event.registerBlockEntity(RefinedStorageNeoForgeApi.INSTANCE.getNetworkNodeContainerProviderCapability(),
+                    Registration.FLUID_STORAGE_TILE.get(variant).get(), (be, side) -> be.getContainerProvider());
+        }
     }
 
     private static void registerRecipeSerializers(DeferredRegister<RecipeSerializer<?>> registry) {

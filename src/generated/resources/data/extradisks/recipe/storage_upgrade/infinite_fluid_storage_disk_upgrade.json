@@ -2,28 +2,28 @@
   "type": "extradisks:upgrade_recipe",
   "base_disk": [
     {
-      "item": "extradisks:16384b_fluid_storage_disk"
+      "item": "refinedstorage:4096b_fluid_storage_disk"
     },
     {
       "item": "extradisks:65536b_fluid_storage_disk"
     },
     {
-      "item": "refinedstorage:1024b_fluid_storage_disk"
-    },
-    {
-      "item": "extradisks:262144b_fluid_storage_disk"
-    },
-    {
-      "item": "extradisks:1048576b_fluid_storage_disk"
-    },
-    {
-      "item": "refinedstorage:4096b_fluid_storage_disk"
+      "item": "extradisks:16384b_fluid_storage_disk"
     },
     {
       "item": "refinedstorage:64b_fluid_storage_disk"
     },
     {
+      "item": "extradisks:262144b_fluid_storage_disk"
+    },
+    {
       "item": "refinedstorage:256b_fluid_storage_disk"
+    },
+    {
+      "item": "refinedstorage:1024b_fluid_storage_disk"
+    },
+    {
+      "item": "extradisks:1048576b_fluid_storage_disk"
     }
   ],
   "result": {
