@@ -4,10 +4,9 @@ plugins {
 
 repositories {
     maven {
-        url = 'https://maven.pkg.github.com/refinedmods/refinedstorage2'
-        credentials {
-            username = 'anything'
-            password = '\u0067hp_oGjcDFCn8jeTzIj4Ke9pLoEVtpnZMP4VQgaX'
+        url = 'https://maven.creeperhost.net'
+        content {
+            includeGroup("com.refinedmods.refinedstorage")
         }
     }
     maven {
@@ -24,8 +23,8 @@ var dev = System.getenv('IS_DEV')?.toBoolean() ?: false
 var baseVersion = '21.1'
 var jeiVersion = '19.21.0.247'
 var mekanismVersion = '1.21.1-10.7.7.64'
-var rsmekanismVersion = '1.0.0'
-var rsVersion = '2.0.0-beta.12'
+var rsmekanismVersion = '1.1.0'
+var rsVersion = '2.0.0'
 var modBaseVersion = '1.21.1-4.0'
 mod.configure {
     modid 'extradisks'
