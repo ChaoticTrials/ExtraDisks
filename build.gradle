@@ -1,5 +1,5 @@
 plugins {
-    id 'org.moddingx.modgradle.meta' version '5.0.2'
+    id 'org.moddingx.modgradle.meta' version '5.1.0'
 }
 
 repositories {
@@ -21,7 +21,7 @@ repositories {
 
 var dev = System.getenv('IS_DEV')?.toBoolean() ?: false
 var baseVersion = '21.1'
-var jeiVersion = '19.21.0.247'
+var jeiVersion = '19.22.1.316'
 var mekanismVersion = '1.21.1-10.7.7.64'
 var rsmekanismVersion = '1.1.0'
 var rsVersion = '2.0.0'
