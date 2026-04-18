@@ -2,6 +2,9 @@
   "values": [
     "#refinedstorage:disks/items",
     "#refinedstorage:disks/fluids",
-    "#refinedstorage:disks/chemical"
+    {
+      "id": "#refinedstorage:disks/chemical",
+      "required": false
+    }
   ]
 }

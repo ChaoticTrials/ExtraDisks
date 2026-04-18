@@ -24,7 +24,6 @@
     "frame": "challenge",
     "hidden": true,
     "icon": {
-      "count": 1,
       "id": "extradisks:infinite_item_storage_disk"
     },
     "title": {

@@ -12,6 +12,7 @@ import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.functions.CopyComponentsFunction;
+import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.neoforged.neoforge.registries.DeferredHolder;
 
@@ -29,7 +30,11 @@ public class ExtraLootTables extends BlockLootSubProvider {
     public void generate() {
         Registration.BLOCKS.getEntries().stream().map(DeferredHolder::get).forEach(block -> {
             if (block instanceof StorageBlock) {
-                this.genBlockItemLootTableWithFunction(block, new ExtraStorageBlockLootFunction.Builder());
+                this.add(block, this.createSingleItemTable(block)
+                        .apply(ExtraStorageBlockLootFunction::new)
+                        .apply(CopyComponentsFunction.copyComponentsFromBlockEntity(LootContextParams.BLOCK_ENTITY)
+                                .include(DataComponents.CUSTOM_NAME))
+                );
             } else {
                 this.dropSelf(block);
             }
@@ -48,7 +53,7 @@ public class ExtraLootTables extends BlockLootSubProvider {
                         .setRolls(ConstantValue.exactly(1))
                         .add(LootItem.lootTableItem(block)
                                 .apply(builder)
-                                .apply(CopyComponentsFunction.copyComponents(CopyComponentsFunction.Source.BLOCK_ENTITY)
+                                .apply(CopyComponentsFunction.copyComponentsFromBlockEntity(LootContextParams.BLOCK_ENTITY)
                                         .include(DataComponents.CUSTOM_NAME))
                         )));
     }

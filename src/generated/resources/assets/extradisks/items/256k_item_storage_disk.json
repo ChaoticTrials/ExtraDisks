@@ -1,0 +1,6 @@
+{
+  "model": {
+    "type": "minecraft:model",
+    "model": "extradisks:item/256k_item_storage_disk"
+  }
+}

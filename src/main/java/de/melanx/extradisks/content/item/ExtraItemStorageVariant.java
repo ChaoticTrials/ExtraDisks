@@ -47,6 +47,7 @@ public enum ExtraItemStorageVariant implements StringRepresentable, StorageVaria
         return this.capacity != null;
     }
 
+    @Nonnull
     public String getName() {
         return this.name;
     }

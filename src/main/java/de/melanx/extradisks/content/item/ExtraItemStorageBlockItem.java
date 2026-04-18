@@ -12,7 +12,10 @@ import com.refinedmods.refinedstorage.common.storage.UpgradeableStorageContainer
 import com.refinedmods.refinedstorage.common.support.resource.ItemResource;
 import com.refinedmods.refinedstorage.common.util.IdentifierUtil;
 import de.melanx.extradisks.Registration;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.inventory.tooltip.TooltipComponent;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -27,8 +30,8 @@ public class ExtraItemStorageBlockItem extends AbstractStorageContainerBlockItem
     private final ExtraItemStorageVariant variant;
     private final Component helpText;
 
-    public ExtraItemStorageBlockItem(Block block, ExtraItemStorageVariant variant) {
-        super(block, new Item.Properties().stacksTo(1).fireResistant(), RefinedStorageApi.INSTANCE.getStorageContainerItemHelper());
+    public ExtraItemStorageBlockItem(Identifier id, Block block, ExtraItemStorageVariant variant) {
+        super(block, new Item.Properties().stacksTo(1).fireResistant().setId(ResourceKey.create(Registries.ITEM, id)).useBlockDescriptionPrefix(), RefinedStorageApi.INSTANCE.getStorageContainerItemHelper());
         this.variant = variant;
         this.helpText = variant.hasCapacity()
                 ? IdentifierUtil.createTranslation("item", "storage_block.help", IdentifierUtil.format(variant.getCapacity()))

@@ -1,5 +1,5 @@
 plugins {
-    id 'org.moddingx.modgradle.meta' version '5.1.0'
+    id 'org.moddingx.modgradle.meta' version '5.1.2'
 }
 
 repositories {
@@ -9,6 +9,7 @@ repositories {
             includeGroup("com.refinedmods.refinedstorage")
         }
     }
+    mavenLocal()
     maven {
         name = 'ModMaven'
         url = 'https://modmaven.dev/'
@@ -20,12 +21,13 @@ repositories {
 }
 
 var dev = System.getenv('IS_DEV')?.toBoolean() ?: false
-var baseVersion = '21.1'
-var jeiVersion = '19.22.1.316'
+var releaseType = 'beta'
+var baseVersion = '26.1'
+var jeiVersion = '29.5.0.26'
 var mekanismVersion = '1.21.1-10.7.7.64'
 var rsmekanismVersion = '1.1.0'
-var rsVersion = '2.0.0'
-var modBaseVersion = '1.21.1-4.0'
+var rsVersion = '3.0.0-beta.1'
+
 mod.configure {
     modid 'extradisks'
     group 'de.melanx'
@@ -34,12 +36,12 @@ mod.configure {
             def gitCommitHash = ['git', 'rev-parse', 'HEAD'].execute().text.trim()
             constant baseVersion + (gitCommitHash ? "-${gitCommitHash}" : '')
         } else {
-            base modBaseVersion
+            base baseVersion
             maven 'https://maven.melanx.de/release'
         }
     }
 
-    neoforge project.hasProperty('neo_version') ? project.neo_version : "${baseVersion}.181"
+    neoforge project.hasProperty('neo_version') ? project.neo_version : "${baseVersion}.2.7-beta"
 
     license 'The Apache License, Version 2.0'
     github 'ChaoticTrials/ExtraDisks'
@@ -68,9 +70,10 @@ mod.configure {
 
     upload {
         all {
-            type 'beta'
+            type releaseType
+            version '26.1.2'
             require 'refined-storage'
-            optional 'refined-storage-mekanism-integration'
+//            optional 'refined-storage-mekanism-integration' todo Mekanism
         }
         curseforge {
             projectId 351491
@@ -84,10 +87,10 @@ mod.configure {
 dependencies {
     implementation "com.refinedmods.refinedstorage:refinedstorage-neoforge:${rsVersion}"
 
-    implementation "com.refinedmods.refinedstorage:refinedstorage-mekanism-integration:${rsmekanismVersion}"
+//    implementation "com.refinedmods.refinedstorage:refinedstorage-mekanism-integration:${rsmekanismVersion}"
 
 //    compileOnlyApi("mekanism:Mekanism:${mekanismVersion}:api")
 
-    implementation "mekanism:Mekanism:${mekanismVersion}:all"
-    runtimeOnly "mezz.jei:jei-1.${baseVersion}-neoforge:${jeiVersion}"
+//    compileOnly "mekanism:Mekanism:${mekanismVersion}:all"
+    runtimeOnly "mezz.jei:jei-${baseVersion}.2-neoforge:${jeiVersion}"
 }

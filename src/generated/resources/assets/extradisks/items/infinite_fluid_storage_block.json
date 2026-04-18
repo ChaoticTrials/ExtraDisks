@@ -1,0 +1,6 @@
+{
+  "model": {
+    "type": "minecraft:model",
+    "model": "extradisks:block/infinite_fluid_storage_block"
+  }
+}

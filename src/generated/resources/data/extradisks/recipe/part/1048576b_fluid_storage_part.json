@@ -2,18 +2,10 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "D": {
-      "item": "extradisks:withering_processor"
-    },
-    "E": {
-      "item": "refinedstorage:quartz_enriched_iron"
-    },
-    "P": {
-      "tag": "refinedstorage:parts/fluids/262144b"
-    },
-    "R": {
-      "tag": "c:dusts/redstone"
-    }
+    "D": "extradisks:withering_processor",
+    "E": "refinedstorage:quartz_enriched_iron",
+    "P": "#refinedstorage:parts/fluids/262144b",
+    "R": "#c:dusts/redstone"
   },
   "pattern": [
     "DED",
@@ -21,7 +13,6 @@
     "DPD"
   ],
   "result": {
-    "count": 1,
     "id": "extradisks:1048576b_fluid_storage_part"
   }
 }

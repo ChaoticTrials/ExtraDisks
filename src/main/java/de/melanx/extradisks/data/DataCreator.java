@@ -8,7 +8,6 @@ import net.minecraft.data.loot.LootTableProvider;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
-import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import net.neoforged.neoforge.data.event.GatherDataEvent;
 
 import java.util.List;
@@ -19,25 +18,20 @@ import java.util.concurrent.CompletableFuture;
 public class DataCreator {
 
     @SubscribeEvent
-    public static void gatherData(GatherDataEvent event) {
+    public static void gatherData(GatherDataEvent.Client event) {
         DataGenerator generator = event.getGenerator();
         PackOutput output = generator.getPackOutput();
-        ExistingFileHelper helper = event.getExistingFileHelper();
         CompletableFuture<HolderLookup.Provider> lookupProvider = event.getLookupProvider();
 
-        ModTags.BlockTags blockTagsProvider = new ModTags.BlockTags(output, lookupProvider, helper);
-        boolean server = event.includeServer();
-        generator.addProvider(server, blockTagsProvider);
-        generator.addProvider(server, new ModTags.ItemTags(output, lookupProvider, blockTagsProvider.contentsGetter(), helper));
-        generator.addProvider(server, new Recipes(output, lookupProvider));
-        generator.addProvider(server, new ExtraAdvancementProvider(output, lookupProvider, helper));
-        generator.addProvider(server, new LootTableProvider(output, Set.of(), List.of(
+        ModTags.BlockTags blockTagsProvider = new ModTags.BlockTags(output, lookupProvider);
+        event.addProvider(blockTagsProvider);
+        event.addProvider(new ModTags.ItemTags(output, lookupProvider, blockTagsProvider.contentsGetter()));
+        event.addProvider(new Recipes.Runner(output, lookupProvider));
+        event.addProvider(new ExtraAdvancementProvider(output, lookupProvider));
+        event.addProvider(new LootTableProvider(output, Set.of(), List.of(
                 new LootTableProvider.SubProviderEntry(ExtraLootTables::new, LootContextParamSets.BLOCK)
         ), lookupProvider));
 
-        boolean client = event.includeClient();
-        generator.addProvider(client, new ModItemModels(output, helper));
-        generator.addProvider(client, new BlockStates(output, helper));
-        generator.addProvider(client, new BlockModels(output, helper));
+        event.addProvider(new ModelProviders(output));
     }
 }

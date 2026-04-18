@@ -12,7 +12,10 @@ import com.refinedmods.refinedstorage.common.storage.UpgradeableStorageContainer
 import com.refinedmods.refinedstorage.common.support.resource.FluidResource;
 import com.refinedmods.refinedstorage.common.util.IdentifierUtil;
 import de.melanx.extradisks.Registration;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.inventory.tooltip.TooltipComponent;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -26,8 +29,8 @@ public class ExtraFluidStorageDiskItem extends AbstractStorageContainerItem impl
     private final ExtraFluidStorageVariant variant;
     private final Component helpText;
 
-    public ExtraFluidStorageDiskItem(ExtraFluidStorageVariant variant) {
-        super(new Item.Properties().stacksTo(1), RefinedStorageApi.INSTANCE.getStorageContainerItemHelper());
+    public ExtraFluidStorageDiskItem(Identifier id, ExtraFluidStorageVariant variant) {
+        super(new Item.Properties().stacksTo(1).setId(ResourceKey.create(Registries.ITEM, id)), RefinedStorageApi.INSTANCE.getStorageContainerItemHelper());
         this.variant = variant;
         this.helpText = variant.getCapacity() == null
                 ? IdentifierUtil.createTranslation("item", "creative_fluid_storage_disk.help")

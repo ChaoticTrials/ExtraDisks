@@ -2,6 +2,9 @@
   "values": [
     "#refinedstorage:parts/items",
     "#refinedstorage:parts/fluids",
-    "#refinedstorage:parts/chemical"
+    {
+      "id": "#refinedstorage:parts/chemical",
+      "required": false
+    }
   ]
 }

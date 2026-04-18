@@ -1,23 +1,28 @@
 {
   "type": "minecraft:block",
+  "functions": [
+    {
+      "function": "extradisks:storage_block"
+    },
+    {
+      "function": "minecraft:copy_components",
+      "include": [
+        "minecraft:custom_name"
+      ],
+      "source": "block_entity"
+    }
+  ],
   "pools": [
     {
       "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        }
+      ],
       "entries": [
         {
           "type": "minecraft:item",
-          "functions": [
-            {
-              "function": "extradisks:storage_block"
-            },
-            {
-              "function": "minecraft:copy_components",
-              "include": [
-                "minecraft:custom_name"
-              ],
-              "source": "block_entity"
-            }
-          ],
           "name": "extradisks:16384b_fluid_storage_block"
         }
       ],
