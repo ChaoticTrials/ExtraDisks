@@ -56,11 +56,6 @@ public class Recipes extends RecipeProvider {
             this.registerStorageBlockRecipe(ModTags.Items.PARTS_FLUID.get(variant), Registration.FLUID_STORAGE_BLOCK.get(variant).get(), recipeOutput);
         }
 
-        for (ExtraChemicalStorageVariant variant : ExtraChemicalStorageVariant.values()) {
-            this.registerMekanismDiskRecipes(Registration.CHEMICAL_STORAGE_DISK.get(variant).get(), ModTags.Items.PARTS_CHEMICAL.get(variant), mekanismRecipeOutput);
-            this.registerMekanismStorageBlockRecipe(ModTags.Items.PARTS_CHEMICAL.get(variant), Registration.CHEMICAL_STORAGE_BLOCK.get(variant).get(), mekanismRecipeOutput);
-        }
-
         this.registerPartRecipe(Registration.ITEM_STORAGE_PART.get(ExtraItemStorageVariant.TIER_5).get(), Items.INSTANCE.getItemStoragePart(ItemStorageVariant.SIXTY_FOUR_K), recipeOutput);
         this.registerPartRecipe(Registration.ITEM_STORAGE_PART.get(ExtraItemStorageVariant.TIER_6).get(), ModTags.Items.PARTS_ITEM.get(ExtraItemStorageVariant.TIER_5), recipeOutput);
         this.registerPartRecipe(Registration.ITEM_STORAGE_PART.get(ExtraItemStorageVariant.TIER_7).get(), ModTags.Items.PARTS_ITEM.get(ExtraItemStorageVariant.TIER_6), recipeOutput);
@@ -76,15 +71,11 @@ public class Recipes extends RecipeProvider {
         this.registerAdvancedPartRecipe(Registration.FLUID_STORAGE_PART.get(ExtraFluidStorageVariant.TIER_8_FLUID).get(), ModTags.Items.PARTS_FLUID.get(ExtraFluidStorageVariant.TIER_7_FLUID), recipeOutput);
         this.registerAdvancedPartRecipe(Registration.FLUID_STORAGE_PART.get(ExtraFluidStorageVariant.TIER_9_FLUID).get(), ModTags.Items.PARTS_FLUID.get(ExtraFluidStorageVariant.TIER_8_FLUID), recipeOutput);
 
-        this.registerMekanismPartRecipe(Registration.CHEMICAL_STORAGE_PART.get(ExtraChemicalStorageVariant.TIER_5_CHEMICAL).get(), com.refinedmods.refinedstorage.mekanism.content.Items.getChemicalStoragePart(ChemicalStorageVariant.EIGHT_THOUSAND_NINETY_TWO_B), mekanismRecipeOutput);
-        this.registerMekanismPartRecipe(Registration.CHEMICAL_STORAGE_PART.get(ExtraChemicalStorageVariant.TIER_6_CHEMICAL).get(), ModTags.Items.PARTS_CHEMICAL.get(ExtraChemicalStorageVariant.TIER_5_CHEMICAL), mekanismRecipeOutput);
-        this.registerMekanismPartRecipe(Registration.CHEMICAL_STORAGE_PART.get(ExtraChemicalStorageVariant.TIER_7_CHEMICAL).get(), ModTags.Items.PARTS_CHEMICAL.get(ExtraChemicalStorageVariant.TIER_6_CHEMICAL), mekanismRecipeOutput);
-        this.registerMekanismAdvancedPartRecipe(Registration.CHEMICAL_STORAGE_PART.get(ExtraChemicalStorageVariant.TIER_8_CHEMICAL).get(), ModTags.Items.PARTS_CHEMICAL.get(ExtraChemicalStorageVariant.TIER_7_CHEMICAL), mekanismRecipeOutput);
-        this.registerMekanismAdvancedPartRecipe(Registration.CHEMICAL_STORAGE_PART.get(ExtraChemicalStorageVariant.TIER_9_CHEMICAL).get(), ModTags.Items.PARTS_CHEMICAL.get(ExtraChemicalStorageVariant.TIER_8_CHEMICAL), mekanismRecipeOutput);
-
         this.registerProcessorRecipe(Registration.WITHERING_PROCESSOR.get(), Registration.RAW_WITHERING_PROCESSOR.get(), Ingredient.of(Tags.Items.NETHER_STARS), recipeOutput);
 
         this.registerUpgrades(recipeOutput);
+
+        this.registerMekanismRecipes(mekanismRecipeOutput);
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, Registration.ADVANCED_STORAGE_HOUSING.get())
                 .pattern("GEG")
@@ -277,6 +268,20 @@ public class Recipes extends RecipeProvider {
     private void registerUpgrades(RecipeOutput recipeOutput) {
         this.registerItemStorageUpgrades(recipeOutput);
         this.registerFluidStorageUpgrades(recipeOutput);
+    }
+
+    private void registerMekanismRecipes(RecipeOutput recipeOutput) {
+        for (ExtraChemicalStorageVariant variant : ExtraChemicalStorageVariant.values()) {
+            this.registerMekanismDiskRecipes(Registration.CHEMICAL_STORAGE_DISK.get(variant).get(), ModTags.Items.PARTS_CHEMICAL.get(variant), recipeOutput);
+            this.registerMekanismStorageBlockRecipe(ModTags.Items.PARTS_CHEMICAL.get(variant), Registration.CHEMICAL_STORAGE_BLOCK.get(variant).get(), recipeOutput);
+        }
+
+        this.registerMekanismPartRecipe(Registration.CHEMICAL_STORAGE_PART.get(ExtraChemicalStorageVariant.TIER_5_CHEMICAL).get(), com.refinedmods.refinedstorage.mekanism.content.Items.getChemicalStoragePart(ChemicalStorageVariant.EIGHT_THOUSAND_NINETY_TWO_B), recipeOutput);
+        this.registerMekanismPartRecipe(Registration.CHEMICAL_STORAGE_PART.get(ExtraChemicalStorageVariant.TIER_6_CHEMICAL).get(), ModTags.Items.PARTS_CHEMICAL.get(ExtraChemicalStorageVariant.TIER_5_CHEMICAL), recipeOutput);
+        this.registerMekanismPartRecipe(Registration.CHEMICAL_STORAGE_PART.get(ExtraChemicalStorageVariant.TIER_7_CHEMICAL).get(), ModTags.Items.PARTS_CHEMICAL.get(ExtraChemicalStorageVariant.TIER_6_CHEMICAL), recipeOutput);
+        this.registerMekanismAdvancedPartRecipe(Registration.CHEMICAL_STORAGE_PART.get(ExtraChemicalStorageVariant.TIER_8_CHEMICAL).get(), ModTags.Items.PARTS_CHEMICAL.get(ExtraChemicalStorageVariant.TIER_7_CHEMICAL), recipeOutput);
+        this.registerMekanismAdvancedPartRecipe(Registration.CHEMICAL_STORAGE_PART.get(ExtraChemicalStorageVariant.TIER_9_CHEMICAL).get(), ModTags.Items.PARTS_CHEMICAL.get(ExtraChemicalStorageVariant.TIER_8_CHEMICAL), recipeOutput);
+
         this.registerChemicalStorageUpgrades(recipeOutput);
     }
 

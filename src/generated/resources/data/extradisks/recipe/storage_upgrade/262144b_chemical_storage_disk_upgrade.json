@@ -1,17 +1,27 @@
 {
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "mekanism"
+    },
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "refinedstorage_mekanism_integration"
+    }
+  ],
   "type": "extradisks:upgrade_recipe",
   "base_disk": [
     {
       "item": "extradisks:65536b_chemical_storage_disk"
     },
     {
-      "item": "refinedstorage_mekanism_integration:256b_chemical_storage_disk"
+      "item": "refinedstorage_mekanism_integration:64b_chemical_storage_disk"
     },
     {
       "item": "refinedstorage_mekanism_integration:1024b_chemical_storage_disk"
     },
     {
-      "item": "refinedstorage_mekanism_integration:64b_chemical_storage_disk"
+      "item": "refinedstorage_mekanism_integration:256b_chemical_storage_disk"
     },
     {
       "item": "refinedstorage_mekanism_integration:8192b_chemical_storage_disk"
